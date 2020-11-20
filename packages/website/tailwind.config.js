@@ -1,5 +1,9 @@
 module.exports = {
-  purge: ['./components/**/*.js', './pages/**/*.js'],
+  purge: ['./components/**/*.tsx', './pages/**/*.tsx'],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -34,4 +38,4 @@ module.exports = {
       },
     },
   },
-}
+};

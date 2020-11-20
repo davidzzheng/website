@@ -53,31 +53,15 @@ export async function getAllPostsWithSlug() {
 export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
-    query Posts($where: JSON){
+    query Post($where: JSON){
       posts(sort: "date:desc", limit: 10, where: $where) {
         title
         slug
-        excerpt
+        content
         date
-        coverImage {
-          url
-        }
-        author {
-          name
-          picture {
-            url
-          }
-        }
       }
     }
   `,
-    {
-      variables: {
-        where: {
-          ...(preview ? {} : { status: 'published' }),
-        },
-      },
-    },
   );
   return data?.posts;
 }
@@ -91,50 +75,15 @@ export async function getPostAndMorePosts(slug, preview) {
       slug
       content
       date
-      ogImage: coverImage{
-        url
-      }
-      coverImage {
-        url
-      }
-      author {
-        name
-        picture {
-          url
-        }
-      }
     }
 
     morePosts: posts(sort: "date:desc", limit: 2, where: $where_ne) {
       title
       slug
-      excerpt
       date
-      coverImage {
-        url
-      }
-      author {
-        name
-        picture {
-          url
-        }
-      }
     }
   }
   `,
-    {
-      preview,
-      variables: {
-        where: {
-          slug,
-          ...(preview ? {} : { status: 'published' }),
-        },
-        where_ne: {
-          ...(preview ? {} : { status: 'published' }),
-          slug_ne: slug,
-        },
-      },
-    },
   );
   return data;
 }
