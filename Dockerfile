@@ -2,6 +2,11 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY package.json /app
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json .
+COPY yarn.lock .
 
 RUN yarn install
+
+COPY . ./

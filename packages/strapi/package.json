@@ -8,7 +8,6 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "knex": "<0.20.0",
     "sqlite3": "latest",
