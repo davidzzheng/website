@@ -1,7 +1,7 @@
+import Header from "@/components/header"
 import Nav from "@/components/nav"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import Header from "@/components/header"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -18,10 +18,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} bg-neutral-950 font-sans text-white`}>
-        <Nav />
+      <body
+        className={`${inter.variable} relative bg-black font-sans text-white`}
+      >
         <Header />
-        {children}
+        <Nav />
+        <main className="absolute top-0 h-screen w-screen pt-72 overflow-hidden">
+          {children}
+        </main>
       </body>
     </html>
   )
