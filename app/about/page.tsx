@@ -24,10 +24,9 @@ export default function About() {
               animate={{ opacity: 1, y: 0, lineHeight: 2 }}
               transition={{ delay: 0.5, duration: 2 / 3, type: "spring" }}
             >
-              I currently specialize in building scalable frontend applications
-              with an emphasis on user experience & accessibility. My primary
-              stack is React with Next.js, TypeScript, and TailwindCSS, but I am
-              always open to learning new{" "}
+              I specialize in building scalable full-stack web applications. My
+              primary stack is React with Next.js, TypeScript, TailwindCSS, and
+              Hono, but I am always open to learning new{" "}
               <Link href="/work" className="link">
                 technologies & paradigms
               </Link>
