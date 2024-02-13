@@ -4,15 +4,15 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion"
 import createGlobe from "cobe"
 import { useRef, useEffect } from "react"
 export default function Home() {
-  const canvasRef = useRef<HTMLCanvasElement>();
-  const globeState = useRef({ phi: 0, theta: 0 });
-  const focusRef = useRef([0, 0]);
-
+  const canvasRef = useRef<HTMLCanvasElement>()
+  const globeState = useRef({ phi: 0, theta: 0 })
+  const focusRef = useRef([0, 0])
 
   useEffect(() => {
-    let width = 0;
-    const onResize = () => canvasRef.current && (width = canvasRef.current.offsetWidth)
-    window.addEventListener('resize', onResize)
+    let width = 0
+    const onResize = () =>
+      canvasRef.current && (width = canvasRef.current.offsetWidth)
+    window.addEventListener("resize", onResize)
     onResize()
     const globe = createGlobe(canvasRef.current!, {
       devicePixelRatio: 2,
@@ -58,21 +58,24 @@ export default function Home() {
         state.phi = current.phi
         state.width = width * 2
         state.height = width * 2
-      }
+      },
     })
     setTimeout(() => {
       if (canvasRef.current) {
-        canvasRef.current.style.opacity = '1'
+        canvasRef.current.style.opacity = "1"
       }
     })
     return () => {
-      globe.destroy();
-      window.removeEventListener('resize', onResize);
+      globe.destroy()
+      window.removeEventListener("resize", onResize)
     }
   }, [])
 
   const locationToAngles = (lat: number, long: number) => {
-    return [Math.PI - ((long * Math.PI) / 180 - Math.PI / 2), (lat * Math.PI) / 180]
+    return [
+      Math.PI - ((long * Math.PI) / 180 - Math.PI / 2),
+      (lat * Math.PI) / 180,
+    ]
   }
 
   const focusOnHome = () => {
@@ -83,36 +86,49 @@ export default function Home() {
     focusRef.current = [0, 0.3]
   }
 
+  const toggleFocus = () => {
+    if (focusRef.current[0] === 0) {
+      focusOnHome()
+    } else {
+      resetFocus()
+    }
+  }
+
   return (
     <>
       <div className="absolute top-0 w-full">
         <canvas
           className="mx-auto"
           ref={canvasRef}
-          style={{ width: 1200, height: 1200, maxWidth: "100%", aspectRatio: 1 }}
+          style={{
+            width: 1200,
+            height: 1200,
+            maxWidth: "100%",
+            aspectRatio: 1,
+          }}
         />
       </div>
       <LazyMotion features={domAnimation}>
-        <div className="container relative flex justify-center mt-[10vh]">
+        <div className="container relative mt-[10vh] flex justify-center">
           <div>
             <AnimatePresence>
               <m.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -120 }}
+                animate={{ opacity: 1, x: -80 }}
                 transition={{ duration: 0.75, delay: 0.5, type: "spring" }}
                 key="hello"
-                className="text-[20ch] font-bold leading-none"
-                onClick={focusOnHome}
+                className="w-fit cursor-pointer text-[20ch] font-bold leading-none"
+                onClick={toggleFocus}
               >
                 Hello
               </m.p>
               <m.p
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: 120 }}
+                animate={{ opacity: 1, x: 80 }}
                 transition={{ duration: 0.75, delay: 0.75, type: "spring" }}
                 key="world"
-                className="ml-40 animate-text-gradient bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% direction-reverse to-blue-400 bg-[length:200%] bg-clip-text text-[20ch] font-bold leading-none text-transparent transition-[background-position]"
-                onClick={resetFocus}
+                className="animate-text-gradient direction-reverse w-fit cursor-pointer bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% to-blue-400 bg-[length:200%] bg-clip-text text-[20ch] font-bold leading-none text-transparent transition-[background-position]"
+                onClick={toggleFocus}
               >
                 World
               </m.p>
