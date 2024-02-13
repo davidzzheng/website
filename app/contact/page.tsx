@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 export default function Contact() {
   return (
-    <main className="mx-auto w-1/2">
+    <div className="mx-auto w-1/2">
       <form className="flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <Label htmlFor="name">Name</Label>
@@ -25,6 +25,6 @@ export default function Contact() {
           </Button>
         </div>
       </form>
-    </main>
+    </div>
   )
 }

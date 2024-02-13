@@ -23,7 +23,7 @@ export default function RootLayout({
       >
         <Header />
         <Nav />
-        <main className="absolute top-0 h-screen w-screen pt-72 overflow-hidden">
+        <main className="h-screen w-screen overflow-x-hidden pb-24 pt-72">
           {children}
         </main>
       </body>

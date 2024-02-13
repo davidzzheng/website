@@ -1,3 +1,7 @@
 export default function Notes() {
-  return <main className="container max-w-[840px] mx-auto">Currently being reworked, check back later :)</main>
+  return (
+    <div className="container mx-auto max-w-[840px]">
+      Currently being reworked, check back later :)
+    </div>
+  )
 }

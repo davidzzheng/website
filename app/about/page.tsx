@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function About() {
   return (
-    <main className="mx-auto max-w-[840px]">
+    <div className="mx-auto max-w-[840px]">
       <LazyMotion features={domAnimation}>
         <AnimatePresence>
           <div className="flex flex-col gap-y-4 text-2xl font-medium leading-relaxed">
@@ -79,6 +79,6 @@ export default function About() {
           </div>
         </AnimatePresence>
       </LazyMotion>
-    </main>
+    </div>
   )
 }
