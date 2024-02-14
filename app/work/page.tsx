@@ -140,7 +140,15 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg">Gladstone Robosavages</h3>
+            <h3 className="text-lg">
+              <a
+                href="https://www.facebook.com/GladstoneRobosavages/"
+                className="link"
+                target="_blank"
+              >
+                Gladstone Robosavages
+              </a>
+            </h3>
             <div className="text-sm">2013 - 2014</div>
           </div>
           <p className="text-sm">
