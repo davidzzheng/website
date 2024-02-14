@@ -17,7 +17,7 @@ export default function Work() {
   return (
     <div className="mx-auto flex max-w-[840px] flex-col gap-y-4">
       <div className="mb-8">
-        <h2 className="mb-2 text-3xl font-semibold">Current Tech Stack</h2>
+        <h2 className="mb-2 text-xl font-semibold">Current Tech Stack</h2>
         <ul className="flex gap-2">
           {TECHSTACK.map((skill) => (
             <li
@@ -30,11 +30,11 @@ export default function Work() {
         </ul>
       </div>
 
-      <h2 className="text-3xl">Work History</h2>
+      <h2 className="text-xl font-semibold">Work History</h2>
       <ul className="space-y-8">
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">
+            <h3 className="text-lg">
               <a
                 href="https://abnormalsecurity.com/"
                 className="link"
@@ -45,7 +45,7 @@ export default function Work() {
             </h3>
             <div className="text-sm">2022 - 2023</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             Abnormal Security is a cybersecurity company that uses artificial
             intelligence to detect and respond to cloud-based threats. At
             Abnormal I helped build the frontend for some of their newer
@@ -55,7 +55,7 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="flex items-baseline gap-x-2 text-2xl">
+            <h3 className="flex items-baseline gap-x-2 text-lg">
               <a className="link" href="https://deliverr.com/">
                 Deliverr
               </a>
@@ -63,7 +63,7 @@ export default function Work() {
             </h3>
             <div className="text-sm">2021 - 2022</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             Deliverr is a logistics company that helps e-commerce businesses
             fulfill orders faster by providing them with a network of warehouses
             across the United States. At Deliverr I worked across the tech
@@ -74,7 +74,7 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">
+            <h3 className="text-lg">
               <a
                 href="https://www.workday.com/"
                 className="link"
@@ -85,7 +85,7 @@ export default function Work() {
             </h3>
             <div className="text-sm">2018 - 2021</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             Workday is a cloud-based financial management and human capital
             management software company used by large enterprises all over the
             world. At Workday I worked with a team that had gotten acquired to
@@ -98,14 +98,14 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">
+            <h3 className="text-lg">
               <a href="https://assistlist.ca/" className="link" target="_blank">
                 AssistList
               </a>
             </h3>
             <div className="text-sm">2017 - 2018</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             AssistList is a non-profit organization based out of Vancouver,
             Canada that facilitates in the exchange and sale of second-hand
             medical equipment. Originally a Rails monolithic application,
@@ -117,7 +117,7 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">
+            <h3 className="text-lg">
               <a
                 href="https://penguinrobotics.ca/"
                 className="link"
@@ -128,7 +128,7 @@ export default function Work() {
             </h3>
             <div className="text-sm">2014 - 2018</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             Penguin Robotics is a non-profit organization that runs local
             robotics competitions and workshops for high school students.
             Founded by graduating students from one of the top high school
@@ -140,10 +140,10 @@ export default function Work() {
         </li>
         <li className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl">Gladstone Robosavages</h3>
+            <h3 className="text-lg">Gladstone Robosavages</h3>
             <div className="text-sm">2013 - 2014</div>
           </div>
-          <p className="text-base">
+          <p className="text-sm">
             Gladstone Robosavages were a high school robotics team that competed
             in VEX Robotics competitions. Originally started as an electronics
             class, the program quickly grew into a world-class robotics program

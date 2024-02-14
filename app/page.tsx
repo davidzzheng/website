@@ -123,7 +123,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: -80 }}
                 transition={{ duration: 0.75, delay: 0.5, type: "spring" }}
                 key="hello"
-                className="w-fit cursor-pointer text-[20ch] font-bold leading-none"
+                className="w-fit cursor-pointer text-6xl font-bold leading-none"
                 onClick={toggleFocus}
               >
                 Hello
@@ -133,7 +133,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: 80 }}
                 transition={{ duration: 0.75, delay: 0.75, type: "spring" }}
                 key="world"
-                className="animate-text-gradient direction-reverse w-fit cursor-pointer bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% to-blue-400 bg-[length:200%] bg-clip-text text-[20ch] font-bold leading-none text-transparent transition-[background-position]"
+                className="animate-text-gradient direction-reverse w-fit cursor-pointer bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% to-blue-400 bg-[length:200%] bg-clip-text text-6xl font-bold leading-none text-transparent transition-[background-position]"
                 onClick={toggleFocus}
               >
                 World

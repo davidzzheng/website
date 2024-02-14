@@ -9,7 +9,7 @@ export default function About() {
     <div className="mx-auto max-w-[840px]">
       <LazyMotion features={domAnimation}>
         <AnimatePresence>
-          <div className="flex flex-col gap-y-4 text-2xl font-medium leading-relaxed">
+          <div className="flex flex-col gap-y-4 text-base font-medium leading-relaxed">
             <m.p
               initial={{ opacity: 0, y: 50, lineHeight: 3 }}
               animate={{ opacity: 1, y: 0, lineHeight: 2 }}

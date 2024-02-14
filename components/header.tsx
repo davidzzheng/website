@@ -21,7 +21,7 @@ export default function Header() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ delay: index * 0.01 }}
-                className="inline-block text-6xl font-semibold"
+                className="inline-block text-4xl font-semibold"
               >
                 {index === 0 ? letter.toUpperCase() : letter}
               </m.span>
