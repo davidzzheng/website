@@ -26,7 +26,7 @@ export default function About() {
             >
               I specialize in building scalable full-stack web applications. My
               primary stack is React with Next.js, TypeScript, TailwindCSS, and
-              Hono, but I am always open to learning new{" "}
+              Hono, but I am always looking to build with new{" "}
               <Link href="/work" className="link">
                 technologies & paradigms
               </Link>
