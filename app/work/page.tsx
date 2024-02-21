@@ -3,6 +3,7 @@ const TECHSTACK = [
   "React",
   "Next.js",
   "TailwindCSS",
+  "tRPC",
   "Cloudflare",
   "Bun",
   "Hono",
