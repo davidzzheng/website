@@ -11,7 +11,6 @@ const TECHSTACK = [
   "Redis",
   "Python",
   "Rust",
-  "Perplexity AI",
 ]
 
 export default function Work() {
