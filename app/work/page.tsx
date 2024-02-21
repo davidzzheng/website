@@ -30,7 +30,7 @@ export default function Work() {
         </ul>
       </div>
 
-      <h2 className="text-xl font-semibold">Work History</h2>
+      <h2 className="text-xl font-semibold">Projects & Work Experience</h2>
       <ul className="space-y-8">
         <li className="space-y-2">
           <div className="flex items-center justify-between">
