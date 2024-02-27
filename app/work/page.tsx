@@ -162,7 +162,13 @@ export default function Work() {
               announced React compiler.
             </p>
             <ul className="flex gap-2">
-              {["TypeScript", "React", "TailwindCSS", "Vercel"].map((skill) => (
+              {[
+                "TypeScript",
+                "React",
+                "TailwindCSS",
+                "shadcn/ui",
+                "Vercel",
+              ].map((skill) => (
                 <li
                   key={skill}
                   className="rounded-sm bg-blue-700 px-1 py-0.5 text-sm"
