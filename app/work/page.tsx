@@ -118,11 +118,18 @@ export default function Work() {
               Workday is a cloud-based financial management and human capital
               management software company used by large enterprises all over the
               world. At Workday I worked with a team that had gotten acquired to
-              help build their talent marketplace platform within the Workday
-              monolith. I also helped prove out the usage of JavaScript & React
-              within our product pillar, paving the way for future projects to
-              use modern web technologies instead of the XML-based service that
-              powers the rest of Workday.
+              help build their{" "}
+              <a
+                href="https://www.workday.com/en-ca/products/talent-management/talent-optimization.html"
+                target="_blank"
+                className="link"
+              >
+                talent marketplace platform
+              </a>{" "}
+              within the Workday monolith. I also helped prove out the usage of
+              JavaScript & React within our product pillar, paving the way for
+              future projects to use modern web technologies instead of the
+              XML-based service that powers the rest of Workday.
             </p>
             <ul className="flex gap-2">
               {["TypeScript", "Angular", "React", "Storybook"].map((skill) => (
