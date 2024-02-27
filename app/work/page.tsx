@@ -158,8 +158,15 @@ export default function Work() {
             <p className="text-sm">
               A simple portfolio website built with the latest versions of
               Next.js and Tailwind CSS. This website will serve as a canvas for
-              me to explore the newer web paradigms in React such as RSC and the
-              announced React compiler.
+              me to explore the newer web paradigms, notably the announced{" "}
+              <a href="https://v0.dev/" target="_blank" className="link">
+                React compiler
+              </a>{" "}
+              and AI-generated UIs with{" "}
+              <a href="https://v0.dev/" target="_blank" className="link">
+                v0
+              </a>
+              .
             </p>
             <ul className="flex gap-2">
               {[
