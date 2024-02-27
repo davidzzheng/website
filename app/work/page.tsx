@@ -152,6 +152,46 @@ export default function Work() {
             <div className="flex items-center justify-between">
               <h3 className="text-lg">
                 <a
+                  // href="https://github.com/davidzzheng/website"
+                  // target="_blank"
+                  className="link"
+                >
+                  blockspace.
+                </a>
+              </h3>
+              <div className="text-sm">2024</div>
+            </div>
+
+            <p className="text-sm">
+              blockspace is an upcoming project that aims to push web archiving
+              onchain. Web archives are published to{" "}
+              <a
+                href="https://www.arweave.org/"
+                target="_blank"
+                className="link"
+              >
+                Arweave
+              </a>{" "}
+              to be immutably preserved, with state-compressed NFTs that store
+              related metadata to the archive. This allows users to curate their
+              own web archive while also providing access to others via a public
+              blockchain.
+            </p>
+            <ul className="flex gap-2">
+              {["TypeScript", "Hono", "Cloudflare", "Arweave"].map((skill) => (
+                <li
+                  key={skill}
+                  className="rounded-sm bg-blue-700 px-1 py-0.5 text-sm"
+                >
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg">
+                <a
                   href="https://github.com/davidzzheng/website"
                   target="_blank"
                   className="link"
