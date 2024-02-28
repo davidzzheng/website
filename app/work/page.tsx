@@ -154,7 +154,7 @@ export default function Work() {
                 <a
                   // href="https://github.com/davidzzheng/website"
                   // target="_blank"
-                  className="link"
+                  className="link cursor-default"
                 >
                   blockspace.
                 </a>
