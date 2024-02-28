@@ -164,7 +164,7 @@ export default function Work() {
 
             <p className="text-sm">
               blockspace is an upcoming project that aims to push web archiving
-              onchain. Web archives are published to{" "}
+              on-chain. Web archives are published to{" "}
               <a
                 href="https://www.arweave.org/"
                 target="_blank"
@@ -173,8 +173,8 @@ export default function Work() {
                 Arweave
               </a>{" "}
               to be immutably preserved, with state-compressed NFTs that store
-              related metadata to the archive. This allows users to curate their
-              own web archive while also providing access to others via a public
+              its related metadata. This allows users to curate their own web
+              archive while also providing access to others via a public
               blockchain.
             </p>
             <ul className="flex gap-2">
