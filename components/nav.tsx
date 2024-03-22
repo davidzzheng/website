@@ -3,14 +3,7 @@
 import Link from "next/link"
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion"
 import { Button } from "./ui/button"
-import {
-  ApertureIcon,
-  BookIcon,
-  CodeIcon,
-  HomeIcon,
-  MailIcon,
-  UserIcon,
-} from "lucide-react"
+import { BookIcon, CodeIcon, HomeIcon, UserIcon } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,

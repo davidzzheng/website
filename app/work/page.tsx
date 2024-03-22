@@ -8,7 +8,7 @@ const TECHSTACK = [
   "Bun",
   "Hono",
   "SQLite",
-  "Redis",
+  "NATS",
   "Python",
   "Rust",
 ]
@@ -91,7 +91,7 @@ export default function Work() {
               integrations with our last-mile carrier partners.
             </p>
             <ul className="flex gap-2">
-              {["TypeScript", "React", "Storybook"].map((skill) => (
+              {["TypeScript", "React", "Express", "Storybook"].map((skill) => (
                 <li
                   key={skill}
                   className="rounded-sm bg-blue-700 px-1 py-0.5 text-sm"
@@ -205,7 +205,8 @@ export default function Work() {
             <p className="text-sm">
               A simple portfolio website built with the latest versions of
               Next.js and Tailwind CSS. This website will serve as a canvas for
-              me to explore the newer web paradigms, notably the announced{" "}
+              me to explore the newer web paradigms - notably the recently
+              announced{" "}
               <a href="https://v0.dev/" target="_blank" className="link">
                 React compiler
               </a>{" "}
