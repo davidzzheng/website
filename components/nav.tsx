@@ -45,8 +45,6 @@ const routes = [
   // },
 ]
 
-// test
-
 export default function Nav() {
   const pathname = usePathname()
 
