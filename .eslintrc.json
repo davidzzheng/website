@@ -1,0 +1,8 @@
+{
+	"extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
+	"rules": {
+		"semi": ["error", "never"],
+		"quotes": ["error", "single"],
+		"eslint-plugin-import/no-anonymous-default-export": "off"
+	}
+}
