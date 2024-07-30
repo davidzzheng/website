@@ -1,11 +1,13 @@
 import { getPayload } from '@/lib/payload'
+import { BlogView } from '@/views/blog'
 
 export default async function BlogPage() {
 	const payload = await getPayload()
 
-	const data = await payload.find({
-		collection: 'pages',
+	const { docs: data = [] } = await payload.find({
+		collection: 'posts',
+		sort: '-createdAt',
 	})
 
-	return <div>Blog Page</div>
+	return <BlogView posts={data} />
 }

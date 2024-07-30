@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
 export const Layout = ({ children }: { children: ReactNode }) => {
 	return (
@@ -9,62 +9,68 @@ export const Layout = ({ children }: { children: ReactNode }) => {
 				{children}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-const LayoutTop = ({
-	children,
-	className,
-}: { children: ReactNode; className?: string }) => (
+type LayoutNodeProps = {
+	children: ReactNode;
+	className?: string;
+};
+
+const LayoutTop = ({ children, className }: LayoutNodeProps) => (
 	<section
 		className={cn(
-			'sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8',
+			"sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8",
 			className,
 		)}
 	>
 		{children}
 	</section>
-)
+);
 
-const LayoutLeft = ({
-	children,
-	className,
-}: { children: ReactNode; className?: string }) => (
-	<section className={cn('hidden sm:col-span-3 md:col-span-2', className)}>
+const LayoutLeft = ({ children, className }: LayoutNodeProps) => (
+	<section className={cn("hidden sm:col-span-3 md:col-span-2", className)}>
 		{children}
 	</section>
-)
+);
 
-const LayoutRight = ({
-	children,
-	className,
-}: { children: ReactNode; className?: string }) => (
+const LayoutRight = ({ children, className }: LayoutNodeProps) => (
 	<section
 		className={cn(
-			'sm:col-start-10 sm:col-span-3 md:col-start-11 md:col-span-2',
+			"sm:col-start-10 sm:col-span-3 md:col-start-11 md:col-span-2",
 			className,
 		)}
 	>
 		{children}
 	</section>
-)
+);
 
-const LayoutMain = ({
-	children,
-	className,
-}: { children: ReactNode; className?: string }) => (
+const LayoutMain = ({ children, className }: LayoutNodeProps) => (
 	<section
 		className={cn(
-			'sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8',
-			'row-start-2',
+			"sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8",
+			"row-start-2",
 			className,
 		)}
 	>
 		{children}
 	</section>
-)
+);
 
-Layout.Top = LayoutTop
-Layout.Left = LayoutLeft
-Layout.Right = LayoutRight
-Layout.Main = LayoutMain
+export const LayoutBottom = ({ children, className }: LayoutNodeProps) => (
+	<section
+		className={cn(
+			"sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8",
+			"row-start-3",
+			className,
+		)}
+	>
+		{children}
+	</section>
+);
+
+Layout.Top = LayoutTop;
+Layout.Left = LayoutLeft;
+Layout.Right = LayoutRight;
+Layout.Main = LayoutMain;
+Layout.Bottom = LayoutBottom;

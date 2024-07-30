@@ -1,11 +1,12 @@
 // @ts-nocheck
 'use client'
 
-import * as THREE from 'three'
-import { useState, useEffect, useMemo, useRef } from 'react'
 import { PerspectiveCamera } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useControls, Leva } from 'leva'
+import { Leva, useControls } from 'leva'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import * as THREE from 'three'
+
 import { fragmentShader } from './shaders/fragmentShader'
 import { vertexShader } from './shaders/vertexShader'
 
