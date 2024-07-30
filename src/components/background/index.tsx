@@ -61,7 +61,7 @@ function Scene() {
 				value: new THREE.Color(colorB),
 			},
 		}
-	}, [])
+	}, [background, colorA, colorB, size, spacing, speed])
 
 	useFrame((state) => {
 		const { clock } = state

@@ -2,6 +2,7 @@ import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
+	BlocksFeature,
 	HTMLConverterFeature,
 	lexicalEditor,
 	lexicalHTML,
@@ -11,6 +12,7 @@ import {
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
+import { createSlug } from '@/lib/string'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,6 +49,7 @@ export default buildConfig({
 					},
 				},
 			}),
+			BlocksFeature({}),
 			HTMLConverterFeature({}),
 		],
 	}),
@@ -71,6 +74,10 @@ export default buildConfig({
 					type: 'text',
 				},
 				{
+					name: 'subtitle',
+					type: 'text',
+				},
+				{
 					name: 'content',
 					type: 'richText',
 				},
@@ -90,6 +97,7 @@ export default buildConfig({
 					name: 'name',
 					type: 'text',
 				},
+				{ name: 'id', type: 'text', unique: true },
 			],
 			admin: {
 				useAsTitle: 'name',
