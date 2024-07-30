@@ -12,11 +12,12 @@ export interface Config {
   };
   collections: {
     users: User;
-    pages: Page;
+    posts: Post;
+    tags: Tag;
     media: Media;
     work: Work;
     technologies: Technology;
-    code_snippets: CodeSnippet;
+    codeSnippets: CodeSnippet;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -64,9 +65,9 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "posts".
  */
-export interface Page {
+export interface Post {
   id: number;
   title?: string | null;
   content?: {
@@ -84,6 +85,18 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  tags?: (number | Tag)[] | null;
+  contentHtml?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -128,10 +141,11 @@ export interface Work {
     };
     [k: string]: unknown;
   } | null;
-  start_date?: string | null;
-  end_date?: string | null;
-  work_type?: ('full-time' | 'project') | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  workType?: ('fulltime' | 'project') | null;
   technologies?: (number | Technology)[] | null;
+  descriptionHtml?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -147,7 +161,7 @@ export interface Technology {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "code_snippets".
+ * via the `definition` "codeSnippets".
  */
 export interface CodeSnippet {
   id: number;

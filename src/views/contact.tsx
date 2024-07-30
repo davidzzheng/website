@@ -2,7 +2,6 @@
 
 import { Layout } from '@/components/layout'
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 export const ContactView = () => {
 	return (

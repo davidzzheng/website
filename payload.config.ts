@@ -2,7 +2,9 @@ import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
+	HTMLConverterFeature,
 	lexicalEditor,
+	lexicalHTML,
 	LinkFeature,
 	UploadFeature,
 } from '@payloadcms/richtext-lexical'
@@ -45,6 +47,7 @@ export default buildConfig({
 					},
 				},
 			}),
+			HTMLConverterFeature({}),
 		],
 	}),
 	collections: [
@@ -58,7 +61,7 @@ export default buildConfig({
 			fields: [],
 		},
 		{
-			slug: 'pages',
+			slug: 'posts',
 			admin: {
 				useAsTitle: 'title',
 			},
@@ -71,7 +74,30 @@ export default buildConfig({
 					name: 'content',
 					type: 'richText',
 				},
+				{
+					name: 'tags',
+					type: 'relationship',
+					relationTo: 'tags',
+					hasMany: true,
+				},
+				lexicalHTML('content', { name: 'contentHtml' }),
 			],
+		},
+		{
+			slug: 'tags',
+			fields: [
+				{
+					name: 'name',
+					type: 'text',
+				},
+			],
+			admin: {
+				useAsTitle: 'name',
+			},
+			labels: {
+				singular: 'Tag',
+				plural: 'Tags',
+			},
 		},
 		{
 			slug: 'media',
@@ -95,19 +121,19 @@ export default buildConfig({
 					type: 'richText',
 				},
 				{
-					name: 'start_date',
+					name: 'startDate',
 					type: 'date',
 				},
 				{
-					name: 'end_date',
+					name: 'endDate',
 					type: 'date',
 				},
 				{
-					name: 'work_type',
+					name: 'workType',
 					label: 'Work Type',
 					type: 'select',
 					options: [
-						{ label: 'Full Time', value: 'full-time' },
+						{ label: 'Full Time', value: 'fulltime' },
 						{ label: 'Project', value: 'project' },
 					],
 				},
@@ -117,6 +143,7 @@ export default buildConfig({
 					relationTo: 'technologies',
 					hasMany: true,
 				},
+				lexicalHTML('description', { name: 'descriptionHtml' }),
 			],
 		},
 		{
@@ -132,7 +159,7 @@ export default buildConfig({
 			],
 		},
 		{
-			slug: 'code_snippets',
+			slug: 'codeSnippets',
 			labels: {
 				singular: 'Code Snippet',
 				plural: 'Code Snippets',
@@ -167,7 +194,6 @@ export default buildConfig({
 		autoLogin: {
 			email: 'dev@payloadcms.com',
 			password: 'test',
-			prefillOnly: true,
 		},
 	},
 	async onInit(payload) {

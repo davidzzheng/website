@@ -1,9 +1,12 @@
 import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
+import fluid, { extract, screens, fontSize } from 'fluid-tailwind'
+import animate from 'tailwindcss-animate'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config = {
 	darkMode: ['class'],
-	content: ['./src/**/*.{ts,tsx}'],
+	content: { files: ['./src/**/*.{ts,tsx}'], extract },
 	theme: {
 		container: {
 			center: true,
@@ -12,6 +15,8 @@ const config = {
 				'2xl': '1400px',
 			},
 		},
+		screens,
+		fontSize,
 		extend: {
 			fontFamily: {
 				sans: ['var(--font-sans)', ...fontFamily.sans],
@@ -65,14 +70,20 @@ const config = {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: '0' },
 				},
+				'text-gradient': {
+					to: {
+						backgroundPosition: '200% center',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
+				'text-gradient': 'text-gradient 10s ease infinite',
 			},
 		},
 	},
-	plugins: [require('tailwindcss-animate')],
+	plugins: [typography, animate, fluid],
 } satisfies Config
 
 export default config
