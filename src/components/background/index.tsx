@@ -14,10 +14,10 @@ function Scene() {
 	const mesh = useRef(null)
 	const { colorA, colorB, background, size, spacing, speed } = useControls({
 		colorA: '#111',
-		colorB: '#888',
+		colorB: '#555',
 		background: '#000',
 		speed: {
-			value: 0.02,
+			value: 0.0075,
 			min: 0.0,
 			max: 2.0,
 			step: 0.01,

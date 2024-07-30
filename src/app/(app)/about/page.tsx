@@ -7,5 +7,5 @@ export default async function BlogPage() {
 		collection: 'pages',
 	})
 
-	return <div>Blog Page</div>
+	return <div>About Page</div>
 }
