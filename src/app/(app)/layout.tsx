@@ -1,17 +1,36 @@
 import React from 'react'
-import './globals.scss'
 import { Inter } from 'next/font/google'
+
+import { Background } from '@/components/background'
+import { NavBar } from '@/components/nav-bar'
+import { cn } from '@/lib/utils'
+import { Providers } from './providers'
+
+import './globals.scss'
 
 const inter = Inter({
 	subsets: ['latin'],
 	display: 'swap',
+	variable: '--font-sans',
 })
 
-/* Our app sits here to not cause any conflicts with payload's root layout  */
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	return (
-		<html className={inter.className}>
-			<body>{children}</body>
+		<html>
+			<body
+				className={cn(
+					'min-h-screen bg-background font-sans antialiased',
+					inter.variable,
+				)}
+			>
+				<Providers>
+					<NavBar />
+					{children}
+					<div className="fixed top-0 -z-50 h-screen w-screen">
+						<Background />
+					</div>
+				</Providers>
+			</body>
 		</html>
 	)
 }
