@@ -70,6 +70,7 @@ export interface User {
 export interface Post {
   id: number;
   title?: string | null;
+  subtitle?: string | null;
   content?: {
     root: {
       type: string;
@@ -85,7 +86,7 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
-  tags?: (number | Tag)[] | null;
+  tags?: (string | Tag)[] | null;
   contentHtml?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -95,8 +96,8 @@ export interface Post {
  * via the `definition` "tags".
  */
 export interface Tag {
-  id: number;
   name?: string | null;
+  id: string;
   updatedAt: string;
   createdAt: string;
 }

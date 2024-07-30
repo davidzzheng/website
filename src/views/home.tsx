@@ -38,10 +38,21 @@ export const HomeView = () => {
 					<BlurFade delay={0.25 * 3} inView>
 						<span className="text-pretty text-lg">
 							In my spare time, I enjoy diving deep into topics like
-							cryptocurrencies & artificial intelligence, experimenting and
-							write about them on my{' '}
+							cryptocurrencies & artificial intelligence, experimenting with,
+							and writing about them on my{' '}
 							<Link href="/blog" className="text-link">
 								blog
+							</Link>
+							.
+						</span>
+					</BlurFade>
+					<BlurFade delay={0.25 * 4} inView>
+						<span className="text-pretty text-lg">
+							If you are interested in working with me, want to learn more about
+							something I&apos;ve written about, or just want to say hi, feel
+							free to{' '}
+							<Link href="/contact" className="text-link">
+								reach out
 							</Link>
 							.
 						</span>

@@ -3,6 +3,7 @@
 	"rules": {
 		"semi": ["error", "never"],
 		"quotes": ["error", "single"],
-		"eslint-plugin-import/no-anonymous-default-export": "off"
+		"eslint-plugin-import/no-anonymous-default-export": "off",
+		"tailwindcss/no-custom-classname": "off"
 	}
 }

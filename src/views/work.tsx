@@ -16,7 +16,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
 
 	return (
 		<Layout>
-			<Layout.Main className="space-y-6 rounded-lg bg-background/80 p-8">
+			<Layout.Main className="space-y-6 rounded-lg bg-background/80 p-6">
 				<h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">
 					Work Experience
 				</h1>
