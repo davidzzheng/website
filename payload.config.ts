@@ -83,6 +83,73 @@ export default buildConfig({
 				},
 			],
 		},
+		{
+			slug: 'work',
+			fields: [
+				{
+					name: 'company',
+					type: 'text',
+				},
+				{
+					name: 'description',
+					type: 'richText',
+				},
+				{
+					name: 'start_date',
+					type: 'date',
+				},
+				{
+					name: 'end_date',
+					type: 'date',
+				},
+				{
+					name: 'work_type',
+					label: 'Work Type',
+					type: 'select',
+					options: [
+						{ label: 'Full Time', value: 'full-time' },
+						{ label: 'Project', value: 'project' },
+					],
+				},
+				{
+					name: 'technologies',
+					type: 'relationship',
+					relationTo: 'technologies',
+					hasMany: true,
+				},
+			],
+		},
+		{
+			slug: 'technologies',
+			admin: {
+				useAsTitle: 'name',
+			},
+			fields: [
+				{
+					name: 'name',
+					type: 'text',
+				},
+			],
+		},
+		{
+			slug: 'code_snippets',
+			labels: {
+				singular: 'Code Snippet',
+				plural: 'Code Snippets',
+			},
+			fields: [
+				{
+					name: 'title',
+					type: 'text',
+					required: true,
+				},
+				{
+					name: 'code',
+					type: 'code',
+					required: true,
+				},
+			],
+		},
 	],
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
@@ -93,18 +160,9 @@ export default buildConfig({
 			connectionString: process.env.POSTGRES_URI || '',
 		},
 	}),
-	// db: mongooseAdapter({
-	//   url: process.env.MONGODB_URI || '',
-	// }),
-
-	/**
-	 * Payload can now accept specific translations from 'payload/i18n/en'
-	 * This is completely optional and will default to English if not provided
-	 */
 	i18n: {
 		supportedLanguages: { en },
 	},
-
 	admin: {
 		autoLogin: {
 			email: 'dev@payloadcms.com',
@@ -128,11 +186,5 @@ export default buildConfig({
 			})
 		}
 	},
-	// Sharp is now an optional dependency -
-	// if you want to resize images, crop, set focal point, etc.
-	// make sure to install it and pass it to the config.
-
-	// This is temporary - we may make an adapter pattern
-	// for this before reaching 3.0 stable
 	sharp,
 })
