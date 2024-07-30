@@ -8,11 +8,11 @@ export const NavBar = () => {
 	const path = usePathname()
 	const initialIndex = (() => {
 		switch (path.split('/')[1]) {
-			case 'about':
-				return 0
 			case 'work':
-				return 1
+				return 0
 			case 'blog':
+				return 1
+			case 'contact':
 				return 2
 			default:
 				return null
@@ -37,6 +37,12 @@ export const NavBar = () => {
 		return () => window.removeEventListener('resize', setTabPosition)
 	}, [activeTabIndex])
 
+	useEffect(() => {
+		if (activeTabIndex !== initialIndex) {
+			setActiveTabIndex(initialIndex)
+		}
+	}, [path])
+
 	const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
 	return (
 		<div className="flex h-16 w-full items-center justify-between px-8">
@@ -47,7 +53,7 @@ export const NavBar = () => {
 			</div>
 			<div className="relative my-4 w-fit">
 				<ul className="flex space-x-4">
-					{['about', 'work', 'blog'].map((tab, idx) => (
+					{['work', 'blog', 'contact'].map((tab, idx) => (
 						<Link
 							key={tab}
 							ref={(el) => {

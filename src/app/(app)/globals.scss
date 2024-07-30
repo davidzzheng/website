@@ -67,3 +67,32 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .text-link {
+    @apply text-blue-500;
+    display: inline-block;
+    position: relative;
+    color: --var(text-blue-500);
+
+    &::after {
+      @apply bg-blue-500;
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+}
