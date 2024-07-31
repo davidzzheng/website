@@ -1,7 +1,14 @@
 'use client'
 
 import { useRef } from 'react'
-import { AnimatePresence, motion, useInView, Variants } from 'framer-motion'
+import {
+  AnimatePresence,
+  domAnimation,
+  LazyMotion,
+  m as motion,
+  useInView,
+  Variants,
+} from 'framer-motion'
 
 type BlurFadeProps = {
   children: React.ReactNode
@@ -39,23 +46,25 @@ export const BlurFade = ({
   }
   const combinedVariants = variant || defaultVariants
   return (
-    <AnimatePresence>
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        exit="hidden"
-        variants={combinedVariants}
-        transition={{
-          delay: 0.04 + delay,
-          duration,
-          ease: 'easeOut',
-        }}
-        // @ts-ignore
-        className={className}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          exit="hidden"
+          variants={combinedVariants}
+          transition={{
+            delay: 0.04 + delay,
+            duration,
+            ease: 'easeOut',
+          }}
+          // @ts-ignore
+          className={className}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </LazyMotion>
   )
 }
