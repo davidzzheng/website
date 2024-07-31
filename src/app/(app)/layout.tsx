@@ -12,7 +12,7 @@ import './globals.scss'
 export const metadata: Metadata = {
   title: {
     template: "%s | David Zheng's Portfolio",
-    default: 'Home', // a default is required when creating a template
+    default: 'Home',
   },
 }
 
