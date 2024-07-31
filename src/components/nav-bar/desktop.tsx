@@ -1,26 +1,19 @@
-'use client'
-
 import { cx } from 'cva'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 
-export const NavBar = () => {
+import { useBreakpoint } from '@/hooks/breakpoint'
+import { Button } from '@/components/ui/button'
+
+type DesktopNavBarProps = {
+  activeTabIndex: number | null
+  setActiveTabIndex: (index: number) => void
+}
+
+export const DesktopNavBar = ({ activeTabIndex, setActiveTabIndex }: DesktopNavBarProps) => {
   const path = usePathname()
-  const initialIndex = (() => {
-    switch (path.split('/')[1]) {
-      case 'work':
-        return 0
-      case 'blog':
-      case 'topics':
-        return 1
-      case 'contact':
-        return 2
-      default:
-        return null
-    }
-  })()
-  const [activeTabIndex, setActiveTabIndex] = useState<number | null>(initialIndex)
+
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0)
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0)
 
@@ -37,15 +30,12 @@ export const NavBar = () => {
     return () => window.removeEventListener('resize', setTabPosition)
   }, [activeTabIndex])
 
-  useEffect(() => {
-    if (activeTabIndex !== initialIndex) {
-      setActiveTabIndex(initialIndex)
-    }
-  }, [activeTabIndex, initialIndex, path])
-
   const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
-  return (
-    <div className="flex h-16 w-full items-center justify-between px-8">
+
+  const aboveSm = useBreakpoint('sm')
+
+  return aboveSm ? (
+    <div className="flex h-16 w-full items-center justify-between ~px-6/8">
       <div className="flex items-center">
         <Link
           href="/"
@@ -88,6 +78,10 @@ export const NavBar = () => {
       {/* 		About */}
       {/* 	</Link> */}
       {/* </div> */}
+    </div>
+  ) : (
+    <div>
+      <Button>here</Button>
     </div>
   )
 }
