@@ -1,5 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 
@@ -42,6 +44,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Background />
           </div>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
