@@ -21,7 +21,7 @@ export const HomeView = () => {
           </BlurFade>
           <BlurFade delay={0.25 * 1} inView>
             <span className="text-pretty ~text-sm/lg">
-              My name is David Zheng. I&apos;m a developer based out of Vancouver, Canada.
+              My name is David Zheng. I&apos;m a developer based in Vancouver, Canada.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
@@ -30,14 +30,14 @@ export const HomeView = () => {
               applications. My primary stack is React with Next.js, TypeScript, TailwindCSS, and
               Fastify, but I am always looking to work with new{' '}
               <Link href="/work" className="text-link">
-                technologies & paradigms.{' '}
+                technologies and paradigms.{' '}
               </Link>
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
             <span className="text-pretty ~text-sm/lg">
-              In my spare time, I enjoy diving deep into topics like cryptocurrencies & artificial
-              intelligence, experimenting with, and writing about them on my{' '}
+              In my spare time, I enjoy diving deep into topics like cryptocurrencies and artificial
+              intelligence, experimenting with them, and writing about them on my{' '}
               <Link href="/blog" className="text-link">
                 blog
               </Link>
