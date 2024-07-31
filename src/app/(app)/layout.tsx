@@ -35,7 +35,7 @@ const fontSans = Inter({
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <Providers>
           <NavBar />
