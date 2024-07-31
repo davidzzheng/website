@@ -7,6 +7,7 @@ export default async function WorkPage() {
 
   const { docs: works } = await payload.find({
     collection: 'work',
+    sort: '-startDate',
   })
 
   // Object.groupBy is not supported on Vercel yet (needs Node 21)

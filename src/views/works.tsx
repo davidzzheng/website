@@ -16,7 +16,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
 
   return (
     <Layout>
-      <Layout.Main className="space-y-6 rounded-lg bg-background/80 p-6">
+      <Layout.Main className="space-y-6 rounded-lg bg-background/80 p-6 mb-16">
         <h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">Work Experience</h1>
         <section className="flex flex-col gap-y-2">
           <div className="flex flex-col gap-y-6">
@@ -36,7 +36,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                   </p>
                 </div>
                 <div
-                  className="prose text-lg text-foreground dark:prose-invert"
+                  className="prose max-w-full text-foreground dark:prose-invert"
                   dangerouslySetInnerHTML={{
                     __html: position.descriptionHtml!,
                   }}
@@ -72,11 +72,13 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                   </a>
 
                   <p className="~text-xs/sm">
-                    {`${getDate(project.startDate!)} - ${getDate(project.endDate!)}`}
+                    {`${getDate(project.startDate!)} - ${
+                      project.endDate ? getDate(project.endDate) : 'Present'
+                    }`}
                   </p>
                 </div>
                 <div
-                  className="prose text-lg text-foreground dark:prose-invert"
+                  className="prose max-w-full text-foreground dark:prose-invert"
                   dangerouslySetInnerHTML={{
                     __html: project.descriptionHtml!,
                   }}
