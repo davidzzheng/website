@@ -14,7 +14,7 @@ const Background = dynamic(() => import('../../components//background'))
 export const metadata: Metadata = {
   title: {
     template: "%s | David Zheng's Portfolio",
-    default: 'Home',
+    default: "Home | David Zheng's Portfolio",
   },
 }
 
