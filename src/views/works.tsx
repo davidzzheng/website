@@ -16,9 +16,9 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
 
   return (
     <Layout>
-      <Layout.Main className="space-y-6 rounded-lg bg-background/80 p-6 mb-16">
+      <Layout.Main className="rounded-lg bg-background/80 p-6 mb-16">
         <h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">Work Experience</h1>
-        <section className="flex flex-col gap-y-2">
+        <section className="flex flex-col gap-y-2 mb-12">
           <div className="flex flex-col gap-y-6">
             {positions.map((position) => (
               <div key={position.id} className="flex flex-col gap-y-2">
