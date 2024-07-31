@@ -7,7 +7,7 @@ type BlogPostPageProps = {
   }
 }
 
-export const revalidate = 60
+export const revalidate = 0
 
 export async function generateStaticParams() {
   const payload = await getPayload()
