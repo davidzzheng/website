@@ -2,19 +2,19 @@ import { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+type LayoutNodeProps = {
+  children: ReactNode
+  className?: string
+}
+
+export const Layout = ({ children, className }: LayoutNodeProps) => {
   return (
-    <div className="container px-2">
+    <div className={cn('container px-2', className)}>
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-4 px-1 sm:grid-cols-12">
         {children}
       </div>
     </div>
   )
-}
-
-type LayoutNodeProps = {
-  children: ReactNode
-  className?: string
 }
 
 const LayoutTop = ({ children, className }: LayoutNodeProps) => (
