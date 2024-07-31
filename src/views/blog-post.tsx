@@ -13,11 +13,11 @@ type BlogPostViewProps = {
 export const BlogPostView = ({ post }: BlogPostViewProps) => {
   return (
     <Layout>
-      <Layout.Main className="rounded-lg bg-background/75 p-8">
+      <Layout.Main className="rounded-lg bg-background/75 p-8 mb-16">
         {/* <Breadcrumbs /> */}
 
         <h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">{post.title}</h1>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-8">
           <p className="~text-xs/sm">Posted on {formatDate(post.createdAt)}</p>
         </div>
         <div
