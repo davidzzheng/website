@@ -76,7 +76,7 @@
 
     &::after {
       @apply bg-blue-500;
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       transform: scaleX(0);
@@ -101,7 +101,7 @@
 
     &::after {
       @apply bg-foreground;
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       transform: scaleX(0);
