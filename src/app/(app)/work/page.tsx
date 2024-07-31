@@ -1,6 +1,12 @@
+import { Metadata } from 'next'
+
 import { getPayload } from '@/lib/payload'
 import { WorkView } from '@/views/works'
 import { Work } from 'payload-types'
+
+export const metadata: Metadata = {
+  title: 'Work',
+}
 
 export default async function WorkPage() {
   const payload = await getPayload()
