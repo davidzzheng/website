@@ -6,4 +6,4 @@ export const formatRelativeDate = (date: string) =>
 	})
 
 export const formatDate = (date: string) =>
-	format(new Date(date), 'LLL dd, yyyy')
+	format(new Date(date), 'EEEE, LLL dd, yyyy \'at\' h:mm a')

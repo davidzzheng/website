@@ -1,8 +1,9 @@
 'use client'
 
+import Link from 'next/link'
+
 import { BlurFade } from '@/components/blur-fade'
 import { Layout } from '@/components/layout'
-import Link from 'next/link'
 
 export const HomeView = () => {
 	return (
