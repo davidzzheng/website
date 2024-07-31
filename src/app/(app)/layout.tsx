@@ -1,4 +1,5 @@
 import React from 'react'
+import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Background } from '@/components/background'
@@ -7,6 +8,13 @@ import { cn } from '@/lib/utils'
 import { Providers } from './providers'
 
 import './globals.scss'
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | David Zheng's Portfolio",
+    default: 'Home', // a default is required when creating a template
+  },
+}
 
 const fontSans = Inter({
   subsets: ['latin'],
