@@ -21,19 +21,36 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
         <section className="flex flex-col gap-y-2">
           <div className="flex flex-col gap-y-6">
             {positions.map((position) => (
-              <div key={position.id} className="flex flex-col">
+              <div key={position.id} className="flex flex-col gap-y-2">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-semibold ~text-lg/2xl">{position.company}</h2>
+                  <a
+                    href={position.link}
+                    className="font-semibold ~text-lg/2xl decorate-underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {position.company}
+                  </a>
                   <p className="~text-xs/sm">
                     {`${getDate(position.startDate!)} - ${getDate(position.endDate!)}`}
                   </p>
                 </div>
                 <div
-                  className="prose my-4 text-lg text-foreground dark:prose-invert"
+                  className="prose text-lg text-foreground dark:prose-invert"
                   dangerouslySetInnerHTML={{
                     __html: position.descriptionHtml!,
                   }}
                 />
+                <ul className="flex gap-2 justify-end">
+                  {position.technologies?.map((tag) => (
+                    <li
+                      key={tag.name}
+                      className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
+                    >
+                      {tag.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -43,19 +60,37 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
         <section className="flex flex-col gap-y-2">
           <div className="flex flex-col gap-y-6">
             {projects.map((project) => (
-              <div key={project.id} className="flex flex-col">
+              <div key={project.id} className="flex flex-col gap-y-2">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-semibold ~text-lg/2xl">{project.company}</h2>
+                  <a
+                    href={project.link}
+                    className="font-semibold ~text-lg/2xl decorate-underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {project.company}
+                  </a>
+
                   <p className="~text-xs/sm">
                     {`${getDate(project.startDate!)} - ${getDate(project.endDate!)}`}
                   </p>
                 </div>
                 <div
-                  className="prose my-4 text-lg text-foreground dark:prose-invert"
+                  className="prose text-lg text-foreground dark:prose-invert"
                   dangerouslySetInnerHTML={{
                     __html: project.descriptionHtml!,
                   }}
                 />
+                <ul className="flex gap-2 justify-end">
+                  {project.technologies?.map((tag) => (
+                    <li
+                      key={tag.name}
+                      className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
+                    >
+                      {tag.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

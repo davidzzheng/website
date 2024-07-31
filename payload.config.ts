@@ -122,6 +122,7 @@ export default buildConfig({
           name: 'company',
           type: 'text',
         },
+        { name: 'link', type: 'text' },
         {
           name: 'description',
           type: 'richText',

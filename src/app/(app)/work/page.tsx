@@ -1,5 +1,5 @@
 import { getPayload } from '@/lib/payload'
-import { WorkView } from '@/views/work'
+import { WorkView } from '@/views/works'
 import { Work } from 'payload-types'
 
 export default async function WorkPage() {
