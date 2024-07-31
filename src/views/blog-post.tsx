@@ -16,7 +16,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
       <Layout.Main className="rounded-lg bg-background/75 p-8 mb-16">
         {/* <Breadcrumbs /> */}
 
-        <div className="mb-4 space-y-2">
+        <div className="mb-4">
           <h1 className="font-bold tracking-tighter ~text-2xl/4xl">{post.title}</h1>
           {post.subtitle ? (
             <p className="text-muted-foreground ~text-lg/xl">{post.subtitle}</p>
