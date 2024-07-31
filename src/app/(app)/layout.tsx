@@ -16,6 +16,13 @@ export const metadata: Metadata = {
     template: "%s | David Zheng's Portfolio",
     default: "Home | David Zheng's Portfolio",
   },
+  description: 'Ramblings about tech and stuff',
+  icons: {
+    icon: ['/favicon.ico?v=4'],
+    apple: ['/apple-touch-icon.png?v=4'],
+    shortcut: ['/apple-touch-icon.png'],
+  },
+  manifest: '/site.webmanifest',
 }
 
 const fontSans = Inter({
