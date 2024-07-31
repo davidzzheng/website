@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react'
 import { MenuIcon } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
+import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
 
-type MobileNavBarProps = {
-  activeTabIndex: number | null
-  setActiveTabIndex: (index: number) => void
-}
-
-export const MobileNavBar = ({ activeTabIndex, setActiveTabIndex }: MobileNavBarProps) => {
+export const MobileNavBar = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   let scrollingTimer: number | null = null
 
