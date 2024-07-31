@@ -7,8 +7,6 @@ type BlogPostPageProps = {
   }
 }
 
-export const dynamicParams = false
-
 export async function generateStaticParams() {
   const payload = await getPayload()
 
