@@ -47,7 +47,7 @@ export const HomeView = () => {
           <BlurFade delay={0.25 * 4} inView>
             <span className="text-pretty ~text-sm/lg">
               If you are interested in working with me, want to learn more about something I&apos;ve
-              written about, or just want to say hi, feel free to{' '}
+              written about, or just want to say hello, feel free to{' '}
               <Link href="/contact" className="text-link">
                 reach out
               </Link>

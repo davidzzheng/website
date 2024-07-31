@@ -127,6 +127,7 @@ export interface Media {
 export interface Work {
   id: number;
   company?: string | null;
+  link?: string | null;
   description?: {
     root: {
       type: string;
