@@ -1,9 +1,10 @@
 'use client'
 
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
 import Link from 'next/link'
-import { Post, Tag } from 'payload-types'
+import { Post } from 'payload-types'
 
 type BlogPostViewProps = {
 	post: Post;
@@ -13,7 +14,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 	return (
 		<Layout>
 			<Layout.Main className="rounded-lg bg-background/75 p-8">
-				{/* <Breadcrumbs /> */}
+				<Breadcrumbs />
 
 				<h1 className="my-3 font-bold tracking-tighter ~text-2xl/4xl">
 					{post.title}

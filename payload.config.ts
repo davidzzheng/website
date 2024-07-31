@@ -12,7 +12,6 @@ import {
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
-import { createSlug } from '@/lib/string'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,7 +48,6 @@ export default buildConfig({
 					},
 				},
 			}),
-			BlocksFeature({}),
 			HTMLConverterFeature({}),
 		],
 	}),
@@ -186,25 +184,19 @@ export default buildConfig({
 			],
 		},
 	],
-	secret: process.env.PAYLOAD_SECRET || '',
+	secret: process.env.PAYLOAD_SECRET ?? '',
 	typescript: {
 		outputFile: path.resolve(dirname, 'payload-types.ts'),
 	},
 	db: postgresAdapter({
 		pool: {
-			connectionString: process.env.POSTGRES_URI || '',
+			connectionString: process.env.POSTGRES_URL ?? '',
 		},
 	}),
 	i18n: {
 		supportedLanguages: { en },
 	},
-	admin: {
-		autoLogin: {
-			email: 'dev@payloadcms.com',
-			password: 'test',
-		},
-	},
-	async onInit(payload) {
+	onInit: async (payload) => {
 		const existingUsers = await payload.find({
 			collection: 'users',
 			limit: 1,
@@ -214,8 +206,8 @@ export default buildConfig({
 			await payload.create({
 				collection: 'users',
 				data: {
-					email: 'dev@payloadcms.com',
-					password: 'test',
+					email: process.env.DEFAULT_EMAIL ?? '',
+					password: process.env.DEFAULT_PASSWORD,
 				},
 			})
 		}
