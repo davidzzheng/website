@@ -8,7 +8,7 @@ import { Providers } from './providers'
 
 import './globals.scss'
 
-const inter = Inter({
+const fontSans = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
@@ -17,7 +17,7 @@ const inter = Inter({
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', inter.variable)}>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <Providers>
           <NavBar />
           {children}
