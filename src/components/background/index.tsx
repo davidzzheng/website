@@ -108,3 +108,5 @@ export const Background = () => {
     </Canvas>
   )
 }
+
+export default Background

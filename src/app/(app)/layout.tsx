@@ -1,13 +1,15 @@
 import React from 'react'
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 
-import { Background } from '@/components/background'
 import { NavBar } from '@/components/nav-bar'
 import { cn } from '@/lib/utils'
 import { Providers } from './providers'
 
 import './globals.scss'
+
+const Background = dynamic(() => import('../../components//background'))
 
 export const metadata: Metadata = {
   title: {
