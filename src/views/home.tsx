@@ -11,21 +11,21 @@ export const HomeView = () => {
       <Layout.Main className="rounded-lg bg-background/75 p-8">
         <section id="header" className="flex flex-col gap-y-6">
           <BlurFade delay={0.25} inView>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+            <h2 className="~text-3xl/6xl font-bold tracking-tighter">
               Hello{' '}
-              <span className="w-fit animate-text-gradient bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% to-blue-400 bg-[length:200%] bg-clip-text text-6xl font-bold leading-none text-transparent transition-[background-position] direction-reverse">
+              <span className="w-fit animate-text-gradient bg-gradient-to-r from-blue-400 from-30% via-green-500 via-70% to-blue-400 bg-[length:200%] bg-clip-text font-bold leading-none text-transparent transition-[background-position] direction-reverse">
                 World
               </span>{' '}
               👋
             </h2>
           </BlurFade>
           <BlurFade delay={0.25 * 1} inView>
-            <span className="text-pretty text-lg">
+            <span className="text-pretty ~text-sm/lg">
               My name is David Zheng. I&apos;m a developer based out of Vancouver, Canada.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
-            <span className="text-pretty text-lg">
+            <span className="text-pretty ~text-sm/lg">
               I have over 5 years of professional experience building scalable full-stack web
               applications. My primary stack is React with Next.js, TypeScript, TailwindCSS, and
               Fastify, but I am always looking to work with new{' '}
@@ -35,7 +35,7 @@ export const HomeView = () => {
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
-            <span className="text-pretty text-lg">
+            <span className="text-pretty ~text-sm/lg">
               In my spare time, I enjoy diving deep into topics like cryptocurrencies & artificial
               intelligence, experimenting with, and writing about them on my{' '}
               <Link href="/blog" className="text-link">
@@ -45,7 +45,7 @@ export const HomeView = () => {
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 4} inView>
-            <span className="text-pretty text-lg">
+            <span className="text-pretty ~text-sm/lg">
               If you are interested in working with me, want to learn more about something I&apos;ve
               written about, or just want to say hi, feel free to{' '}
               <Link href="/contact" className="text-link">
