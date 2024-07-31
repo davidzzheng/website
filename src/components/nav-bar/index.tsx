@@ -7,5 +7,5 @@ import { useBreakpoint } from '@/hooks/breakpoint'
 export const NavBar = () => {
   const aboveSm = useBreakpoint('sm')
 
-  return !aboveSm ? <MobileNavBar /> : <DesktopNavBar />
+  return aboveSm ? <DesktopNavBar /> : <MobileNavBar />
 }
