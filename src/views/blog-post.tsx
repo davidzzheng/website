@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
 import { Post } from 'payload-types'
+import { Button } from '@/components/ui/button'
+import { ArrowUp } from 'lucide-react'
 
 const WPM = 150
 
@@ -16,8 +18,8 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
   const readingTime = Math.ceil(wordCount / WPM)
 
   return (
-    <Layout>
-      <Layout.Main className="rounded-lg bg-background/75 p-8 mb-16">
+    <Layout className="mb-8">
+      <Layout.Main className="rounded-lg bg-background/75 p-8">
         {/* <Breadcrumbs /> */}
 
         <div className="mb-4">
@@ -50,11 +52,12 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           ))}
         </ul>
       </Layout.Main>
-      {/* <Layout.Bottom className="rounded-lg bg-background/75 p-8"> */}
-      {/* 	<h1 className="mb-3 font-bold tracking-tighter ~text-lg/xl"> */}
-      {/* 		Other Posts */}
-      {/* 	</h1> */}
-      {/* </Layout.Bottom> */}
+      <Layout.Bottom className="flex justify-center">
+        <Button variant="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <ArrowUp className="mr-2 size-4" />
+          Back to top
+        </Button>
+      </Layout.Bottom>
     </Layout>
   )
 }
