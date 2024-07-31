@@ -41,7 +41,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                     __html: position.descriptionHtml!,
                   }}
                 />
-                <ul className="flex gap-2 justify-end">
+                <ul className="flex gap-2 flex-wrap">
                   {position.technologies?.map((tag) => (
                     <li
                       key={tag.name}
@@ -83,7 +83,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                     __html: project.descriptionHtml!,
                   }}
                 />
-                <ul className="flex gap-2 justify-end">
+                <ul className="flex gap-2 flex-wrap">
                   {project.technologies?.map((tag) => (
                     <li
                       key={tag.name}

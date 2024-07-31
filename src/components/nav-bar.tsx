@@ -66,7 +66,7 @@ export const NavBar = () => {
                 tabsRef.current[idx] = el
               }}
               href={`/${tab}`}
-              className="cursor-pointer px-4 pb-3 pt-2 font-semibold text-foreground transition ~text-lg/xl hover:text-muted-foreground"
+              className="cursor-pointer px-4 py-3 font-semibold text-foreground transition ~text-lg/xl hover:text-muted-foreground"
               onClick={() => setActiveTabIndex(idx)}
               role="listitem"
             >
