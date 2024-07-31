@@ -1,11 +1,9 @@
 'use client'
 
-import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
-import { createSlug } from '@/lib/string'
 import Link from 'next/link'
-import { Post } from 'payload-types'
+import { Post, Tag } from 'payload-types'
 
 type BlogPostViewProps = {
 	post: Post;
@@ -24,7 +22,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 					<p className="~text-xs/sm">Posted on {formatDate(post.createdAt)}</p>
 				</div>
 				<div
-					className="prose my-4 text-lg text-foreground dark:prose-invert"
+					className="prose mb-8 mt-4 text-lg text-foreground dark:prose-invert"
 					dangerouslySetInnerHTML={{
 						__html: post.contentHtml!,
 					}}
@@ -33,7 +31,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 					{post.tags?.map((tag) => (
 						<Link
 							key={tag.name}
-							href={`/topics/${createSlug(tag.id)}`}
+							href={`/topics/${tag.id}`}
 							className="decorate-underline flex cursor-pointer"
 						>
 							<span className="text-xs">#</span> {tag.name}

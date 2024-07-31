@@ -46,7 +46,7 @@ export const BlogView = ({ posts }: BlogViewProps) => {
 										{post.tags?.map((tag) => (
 											<li
 												key={tag.name}
-												className="rounded bg-muted-foreground px-1 text-xs"
+												className="rounded bg-muted px-1 py-0.5 text-xs"
 											>
 												{tag.name}
 											</li>
