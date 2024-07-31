@@ -21,11 +21,11 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                   key={post.id}
                   className="m-3 flex flex-col gap-y-2 rounded px-4 py-2 transition hover:bg-muted/50"
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <div className="flex flex-col gap-y-0.5">
                       <Link
                         href={`/blog/${post.id}`}
-                        className="decorate-underline pb-1 font-semibold ~text-lg/3xl"
+                        className="decorate-underline font-semibold ~text-lg/3xl"
                       >
                         {post.title}
                       </Link>
@@ -34,7 +34,9 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                       ) : null}
                     </div>
 
-                    <p className="~text-xs/sm mt-1">{formatRelativeDate(post.createdAt)}</p>
+                    <p className="~text-xs/sm sm:mt-2 sm:text-right">
+                      Posted {formatRelativeDate(post.createdAt)}
+                    </p>
                   </div>
                   <ul className="flex justify-end gap-2">
                     {post.tags?.map((tag) => (
