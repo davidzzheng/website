@@ -31,12 +31,12 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
             __html: post.contentHtml!,
           }}
         />
-        <ul className="flex gap-2 justify-end text-muted-foreground transition hover:text-foreground">
+        <ul className="flex gap-2 justify-end">
           {post.tags?.map((tag) => (
             <Link
               key={tag.name}
               href={`/topics/${tag.id}`}
-              className="decorate-underline flex cursor-pointer"
+              className="decorate-underline flex cursor-pointer text-muted-foreground transition hover:text-foreground"
             >
               <span className="text-xs">#</span> {tag.name}
             </Link>
