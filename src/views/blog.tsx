@@ -25,7 +25,7 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                     <div className="flex flex-col gap-y-0.5">
                       <Link
                         href={`/blog/${post.id}`}
-                        className="decorate-underline font-semibold ~text-lg/3xl"
+                        className="decorate-underline font-semibold ~text-lg/3xl w-fit"
                       >
                         {post.title}
                       </Link>
