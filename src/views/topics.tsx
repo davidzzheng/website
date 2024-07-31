@@ -14,7 +14,7 @@ export const TopicsView = ({ topics }: TopicsViewProps) => {
       <Layout.Main className="rounded-lg bg-background/75 p-8">
         {/* <Breadcrumbs /> */}
 
-        <h1 className="my-3 px-6 font-bold tracking-tighter ~text-2xl/4xl">Topics</h1>
+        <h1 className="font-bold tracking-tighter ~text-2xl/4xl">Topics</h1>
         <section className="flex flex-col gap-y-6">
           {topics.map((topic) => (
             <div

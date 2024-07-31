@@ -5,3 +5,5 @@ export const createSlug = (str: string) =>
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .trim()
+
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
