@@ -24,7 +24,7 @@ export const DesktopNavBar = () => {
     if (activeTabIndex !== initialIndex) {
       setActiveTabIndex(initialIndex)
     }
-  }, [activeTabIndex, initialIndex, path])
+  }, [path])
 
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0)
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0)
@@ -52,7 +52,7 @@ export const DesktopNavBar = () => {
           className={cx('decorate-underline ~text-lg/xl font-bold text-foreground', {
             selected: path === '/',
           })}
-          aria-label="David Zheng's portfolio website"
+          aria-label="Home"
         >
           dz
         </Link>
