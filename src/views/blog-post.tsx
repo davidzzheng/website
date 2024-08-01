@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/date'
 import { Post } from 'payload-types'
 import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-react'
+import { LexicalViewer } from '@/components/lexical-viewer'
 
 const WPM = 150
 
@@ -34,12 +35,13 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           </span>
           <p>Posted on {formatDate(post.createdAt)}</p>
         </div>
-        <div
-          className="prose mb-8 mt-4 text-lg text-foreground dark:prose-invert"
-          dangerouslySetInnerHTML={{
-            __html: post.contentHtml!,
-          }}
-        />
+        <LexicalViewer content={JSON.stringify(post.content)} />
+        {/* <div */}
+        {/*   className="prose mb-8 mt-4 text-lg text-foreground dark:prose-invert" */}
+        {/*   dangerouslySetInnerHTML={{ */}
+        {/*     __html: post.contentHtml!, */}
+        {/*   }} */}
+        {/* /> */}
         <ul className="flex gap-2 justify-end">
           {post.tags?.map((tag) => (
             <Link
