@@ -21,7 +21,7 @@ export const HomeView = () => {
           </BlurFade>
           <BlurFade delay={0.25 * 1} inView>
             <span className="text-pretty ~text-sm/lg">
-              My name is David Zheng. I&apos;m a developer based in Vancouver, Canada.
+              My name is David Zheng. I&apos;m a software developer based in Vancouver, Canada.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>

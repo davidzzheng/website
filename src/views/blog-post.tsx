@@ -23,7 +23,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
         {/* <Breadcrumbs /> */}
 
         <div className="mb-4">
-          <h1 className="font-bold tracking-tighter ~text-2xl/4xl">{post.title}</h1>
+          <h1 className="font-bold tracking-tighter ~text-3xl/4xl">{post.title}</h1>
           {post.subtitle ? (
             <p className="text-muted-foreground ~text-lg/xl">{post.subtitle}</p>
           ) : null}
