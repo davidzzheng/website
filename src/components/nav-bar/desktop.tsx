@@ -1,3 +1,4 @@
+import { useDarkMode } from '@/hooks/theme'
 import { cx } from 'cva'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -44,8 +45,9 @@ export const DesktopNavBar = () => {
 
   const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
 
+  const { toggleDarkMode } = useDarkMode()
   return (
-    <div className="flex h-16 w-full items-center justify-between ~px-6/8">
+    <div className="flex h-16 w-full items-center justify-between ~px-6/8 bg-transparent">
       <div className="flex items-center">
         <Link
           href="/"
@@ -79,7 +81,7 @@ export const DesktopNavBar = () => {
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
         />
       </div>
-      <div />
+      <div></div>
     </div>
   )
 }

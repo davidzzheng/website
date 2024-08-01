@@ -9,7 +9,7 @@ type ProvidersProps = {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark">
+    <ThemeProvider attribute="class" defaultTheme="dark" themes={['dark']} enableSystem={false}>
       {children}
     </ThemeProvider>
   )
