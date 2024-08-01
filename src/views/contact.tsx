@@ -24,6 +24,7 @@ export const ContactView = () => {
             className="transition hover:opacity-75"
             href="https://github.com/davidzzheng"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <GithubIcon size={24} aria-label="Github" />
           </a>
