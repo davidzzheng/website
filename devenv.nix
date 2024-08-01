@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
-  packages = [ pkgs.git pkgs.bun ];
+  packages = [ pkgs.git ];
 
   enterShell = ''
   '';

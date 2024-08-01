@@ -17,20 +17,18 @@ export const Clipboard = ({ value, children, className }: ClipboardProps) => {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={250}>
-        <TooltipTrigger asChild>
-          <button
-            className={cn('transiton hover:opacity-75', className)}
-            onClick={(e) => {
-              e.preventDefault()
-              navigator.clipboard.writeText(value)
-              setIsCopied(true)
-              setTimeout(() => {
-                setIsCopied(false)
-              }, 3000)
-            }}
-          >
-            {children}
-          </button>
+        <TooltipTrigger
+          className={cn('transiton hover:opacity-75', className)}
+          onClick={(e) => {
+            e.preventDefault()
+            navigator.clipboard.writeText(value)
+            setIsCopied(true)
+            setTimeout(() => {
+              setIsCopied(false)
+            }, 3000)
+          }}
+        >
+          {children}
         </TooltipTrigger>
         <TooltipContent onPointerDownOutside={(e) => e.preventDefault()}>
           {isCopied ? 'Copied!' : 'Click to copy'}
