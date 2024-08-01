@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 import fluid, { extract, screens, fontSize } from 'fluid-tailwind'
+import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
