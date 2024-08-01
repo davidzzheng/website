@@ -9,6 +9,7 @@ import * as THREE from 'three'
 
 import { fragmentShader } from './shaders/fragmentShader'
 import { vertexShader } from './shaders/vertexShader'
+import { useDarkMode } from '@/hooks/theme'
 
 function Scene() {
   const [isMounted, setIsMounted] = useState(false)
@@ -102,10 +103,14 @@ function Scene() {
 }
 
 export const Background = () => {
-  return (
+  const { isDarkMode } = useDarkMode()
+
+  return isDarkMode ? (
     <Canvas>
       <Scene />
     </Canvas>
+  ) : (
+    <div />
   )
 }
 

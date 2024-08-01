@@ -2,7 +2,6 @@ import path from 'path'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
 import {
-  BlocksFeature,
   HTMLConverterFeature,
   lexicalEditor,
   lexicalHTML,
@@ -12,6 +11,8 @@ import {
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
+import { UploadHTMLConverter } from '@/lib/lexical/converters/upload'
+import { RelationHTMLConverter } from '@/lib/lexical/converters/relation'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -48,7 +49,13 @@ export default buildConfig({
           },
         },
       }),
-      HTMLConverterFeature({}),
+      HTMLConverterFeature({
+        converters: ({ defaultConverters }) => [
+          ...defaultConverters,
+          RelationHTMLConverter,
+          UploadHTMLConverter,
+        ],
+      }),
     ],
   }),
   collections: [
@@ -114,6 +121,9 @@ export default buildConfig({
           type: 'text',
         },
       ],
+      access: {
+        read: () => true,
+      },
     },
     {
       slug: 'work',
