@@ -1,19 +1,19 @@
 import { Metadata } from 'next'
 
-import { getPayload } from '@/lib/payload'
+import { ghost } from '@/lib/ghost'
 import { BlogView } from '@/views/blog'
+
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Blog',
 }
 
 export default async function BlogPage() {
-  const payload = await getPayload()
-
-  const { docs: data = [] } = await payload.find({
-    collection: 'posts',
-    sort: '-createdAt',
+  const posts = await ghost.posts.browse({
+    order: 'published_at DESC',
+    include: 'tags',
   })
 
-  return <BlogView posts={data} />
+  return <BlogView posts={posts} />
 }

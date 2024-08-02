@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { Post } from 'payload-types'
 
 import { Layout } from '@/components/layout'
 import { formatRelativeDate } from '@/lib/date'
+import { Post } from '@/lib/ghost'
 
 type BlogViewProps = {
   posts: Post[]
@@ -21,30 +21,24 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                   key={post.id}
                   className="m-3 flex flex-col gap-y-2 rounded px-3 py-2 transition hover:bg-muted/50"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div className="flex flex-col gap-y-0.5">
-                      <Link
-                        href={`/blog/${post.id}`}
-                        className="decorate-underline font-semibold ~text-lg/3xl w-fit"
-                      >
-                        {post.title}
-                      </Link>
-                      {post.subtitle ? (
-                        <p className="text-muted-foreground ~text-lg">{post.subtitle}</p>
-                      ) : null}
-                    </div>
-
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="decorate-underline font-semibold ~text-lg/3xl w-fit"
+                  >
+                    {post.title}
+                  </Link>
+                  <div className="flex justify-between items-center">
                     <p className="~text-xs/sm sm:mt-2 sm:text-right">
-                      Posted {formatRelativeDate(post.createdAt)}
+                      Posted {formatRelativeDate(post.created_at!)}
                     </p>
+                    <ul className="flex justify-end gap-2">
+                      {post.tags?.map((tag) => (
+                        <li key={tag.name} className="rounded bg-muted px-1 py-0.5 text-xs">
+                          {tag.name}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="flex justify-end gap-2">
-                    {post.tags?.map((tag) => (
-                      <li key={tag.name} className="rounded bg-muted px-1 py-0.5 text-xs">
-                        {tag.name}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               ))}
             </section>
