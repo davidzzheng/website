@@ -29,7 +29,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           <span>
             {wordCount} words • {readingTime} min read
           </span>
-          <p>Posted on {formatDate(post.created_at!)}</p>
+          <p>Posted on {formatDate(post.published_at!)}</p>
         </div>
 
         <PostView content={post.html!} />
