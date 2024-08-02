@@ -29,7 +29,7 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                   </Link>
                   <div className="flex justify-between items-center">
                     <p className="~text-xs/sm sm:mt-2 sm:text-right">
-                      Posted {formatRelativeDate(post.created_at!)}
+                      Posted {formatRelativeDate(post.published_at!)}
                     </p>
                     <ul className="flex justify-end gap-2">
                       {post.tags?.map((tag) => (
