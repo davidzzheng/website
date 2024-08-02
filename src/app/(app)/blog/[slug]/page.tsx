@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = params
 
-  const post = await ghost.posts.read({ slug })
+  const post = await ghost.posts.read({ slug }, { include: 'tags' })
 
   if (!post) return null
 
