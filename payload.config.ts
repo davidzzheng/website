@@ -11,8 +11,6 @@ import {
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
-import { UploadHTMLConverter } from '@/lib/lexical/converters/upload'
-import { RelationHTMLConverter } from '@/lib/lexical/converters/relation'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,11 +48,7 @@ export default buildConfig({
         },
       }),
       HTMLConverterFeature({
-        converters: ({ defaultConverters }) => [
-          ...defaultConverters,
-          RelationHTMLConverter,
-          UploadHTMLConverter,
-        ],
+        converters: ({ defaultConverters }) => [...defaultConverters],
       }),
     ],
   }),

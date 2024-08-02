@@ -1,8 +1,7 @@
 'use client'
 
-import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
-import { Tag } from 'payload-types'
+import { Tag } from '@/lib/ghost'
 
 type TopicsViewProps = {
   topics: Tag[]
