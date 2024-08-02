@@ -27,8 +27,9 @@ export const HomeView = () => {
           <BlurFade delay={0.25 * 2} inView>
             <span className="text-pretty ~text-sm/lg">
               I have over 5 years of professional experience building scalable full-stack web
-              applications. My primary stack is React with Next.js, TypeScript, TailwindCSS, and
-              Fastify, but I am always looking to work with new{' '}
+              applications at companies ranging from high-growth startups to enterprise-level. My
+              primary stack is React with Next.js, TypeScript, TailwindCSS, and Fastify, but I am
+              always looking to work with new{' '}
               <Link href="/work" className="text-link">
                 technologies and paradigms.{' '}
               </Link>
@@ -36,8 +37,9 @@ export const HomeView = () => {
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
             <span className="text-pretty ~text-sm/lg">
-              In my spare time, I enjoy diving deep into topics like cryptocurrencies and artificial
-              intelligence, experimenting with them, and writing about them on my{' '}
+              In my spare time, I enjoy diving deep into novel technical topics like
+              cryptocurrencies and artificial intelligence, experimenting with them, and writing
+              about them on my{' '}
               <Link href="/blog" className="text-link">
                 blog
               </Link>
