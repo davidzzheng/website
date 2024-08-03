@@ -33,7 +33,7 @@ export const Breadcrumbs = ({}: BreadcrumbsProps) => {
       <BreadcrumbList>
         {breadcrumbs.map((crumb, index) => (
           <React.Fragment key={crumb.href}>
-            {index > 0 && <BreadcrumbSeparator />}
+            {index > 0 ? <BreadcrumbSeparator /> : null}
             <BreadcrumbItem>
               {index === breadcrumbs.length - 1 ? (
                 <BreadcrumbPage>{crumb.label}</BreadcrumbPage>

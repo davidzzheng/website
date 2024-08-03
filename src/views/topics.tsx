@@ -1,5 +1,3 @@
-'use client'
-
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { Tag } from '@/lib/ghost'
@@ -10,11 +8,10 @@ type TopicsViewProps = {
 }
 
 export const TopicsView = ({ topics }: TopicsViewProps) => {
-  console.log({ topics })
   return (
     <Layout>
       <Layout.Main className="rounded-lg bg-background/75 py-3">
-        <div className="px-6 mb-3">
+        <div className="px-6 my-3">
           <Breadcrumbs />
         </div>
 

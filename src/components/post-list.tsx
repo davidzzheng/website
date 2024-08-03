@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { formatRelativeDate } from '@/lib/date'
 import { Post } from '@/lib/ghost'
+import { cn } from '@/lib/utils'
 
 type PostListProps = {
   posts: Post[]
@@ -28,12 +29,15 @@ export const PostList = ({ posts }: PostListProps) => {
               </p>
               <ul className="flex flex-wrap justify-end gap-2">
                 {post.tags?.map((tag) => (
-                  <li
+                  <Link
+                    href={`/topics/${tag.slug}`}
                     key={tag.name}
-                    className="rounded bg-muted px-1 py-0.5 text-xs h-fit text-pretty"
+                    className={cn(
+                      'rounded bg-muted px-1 py-0.5 text-xs h-fit text-pretty transition hover:bg-muted-foreground',
+                    )}
                   >
                     {tag.name}
-                  </li>
+                  </Link>
                 ))}
               </ul>
             </div>
