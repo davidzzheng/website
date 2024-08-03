@@ -7,8 +7,6 @@ import {
 import { createHighlighterCore } from 'shiki/core'
 import loadWasm from 'shiki/wasm'
 
-const theme = 'tokyo-night'
-
 type Highlighter = Awaited<ReturnType<typeof createHighlighterCore>>
 
 class ShikiSingleton {
@@ -43,7 +41,7 @@ class ShikiSingleton {
 
 export type CodeHighlighterOptions = {
   lang: 'ts' | 'js' | 'json' | 'html' | 'css'
-  theme: string
+  theme: 'tokyo-night'
 }
 
 export const codeToHtml = async (
