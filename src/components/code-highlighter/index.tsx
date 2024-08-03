@@ -4,7 +4,7 @@ import { codeToHtml } from '@/lib/code'
 import { Button } from '../ui/button'
 import { Clipboard } from '../ui/clipboard'
 
-import './index.css'
+import './index.scss'
 
 type CodeHighlighterProps = {
   code: string
