@@ -1,7 +1,6 @@
 import { ClipboardIcon } from 'lucide-react'
 
 import { codeToHtml, stripCodeDirectives } from '@/lib/code'
-import { Button } from '../ui/button'
 import { Clipboard } from '../ui/clipboard'
 
 import './index.scss'

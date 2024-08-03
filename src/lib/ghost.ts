@@ -14,6 +14,6 @@ export const ghost = GhostContentAPI({
   },
 })
 
+export type Page = Awaited<ReturnType<typeof ghost.pages.read>>
 export type Post = Awaited<ReturnType<typeof ghost.posts.read>>
-
 export type Tag = Awaited<ReturnType<typeof ghost.tags.read>>

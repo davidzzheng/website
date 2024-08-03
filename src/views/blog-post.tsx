@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
 
-import { Post } from '@/lib/ghost'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { PostView } from '@/components/post-view'
 import { ScrollToTop } from '@/components/scroll-to-top'
-import { Breadcrumbs } from '@/components/breadcrumbs'
+import { Post } from '@/lib/ghost'
 
 const WPM = 150
 
