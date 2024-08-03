@@ -26,8 +26,8 @@ export const PostView = async ({ content, className }: PostViewProps) => {
         if (domNode.name === 'a') {
           return (
             <Link
-              href={removeRefParam(domNode.attribs.href ?? '')}
               {...domNode.attribs}
+              href={removeRefParam(domNode.attribs.href ?? '')}
               target="_blank"
               rel="noopener noreferrer"
               className="text-link"
