@@ -7,38 +7,41 @@ import {
 import { createHighlighterCore } from 'shiki/core'
 import loadWasm from 'shiki/wasm'
 
+export const createHighlighter = async () =>
+  await createHighlighterCore({
+    themes: [
+      import('shiki/themes/tokyo-night.mjs'),
+      // TODO: https://github.com/shikijs/shiki/issues/730
+      // import('shiki/themes/rose-pine-moon.mjs'),
+      // import('shiki/themes/rose-pine-dawn.mjs'),
+    ],
+    langs: [
+      import('shiki/langs/ts.mjs'),
+      import('shiki/langs/json.mjs'),
+      import('shiki/langs/html.mjs'),
+      import('shiki/langs/css.mjs'),
+    ],
+    loadWasm,
+  })
+
 type Highlighter = Awaited<ReturnType<typeof createHighlighterCore>>
 
-class ShikiSingleton {
-  private static instance: ShikiSingleton
+export class HighliterSingleton {
+  private static instance: HighliterSingleton
   private highlighter: Highlighter | undefined
 
   private constructor() {}
 
-  public static getInstance(): ShikiSingleton {
-    if (!ShikiSingleton.instance) {
-      ShikiSingleton.instance = new ShikiSingleton()
+  public static getInstance(): HighliterSingleton {
+    if (!HighliterSingleton.instance) {
+      HighliterSingleton.instance = new HighliterSingleton()
     }
-    return ShikiSingleton.instance
+    return HighliterSingleton.instance
   }
 
   public async getHighlighter(): Promise<Highlighter> {
     if (!this.highlighter) {
-      this.highlighter = await createHighlighterCore({
-        themes: [
-          import('shiki/themes/tokyo-night.mjs'),
-          // TODO: https://github.com/shikijs/shiki/issues/730
-          // import('shiki/themes/rose-pine-moon.mjs'),
-          // import('shiki/themes/rose-pine-dawn.mjs'),
-        ],
-        langs: [
-          import('shiki/langs/ts.mjs'),
-          import('shiki/langs/json.mjs'),
-          import('shiki/langs/html.mjs'),
-          import('shiki/langs/css.mjs'),
-        ],
-        loadWasm,
-      })
+      this.highlighter = await createHighlighter()
     }
     return this.highlighter
   }
@@ -56,10 +59,10 @@ export const codeToHtml = async (
     theme: 'tokyo-night',
   },
 ) => {
-  const highlighter = await ShikiSingleton.getInstance().getHighlighter()
+  const highlighter = await createHighlighter()
   const { theme, lang } = options
 
-  return highlighter.codeToHtml(code, {
+  const html = highlighter.codeToHtml(code, {
     lang,
     theme,
     transformers: [
@@ -69,6 +72,10 @@ export const codeToHtml = async (
       transformerNotationErrorLevel(),
     ],
   })
+
+  highlighter.dispose()
+
+  return html
 }
 
 export const stripComments = (code: string) =>

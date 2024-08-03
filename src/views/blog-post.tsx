@@ -37,6 +37,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
         <ul className="flex flex-wrap gap-x-4 gap-y-2 justify-end">
           {post.tags?.map((tag) => (
             <Link
+              role="listitem"
               key={tag.slug}
               href={`/topics/${tag.slug}`}
               className="decorate-underline flex cursor-pointer text-muted-foreground transition hover:text-foreground"
