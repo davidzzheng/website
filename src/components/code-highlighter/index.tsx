@@ -1,4 +1,8 @@
+import { ClipboardIcon } from 'lucide-react'
+
 import { codeToHtml } from '@/lib/code'
+import { Button } from '../ui/button'
+import { Clipboard } from '../ui/clipboard'
 
 import './index.css'
 
@@ -10,5 +14,14 @@ type CodeHighlighterProps = {
 export const CodeHighlighter = async ({ code, language = 'typescript' }: CodeHighlighterProps) => {
   const html = await codeToHtml(code, language)
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <div className="relative">
+      <Clipboard value={code} className="absolute right-4 top-4">
+        <Button variant="secondary" size="icon" className="transition opacity-60 hover:opacity-100">
+          <ClipboardIcon className="w-5 h-5" aria-label="Copy code to clipboard" />
+        </Button>
+      </Clipboard>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
+  )
 }
