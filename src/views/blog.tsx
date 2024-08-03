@@ -27,13 +27,16 @@ export const BlogView = ({ posts }: BlogViewProps) => {
                   >
                     {post.title}
                   </Link>
-                  <div className="flex justify-between items-center">
-                    <p className="~text-xs/sm sm:mt-2 sm:text-right">
+                  <div className="flex justify-between">
+                    <p className="~text-xs/sm sm:text-right text-nowrap">
                       Posted {formatRelativeDate(post.published_at!)}
                     </p>
-                    <ul className="flex justify-end gap-2">
+                    <ul className="flex flex-wrap justify-end gap-2">
                       {post.tags?.map((tag) => (
-                        <li key={tag.name} className="rounded bg-muted px-1 py-0.5 text-xs">
+                        <li
+                          key={tag.name}
+                          className="rounded bg-muted px-1 py-0.5 text-xs h-fit text-pretty"
+                        >
                           {tag.name}
                         </li>
                       ))}
