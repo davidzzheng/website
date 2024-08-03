@@ -33,7 +33,8 @@ export const PostList = ({ posts }: PostListProps) => {
                     href={`/topics/${tag.slug}`}
                     key={tag.name}
                     className={cn(
-                      'rounded bg-muted px-1 py-0.5 text-xs h-fit text-pretty transition hover:bg-muted-foreground',
+                      'rounded bg-muted px-1 py-0.5 text-xs h-fit transition',
+                      'hover:bg-muted-foreground hover:text-background',
                     )}
                   >
                     {tag.name}
