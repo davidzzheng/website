@@ -1,19 +1,24 @@
 'use client'
 
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
-import { Post, Tag } from 'payload-types'
+import { PostList } from '@/components/post-list'
+import { Post, Tag } from '@/lib/ghost'
 
 type TopicViewProps = {
   topic: Tag
   posts: Post[]
 }
 
-export const TopicView = ({ topic }: TopicViewProps) => {
+export const TopicView = ({ topic, posts }: TopicViewProps) => {
   return (
     <Layout>
-      <Layout.Main className="rounded-lg bg-background/75 p-8">
-        <h1 className="font-bold tracking-tighter ~text-2xl/4xl">{topic.name}</h1>
-        <p>(you shouldn't be here yet, this part is still being built)</p>
+      <Layout.Main className="rounded-lg bg-background/75 py-3">
+        <div className="px-6">
+          <Breadcrumbs />
+        </div>
+
+        <PostList posts={posts} />
       </Layout.Main>
     </Layout>
   )

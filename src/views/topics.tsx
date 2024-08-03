@@ -1,19 +1,23 @@
 'use client'
 
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { Tag } from '@/lib/ghost'
+import Link from 'next/link'
 
 type TopicsViewProps = {
   topics: Tag[]
 }
 
 export const TopicsView = ({ topics }: TopicsViewProps) => {
+  console.log({ topics })
   return (
     <Layout>
-      <Layout.Main className="rounded-lg bg-background/75 p-8">
-        {/* <Breadcrumbs /> */}
+      <Layout.Main className="rounded-lg bg-background/75 py-3">
+        <div className="px-6 mb-3">
+          <Breadcrumbs />
+        </div>
 
-        <h1 className="font-bold tracking-tighter ~text-2xl/4xl">Topics</h1>
         <section className="flex flex-col gap-y-6">
           {topics.map((topic) => (
             <div
@@ -21,7 +25,13 @@ export const TopicsView = ({ topics }: TopicsViewProps) => {
               className="m-2 flex flex-col gap-y-2 rounded p-4 transition hover:bg-muted/50"
             >
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold ~text-lg/2xl">{topic.name}</h2>
+                <Link
+                  href={`/topics/${topic.slug}`}
+                  className="font-semibold ~text-lg/2xl decorate-underline"
+                >
+                  <span className="~text-sm/lg text-muted-foreground mr-2">#</span>
+                  {topic.name}
+                </Link>
               </div>
             </div>
           ))}

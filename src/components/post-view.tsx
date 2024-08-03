@@ -3,13 +3,16 @@
 import parse from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { cn } from '@/lib/utils'
 import { CodeHighlighter } from './ui/code-highlighter'
 
 type PostViewProps = {
   content: string
+  className?: string
 }
 
-export const PostView = async ({ content }: PostViewProps) => {
+export const PostView = async ({ content, className }: PostViewProps) => {
   const parsed = parse(content, {
     replace: async (domNode) => {
       if (domNode.type === 'tag' && domNode.name === 'img') {
@@ -39,5 +42,5 @@ export const PostView = async ({ content }: PostViewProps) => {
     },
   })
 
-  return <article className="prose dark:prose-invert max-w-none">{parsed}</article>
+  return <article className={cn('prose dark:prose-invert max-w-none', className)}>{parsed}</article>
 }

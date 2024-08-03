@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/date'
 import { Post } from '@/lib/ghost'
 import { PostView } from '@/components/post-view'
 import { ScrollToTop } from '@/components/scroll-to-top'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 
 const WPM = 150
 
@@ -32,15 +33,15 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           <p>Posted on {formatDate(post.published_at!)}</p>
         </div>
 
-        <PostView content={post.html!} />
-        <ul className="flex gap-2 justify-end">
+        <PostView content={post.html!} className="mb-12" />
+        <ul className="flex flex-wrap gap-x-4 gap-y-2 justify-end">
           {post.tags?.map((tag) => (
             <Link
-              key={tag.name}
-              href={`/topics/${tag.id}`}
+              key={tag.slug}
+              href={`/topics/${tag.slug}`}
               className="decorate-underline flex cursor-pointer text-muted-foreground transition hover:text-foreground"
             >
-              <span className="text-xs">#</span> {tag.name}
+              <span className="text-xs text-muted-foreground">#</span> {tag.name}
             </Link>
           ))}
         </ul>
