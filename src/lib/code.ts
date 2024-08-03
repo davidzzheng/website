@@ -4,11 +4,12 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
 } from '@shikijs/transformers'
-import { createHighlighter } from 'shiki/bundle/web'
+import { createHighlighterCore } from 'shiki/core'
+import loadWasm from 'shiki/wasm'
 
 const theme = 'tokyo-night'
 
-type Highlighter = Awaited<ReturnType<typeof createHighlighter>>
+type Highlighter = Awaited<ReturnType<typeof createHighlighterCore>>
 
 class ShikiSingleton {
   private static instance: ShikiSingleton
@@ -25,17 +26,35 @@ class ShikiSingleton {
 
   public async getHighlighter(): Promise<Highlighter> {
     if (!this.highlighter) {
-      this.highlighter = await createHighlighter({
-        themes: [theme],
-        langs: ['typescript', 'javascript', 'json', 'html', 'css', 'markdown'],
+      this.highlighter = await createHighlighterCore({
+        themes: [import('shiki/themes/tokyo-night.mjs')],
+        langs: [
+          import('shiki/langs/ts.mjs'),
+          import('shiki/langs/json.mjs'),
+          import('shiki/langs/html.mjs'),
+          import('shiki/langs/css.mjs'),
+        ],
+        loadWasm,
       })
     }
     return this.highlighter
   }
 }
 
-export const codeToHtml = async (code: string, lang: string = 'typescript') => {
+export type CodeHighlighterOptions = {
+  lang: 'ts' | 'js' | 'json' | 'html' | 'css'
+  theme: string
+}
+
+export const codeToHtml = async (
+  code: string,
+  options: CodeHighlighterOptions = {
+    lang: 'ts',
+    theme: 'tokyo-night',
+  },
+) => {
   const highlighter = await ShikiSingleton.getInstance().getHighlighter()
+  const { theme, lang } = options
 
   return highlighter.codeToHtml(code, {
     lang,
