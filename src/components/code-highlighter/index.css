@@ -1,45 +1,55 @@
-.diff {
-  @apply inline-block w-full;
-  &.add {
-    &::before {
-      @apply font-mono;
-      content: " +";
+pre {
+  @apply !px-0 !py-5;
+  code {
+    @apply block w-full;
+
+    .line {
+      @apply px-4 text-pretty inline-block w-full;
     }
-    @apply bg-green-950 -ml-4;
-  }
 
-  &.remove {
-    &::before {
-      @apply font-mono;
-      content: " -";
+    .diff {
+      &.add {
+        &::before {
+          @apply font-mono -ml-4 pl-2;
+          content: "+";
+        }
+        @apply bg-green-950;
+      }
+
+      &.remove {
+        &::before {
+          @apply font-mono -ml-4 pl-2;
+          content: "-";
+        }
+        @apply bg-red-950 opacity-70;
+      }
     }
-    @apply bg-red-950 -ml-4;
-  }
-}
 
-.highlighted {
-  @apply inline-block w-full bg-neutral-600;
+    .highlighted {
+      @apply inline-block w-full bg-neutral-600;
 
-  &.error {
-    @apply bg-red-950;
-  }
+      &.error {
+        @apply bg-red-950;
+      }
 
-  &.warning {
-    @apply bg-yellow-950;
-  }
-}
-
-.has-focused {
-  &:hover {
-    & .line {
-      @apply blur-none;
+      &.warning {
+        @apply bg-yellow-950;
+      }
     }
-  }
-  & .line {
-    @apply blur-code opacity-80;
 
-    &.focused {
-      @apply blur-none;
+    .has-focused {
+      &:hover {
+        & .line {
+          @apply blur-none;
+        }
+      }
+      & .line {
+        @apply blur-code opacity-70;
+
+        &.focused {
+          @apply blur-none;
+        }
+      }
     }
   }
 }
