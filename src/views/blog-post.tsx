@@ -20,7 +20,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 
   return (
     <Layout className="mb-8">
-      <Layout.Main className="rounded-lg bg-background/75 p-8">
+      <Layout.Main className="rounded-lg bg-background/75 py-8 ~px-4/8">
         {/* <Breadcrumbs /> */}
 
         <div className="mb-4">
