@@ -20,7 +20,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
         if (domNode.name === 'a') {
           return (
             <Link
-              href={domNode.attribs.href}
+              href={domNode.attribs.href ?? ''}
               {...domNode.attribs}
               target="_blank"
               rel="noopener noreferrer"

@@ -1,0 +1,35 @@
+.diff {
+  @apply inline-block w-full;
+  &.add {
+    &::before {
+      content: "+";
+    }
+    @apply bg-green-950;
+  }
+
+  &.remove {
+    &::before {
+      content: "-";
+    }
+    @apply bg-red-950;
+  }
+}
+
+.highlighted {
+  @apply inline-block w-full bg-neutral-600;
+}
+
+.has-focused {
+  &:hover {
+    & .line {
+      @apply blur-none;
+    }
+  }
+  & .line {
+    @apply blur-code opacity-80;
+
+    &.focused {
+      @apply blur-none;
+    }
+  }
+}

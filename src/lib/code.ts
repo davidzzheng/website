@@ -1,4 +1,8 @@
-import { transformerNotationDiff } from '@shikijs/transformers'
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationFocus,
+} from '@shikijs/transformers'
 import { createHighlighter } from 'shiki/bundle/web'
 
 const theme = 'tokyo-night'
@@ -35,6 +39,10 @@ export const codeToHtml = async (code: string, lang: string = 'typescript') => {
   return highlighter.codeToHtml(code, {
     lang,
     theme,
-    transformers: [transformerNotationDiff()],
+    transformers: [
+      transformerNotationDiff(),
+      transformerNotationHighlight(),
+      transformerNotationFocus(),
+    ],
   })
 }

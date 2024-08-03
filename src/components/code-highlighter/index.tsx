@@ -1,5 +1,7 @@
 import { codeToHtml } from '@/lib/code'
 
+import './index.css'
+
 type CodeHighlighterProps = {
   code: string
   language?: string

@@ -81,6 +81,9 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'text-gradient': 'text-gradient 10s ease infinite',
       },
+      blur: {
+        code: '0.1rem',
+      },
     },
   },
   plugins: [typography, animate, fluid],
