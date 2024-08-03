@@ -15,13 +15,10 @@ export const TopicsView = ({ topics }: TopicsViewProps) => {
           <Breadcrumbs />
         </div>
 
-        <section className="flex flex-col gap-y-6">
+        <section className="flex flex-wrap gap-x-2 gap-y-4">
           {topics.map((topic) => (
-            <div
-              key={topic.id}
-              className="m-2 flex flex-col gap-y-2 rounded p-4 transition hover:bg-muted/50"
-            >
-              <div className="flex items-center justify-between">
+            <div key={topic.id} className="m-2 rounded p-4 transition hover:bg-muted/50">
+              <div className="flex items-center justify-between w-fit">
                 <Link
                   href={`/topics/${topic.slug}`}
                   className="font-semibold ~text-lg/2xl decorate-underline"
