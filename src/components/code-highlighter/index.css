@@ -2,21 +2,31 @@
   @apply inline-block w-full;
   &.add {
     &::before {
-      content: "+";
+      @apply font-mono;
+      content: " +";
     }
-    @apply bg-green-950;
+    @apply bg-green-950 -ml-4;
   }
 
   &.remove {
     &::before {
-      content: "-";
+      @apply font-mono;
+      content: " -";
     }
-    @apply bg-red-950;
+    @apply bg-red-950 -ml-4;
   }
 }
 
 .highlighted {
   @apply inline-block w-full bg-neutral-600;
+
+  &.error {
+    @apply bg-red-950;
+  }
+
+  &.warning {
+    @apply bg-yellow-950;
+  }
 }
 
 .has-focused {

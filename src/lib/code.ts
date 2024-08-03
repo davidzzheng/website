@@ -1,7 +1,8 @@
 import {
   transformerNotationDiff,
-  transformerNotationHighlight,
+  transformerNotationErrorLevel,
   transformerNotationFocus,
+  transformerNotationHighlight,
 } from '@shikijs/transformers'
 import { createHighlighter } from 'shiki/bundle/web'
 
@@ -43,6 +44,7 @@ export const codeToHtml = async (code: string, lang: string = 'typescript') => {
       transformerNotationDiff(),
       transformerNotationHighlight(),
       transformerNotationFocus(),
+      transformerNotationErrorLevel(),
     ],
   })
 }
