@@ -1,8 +1,6 @@
-import Link from 'next/link'
-
 import { Layout } from '@/components/layout'
-import { formatRelativeDate } from '@/lib/date'
 import { Post } from '@/lib/ghost'
+import { PostList } from '@/components/post-list'
 
 type BlogViewProps = {
   posts: Post[]
@@ -15,36 +13,7 @@ export const BlogView = ({ posts }: BlogViewProps) => {
         {posts.length > 0 ? (
           <>
             <h1 className="my-3 px-6 font-bold tracking-tighter ~text-2xl/4xl">Blog</h1>
-            <section className="flex flex-col gap-y-6">
-              {posts.map((post) => (
-                <div
-                  key={post.id}
-                  className="m-3 flex flex-col gap-y-2 rounded px-3 py-2 transition hover:bg-muted/50"
-                >
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="decorate-underline font-semibold ~text-lg/3xl w-fit"
-                  >
-                    {post.title}
-                  </Link>
-                  <div className="flex justify-between">
-                    <p className="~text-xs/sm sm:text-right text-nowrap">
-                      Posted {formatRelativeDate(post.published_at!)}
-                    </p>
-                    <ul className="flex flex-wrap justify-end gap-2">
-                      {post.tags?.map((tag) => (
-                        <li
-                          key={tag.name}
-                          className="rounded bg-muted px-1 py-0.5 text-xs h-fit text-pretty"
-                        >
-                          {tag.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </section>
+            <PostList posts={posts} />
           </>
         ) : (
           <p className="text-center text-lg">No posts yet.</p>
