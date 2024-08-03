@@ -1,6 +1,12 @@
 'use server'
 
-import parse, { DOMNode, domToReact, HTMLReactParserOptions } from 'html-react-parser'
+import parse, {
+  DOMNode,
+  domToReact,
+  HTMLReactParserOptions,
+  Text,
+  Element,
+} from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -16,7 +22,6 @@ export const PostView = async ({ content, className }: PostViewProps) => {
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode.type === 'tag') {
-        // Example of custom component replacement
         if (domNode.name === 'a') {
           return (
             <Link
@@ -41,9 +46,8 @@ export const PostView = async ({ content, className }: PostViewProps) => {
             />
           )
         } else if (domNode.name === 'pre') {
-          const codeEl = domNode.children[0]
-          // @ts-ignore
-          const codeText = codeEl.children[0].data as string
+          const codeEl = domNode.children[0] as Element
+          const codeText = (codeEl.children[0] as Text).data
           return <CodeHighlighter code={codeText} />
         }
 
