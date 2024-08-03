@@ -12,14 +12,14 @@ import { Providers } from './providers'
 
 import './globals.scss'
 
-const Background = dynamic(() => import('../../components//background'))
+const Background = dynamic(() => import('../../components/background'))
 
 export const metadata: Metadata = {
   title: {
     template: "%s | David Zheng's Portfolio",
     default: "Home | David Zheng's Portfolio",
   },
-  description: 'Ramblings about tech and stuff',
+  description: 'Ramblings about tech and stuff.',
   icons: {
     icon: ['/favicon.ico?v=4'],
     apple: ['/apple-touch-icon.png?v=4'],
