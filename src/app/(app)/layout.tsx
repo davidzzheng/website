@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import dynamic from 'next/dynamic'
+import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
 
 import { NavBar } from '@/components/nav-bar'
@@ -33,10 +34,43 @@ const fontSans = Inter({
   variable: '--font-sans',
 })
 
+const commitMono = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/CommitMono-400-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/CommitMono-700-Regular.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/CommitMono-400-Italic.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../../public/fonts/CommitMono-700-Italic.otf',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-mono',
+})
+
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable,
+          commitMono.variable,
+        )}
+      >
         <Providers>
           <NavBar />
           {children}
