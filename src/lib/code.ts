@@ -25,7 +25,12 @@ class ShikiSingleton {
   public async getHighlighter(): Promise<Highlighter> {
     if (!this.highlighter) {
       this.highlighter = await createHighlighterCore({
-        themes: [import('shiki/themes/tokyo-night.mjs')],
+        themes: [
+          import('shiki/themes/tokyo-night.mjs'),
+          // TODO: https://github.com/shikijs/shiki/issues/730
+          // import('shiki/themes/rose-pine-moon.mjs'),
+          // import('shiki/themes/rose-pine-dawn.mjs'),
+        ],
         langs: [
           import('shiki/langs/ts.mjs'),
           import('shiki/langs/json.mjs'),
@@ -41,7 +46,7 @@ class ShikiSingleton {
 
 export type CodeHighlighterOptions = {
   lang: 'ts' | 'js' | 'json' | 'html' | 'css'
-  theme: 'tokyo-night'
+  theme: 'tokyo-night' | 'rose-pine-moon' | 'rose-pine-dawn'
 }
 
 export const codeToHtml = async (
