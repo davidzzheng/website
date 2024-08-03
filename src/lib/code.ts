@@ -50,4 +50,7 @@ export const codeToHtml = async (code: string, lang: string = 'typescript') => {
 }
 
 export const stripComments = (code: string) =>
-  code.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)[ \t]*\/\/.*$/gm, '$1')
+  code.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1')
+
+export const stripCodeDirectives = (code: string) =>
+  code.replace(/[ \t]*\/\/\s*\[!code\s+[^\]]+\]\s*$/gm, '')
