@@ -10,6 +10,7 @@ import parse, {
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { removeRefParam } from '@/lib/string'
 import { cn } from '@/lib/utils'
 import { CodeHighlighter } from './code-highlighter'
 
@@ -25,7 +26,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
         if (domNode.name === 'a') {
           return (
             <Link
-              href={domNode.attribs.href ?? ''}
+              href={removeRefParam(domNode.attribs.href ?? '')}
               {...domNode.attribs}
               target="_blank"
               rel="noopener noreferrer"
