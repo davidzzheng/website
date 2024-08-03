@@ -36,19 +36,19 @@ pre {
         @apply bg-yellow-950;
       }
     }
+  }
 
-    .has-focused {
-      &:hover {
-        & .line {
-          @apply blur-none;
-        }
-      }
+  &.has-focused {
+    &:hover {
       & .line {
-        @apply blur-code opacity-70;
+        @apply blur-none;
+      }
+    }
+    & .line {
+      @apply blur-code opacity-70 transition-[opacity,filter];
 
-        &.focused {
-          @apply blur-none;
-        }
+      &.focused {
+        @apply blur-none;
       }
     }
   }
