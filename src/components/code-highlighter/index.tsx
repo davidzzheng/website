@@ -1,17 +1,17 @@
 import { ClipboardIcon } from 'lucide-react'
 
-import { codeToHtml, stripCodeDirectives } from '@/lib/code'
+import { CodeHighlighterOptions, codeToHtml, stripCodeDirectives } from '@/lib/code'
 import { Clipboard } from '../ui/clipboard'
 
 import './index.scss'
 
 type CodeHighlighterProps = {
   code: string
-  language?: string
+  options?: CodeHighlighterOptions
 }
 
-export const CodeHighlighter = async ({ code, language = 'typescript' }: CodeHighlighterProps) => {
-  const html = await codeToHtml(code, language)
+export const CodeHighlighter = async ({ code, options }: CodeHighlighterProps) => {
+  const html = await codeToHtml(code, options)
 
   return (
     <div className="relative">
