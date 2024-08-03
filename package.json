@@ -27,6 +27,8 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.16.8",
+    "@shikijs/transformers": "^1.12.1",
+    "@shikijs/twoslash": "^1.12.1",
     "@tailwindcss/typography": "^0.5.13",
     "@tryghost/content-api": "^1.11.21",
     "@vercel/analytics": "^1.3.1",

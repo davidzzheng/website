@@ -1,5 +1,4 @@
 import { ghost } from '@/lib/ghost'
-import { getPayload } from '@/lib/payload'
 import { TopicView } from '@/views/topic'
 
 type TopicPageProps = {
