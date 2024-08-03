@@ -1,8 +1,8 @@
 'use client'
 
+import { useBreakpoint } from '@/hooks/breakpoint'
 import { DesktopNavBar } from './desktop'
 import { MobileNavBar } from './mobile'
-import { useBreakpoint } from '@/hooks/breakpoint'
 
 export const NavBar = () => {
   const aboveSm = useBreakpoint('sm')

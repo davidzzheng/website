@@ -1,6 +1,6 @@
 'use server'
 
-import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser'
+import parse, { DOMNode, domToReact, HTMLReactParserOptions } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
               rel="noopener noreferrer"
               className="text-link"
             >
-              {domToReact(domNode.children, options)}
+              {domToReact(domNode.children as DOMNode[], options)}
             </Link>
           )
         } else if (domNode.name === 'img') {
@@ -42,11 +42,12 @@ export const PostView = async ({ content, className }: PostViewProps) => {
           )
         } else if (domNode.name === 'pre') {
           const codeEl = domNode.children[0]
-          const codeText = codeEl.children[0].data
+          // @ts-ignore
+          const codeText = codeEl.children[0].data as string
           return <CodeHighlighter code={codeText} />
         }
 
-        return domToReact(domNode.children, options)
+        return domToReact(domNode.children as DOMNode[], options)
       }
     },
   }

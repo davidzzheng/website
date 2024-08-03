@@ -1,8 +1,9 @@
-import { useDarkMode } from '@/hooks/theme'
 import { cx } from 'cva'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+// import { useDarkMode } from '@/hooks/theme'
 
 export const DesktopNavBar = () => {
   const path = usePathname()
@@ -45,7 +46,7 @@ export const DesktopNavBar = () => {
 
   const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
 
-  const { toggleDarkMode } = useDarkMode()
+  // const { toggleDarkMode } = useDarkMode()
   return (
     <div className="flex h-16 w-full items-center justify-between ~px-6/8 bg-transparent">
       <div className="flex items-center">

@@ -1,7 +1,8 @@
+import Link from 'next/link'
+
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { Tag } from '@/lib/ghost'
-import Link from 'next/link'
 
 type TopicsViewProps = {
   topics: Tag[]
