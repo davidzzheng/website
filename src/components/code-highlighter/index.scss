@@ -1,5 +1,4 @@
 pre {
-  padding: 1.25rem 0 !important;
   code {
     @apply block w-full;
 
@@ -10,16 +9,14 @@ pre {
     .diff {
       &.add {
         &::before {
-          @apply font-mono -ml-4 pl-2;
-          content: "+";
+          @apply font-mono -ml-4 pl-2 content-["+"];
         }
         @apply bg-green-950;
       }
 
       &.remove {
         &::before {
-          @apply font-mono -ml-4 pl-2;
-          content: "-";
+          @apply font-mono -ml-4 pl-2 content-["-"];
         }
         @apply bg-red-950 opacity-70;
       }
