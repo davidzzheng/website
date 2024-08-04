@@ -6,6 +6,12 @@ html {
   scrollbar-gutter: stable;
 }
 
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  .text-pretty {
+    @apply text-wrap;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

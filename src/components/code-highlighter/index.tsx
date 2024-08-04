@@ -7,11 +7,16 @@ import './index.scss'
 
 type CodeHighlighterProps = {
   code: string
-  options?: CodeHighlighterOptions
+  lang?: CodeHighlighterOptions['lang']
+  theme?: CodeHighlighterOptions['theme']
 }
 
-export const CodeHighlighter = async ({ code, options }: CodeHighlighterProps) => {
-  const html = await codeToHtml(code, options)
+export const CodeHighlighter = async ({
+  code,
+  lang = 'ts',
+  theme = 'tokyo-night',
+}: CodeHighlighterProps) => {
+  const html = await codeToHtml(code, { lang, theme })
 
   return (
     <div className="relative">

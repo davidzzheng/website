@@ -26,17 +26,17 @@ export const createHighlighter = async () =>
 
 type Highlighter = Awaited<ReturnType<typeof createHighlighterCore>>
 
-export class HighliterSingleton {
-  private static instance: HighliterSingleton
+export class HighlighterSingleton {
+  private static instance: HighlighterSingleton
   private highlighter: Highlighter | undefined
 
   private constructor() {}
 
-  public static getInstance(): HighliterSingleton {
-    if (!HighliterSingleton.instance) {
-      HighliterSingleton.instance = new HighliterSingleton()
+  public static getInstance(): HighlighterSingleton {
+    if (!HighlighterSingleton.instance) {
+      HighlighterSingleton.instance = new HighlighterSingleton()
     }
-    return HighliterSingleton.instance
+    return HighlighterSingleton.instance
   }
 
   public async getHighlighter(): Promise<Highlighter> {
@@ -52,15 +52,9 @@ export type CodeHighlighterOptions = {
   theme: 'tokyo-night' | 'rose-pine-moon' | 'rose-pine-dawn'
 }
 
-export const codeToHtml = async (
-  code: string,
-  options: CodeHighlighterOptions = {
-    lang: 'ts',
-    theme: 'tokyo-night',
-  },
-) => {
-  const highlighter = await createHighlighter()
+export const codeToHtml = async (code: string, options: CodeHighlighterOptions) => {
   const { theme, lang } = options
+  const highlighter = await createHighlighter()
 
   const html = highlighter.codeToHtml(code, {
     lang,
