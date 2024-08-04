@@ -4,6 +4,7 @@ import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
 
 import { Breadcrumbs } from '@/components/breadcrumbs'
+import { PostTableOfContents } from '@/components/post-toc'
 import { PostView } from '@/components/post-view'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { Post } from '@/lib/ghost'
@@ -20,9 +21,10 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 
   return (
     <Layout className="mb-8">
-      <Layout.Main className="rounded-lg bg-background/75 py-8 ~px-4/8">
-        {/* <Breadcrumbs /> */}
-
+      <Layout.Left className="pt-8 sm:sticky sm:top-16 sm:overflow-y-auto row-start-2">
+        <PostTableOfContents />
+      </Layout.Left>
+      <Layout.Top className="rounded-lg bg-background/75 py-3 px-6">
         <div className="mb-4">
           <h1 className="font-bold ~text-3xl/4xl">{post.title}</h1>
         </div>
@@ -32,6 +34,10 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           </span>
           <p>Posted on {formatDate(post.published_at!)}</p>
         </div>
+      </Layout.Top>
+
+      <Layout.Main className="rounded-lg bg-background/75 py-8 ~px-4/8">
+        {/* <Breadcrumbs /> */}
 
         <PostView content={post.html!} className="mb-12" />
         <ul className="flex flex-wrap gap-x-4 gap-y-2 justify-end">

@@ -24,7 +24,9 @@ const LayoutTop = ({ children, className }: LayoutNodeProps) => (
 )
 
 const LayoutLeft = ({ children, className }: LayoutNodeProps) => (
-  <section className={cn('hidden sm:col-span-3 md:col-span-2', className)}>{children}</section>
+  <section className={cn('hidden sm:block sm:col-span-3 md:col-span-2', className)}>
+    {children}
+  </section>
 )
 
 const LayoutRight = ({ children, className }: LayoutNodeProps) => (
