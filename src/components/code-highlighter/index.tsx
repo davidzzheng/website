@@ -24,7 +24,7 @@ export const CodeHighlighter = async ({
         value={stripCodeDirectives(code)}
         className="absolute right-4 top-4 transition opacity-60 hover:opacity-100 z-10"
       >
-        <ClipboardIcon className="w-5 h-5" aria-label="Copy code to clipboard" />
+        <ClipboardIcon className="~size-4/5" aria-label="Copy code to clipboard" />
       </Clipboard>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
