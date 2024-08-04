@@ -27,7 +27,7 @@ export const Heading = ({ heading, id, children, className }: HeadingProps) => {
       id={id}
       className={cn(
         'relative flex items-center cursor-pointer hover:text-muted-foreground transition w-fit',
-        "hover:before:content-['#'] before:absolute before:text-muted-foreground before:-ml-[21px] before:opacity-0 hover:before:opacity-100 before:transition",
+        "hover:before:content-['#'] before:absolute before:text-muted-foreground before:ml-[-15px] before:~text-sm/lg before:opacity-0 hover:before:opacity-100 before:transition",
         className,
       )}
       onClick={handleClick}
