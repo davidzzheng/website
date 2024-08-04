@@ -30,7 +30,7 @@ export const HomeView = () => {
               applications at companies ranging from high-growth startups to enterprise-level. My
               primary stack is React with Next.js, TypeScript, TailwindCSS, and Fastify, but I am
               always looking to work with new{' '}
-              <Link href="/work" className="text-link">
+              <Link href="/work" className="text-blue-500 decorate-underline-blue-500">
                 technologies and paradigms.{' '}
               </Link>
             </span>
@@ -40,7 +40,7 @@ export const HomeView = () => {
               In my spare time, I enjoy diving deep into novel technical topics like
               cryptocurrencies and artificial intelligence, experimenting with them, and writing
               about them on my{' '}
-              <Link href="/blog" className="text-link">
+              <Link href="/blog" className="text-blue-500 decorate-underline-blue-500">
                 blog
               </Link>
               .
@@ -50,7 +50,7 @@ export const HomeView = () => {
             <span className="text-pretty ~text-sm/lg">
               If you are interested in working with me, want to learn more about something I&apos;ve
               written about, or just want to say hello, feel free to{' '}
-              <Link href="/contact" className="text-link">
+              <Link href="/contact" className="text-blue-500 decorate-underline-blue-500">
                 reach out
               </Link>
               .
