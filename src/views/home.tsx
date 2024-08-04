@@ -21,25 +21,28 @@ export const HomeView = () => {
           </BlurFade>
           <BlurFade delay={0.25 * 1} inView>
             <span className="text-pretty ~text-sm/lg">
-              My name is David Zheng. I&apos;m a software developer based in Vancouver, Canada.
+              I'm David Zheng, a Vancouver-based software developer with a passion for coding that
+              began at age 12. My self-taught journey has led me through diverse areas of
+              programming, from web development to robotics.{' '}
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
             <span className="text-pretty ~text-sm/lg">
-              I have over 5 years of professional experience building scalable full-stack web
-              applications at companies ranging from high-growth startups to enterprise-level. My
-              primary stack is React with Next.js, TypeScript, TailwindCSS, and Fastify, but I am
-              always looking to work with new{' '}
+              With over 5 years of{' '}
               <Link href="/work" className="text-blue-500 decorate-underline-blue-500">
-                technologies and paradigms.{' '}
+                professional experience
               </Link>
+              , I've honed my skills in building scalable full-stack web applications for both
+              high-growth startups and enterprise-level companies. While my primary stack includes
+              React, Next.js, TypeScript, TailwindCSS, and Fastify, I'm always eager to explore and
+              adapt to new technologies and paradigms in the ever-evolving world of software
+              development.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
             <span className="text-pretty ~text-sm/lg">
-              In my spare time, I enjoy diving deep into novel technical topics like
-              cryptocurrencies and artificial intelligence, experimenting with them, and writing
-              about them on my{' '}
+              I also enjoy diving deep into novel technical topics like cryptocurrencies and
+              artificial intelligence, experimenting with them, and writing about them on my{' '}
               <Link href="/blog" className="text-blue-500 decorate-underline-blue-500">
                 blog
               </Link>
