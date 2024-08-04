@@ -10,10 +10,14 @@ type BlogPostPageProps = {
 export const revalidate = 0
 
 export async function generateStaticParams() {
-  const posts = await ghost.posts.browse()
+  const posts = await ghost.posts.browse({
+    filter: 'updated_at:<now-7d',
+    limit: 'all',
+    fields: 'slug',
+  })
 
-  return posts.map((post) => ({
-    slug: post.slug,
+  return posts.map(({ slug }) => ({
+    slug,
   }))
 }
 
