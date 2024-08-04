@@ -1,7 +1,7 @@
 'use client'
 
 import { Layout } from '@/components/layout'
-import { Work } from 'payload-types'
+import { Technology, Work } from 'payload-types'
 
 type WorkViewProps = {
   positions: Work[]
@@ -24,7 +24,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
               <div key={position.id} className="flex flex-col gap-y-2">
                 <div className="flex items-center justify-between">
                   <a
-                    href={position.link}
+                    href={position.link!}
                     className="font-semibold ~text-lg/2xl decorate-underline"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -44,10 +44,10 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                 <ul className="flex gap-2 flex-wrap">
                   {position.technologies?.map((tag) => (
                     <li
-                      key={tag.name}
+                      key={(tag as Technology).name}
                       className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
                     >
-                      {tag.name}
+                      {(tag as Technology).name}
                     </li>
                   ))}
                 </ul>
@@ -63,7 +63,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
               <div key={project.id} className="flex flex-col gap-y-2">
                 <div className="flex items-center justify-between">
                   <a
-                    href={project.link}
+                    href={project.link!}
                     className="font-semibold ~text-lg/2xl decorate-underline"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -86,10 +86,10 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                 <ul className="flex gap-2 flex-wrap">
                   {project.technologies?.map((tag) => (
                     <li
-                      key={tag.name}
+                      key={(tag as Technology).name}
                       className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
                     >
-                      {tag.name}
+                      {(tag as Technology).name}
                     </li>
                   ))}
                 </ul>

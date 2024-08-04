@@ -1,7 +1,7 @@
 import { ghost } from '@/lib/ghost'
 import { BlogPostView } from '@/views/blog-post'
 
-type BlogPostPageProps = {
+export type BlogPostPageProps = {
   params: {
     slug: string
   }
