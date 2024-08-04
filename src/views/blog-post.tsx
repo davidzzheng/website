@@ -40,7 +40,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
               role="listitem"
               key={tag.slug}
               href={`/topics/${tag.slug}`}
-              className="decorate-underline flex cursor-pointer text-muted-foreground transition hover:text-foreground"
+              className="decorate-underline flex cursor-pointer items-center gap-x-1 text-muted-foreground transition hover:text-foreground"
             >
               <span className="text-xs text-muted-foreground">#</span> {tag.name}
             </Link>
