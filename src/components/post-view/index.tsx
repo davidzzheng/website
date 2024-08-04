@@ -56,6 +56,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
               'language-',
             )[1] as CodeHighlighterOptions['lang']
             return <CodeHighlighter code={codeText} lang={lang} />
+          case 'h1':
           case 'h2':
           case 'h3':
           case 'h4':
