@@ -60,7 +60,9 @@ export const PostView = async ({ content, className }: PostViewProps) => {
   }
 
   return (
-    <article className={cn('prose dark:prose-invert max-w-full', className)}>
+    <article
+      className={cn('prose dark:prose-invert max-w-full', 'prose-blockquote:font-light', className)}
+    >
       {parse(content, options)}
     </article>
   )
