@@ -1,9 +1,10 @@
 import typography from '@tailwindcss/typography'
 import fluid, { extract, screens, fontSize } from 'fluid-tailwind'
-import { decorateUnderline } from './src/lib/tailwind'
 import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+
+import { decorateUnderline } from './src/lib/tailwind'
 
 const config = {
   darkMode: ['class'],
