@@ -72,8 +72,8 @@ export const PostTableOfContents = () => {
                 })
               }}
               className={cn(
-                'w-fit decorate-underline text-sm',
-                heading.id === activeId ? 'selected font-semibold' : '',
+                'w-fit decorate-underline text-sm leading-6',
+                heading.id === activeId ? 'selected font-medium' : '',
               )}
             >
               {heading.title}
@@ -91,8 +91,8 @@ export const PostTableOfContents = () => {
                         })
                       }}
                       className={cn(
-                        'ml-4 w-fit decorate-underline text-sm',
-                        child.id === activeId ? 'selected font-semibold' : '',
+                        'ml-4 w-fit decorate-underline text-sm leading-6',
+                        child.id === activeId ? 'selected font-medium' : '',
                       )}
                     >
                       {child.title}
