@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 type Heading = {
@@ -28,6 +29,7 @@ const getNestedHeadings = (
 export const PostTableOfContents = () => {
   const [headings, setHeadings] = useState<Heading[]>([])
   const [activeId, setActiveId] = useState<string>('')
+  const router = useRouter()
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll('h2, h3, h4')).map((elem) => ({
@@ -58,6 +60,13 @@ export const PostTableOfContents = () => {
     return () => observer.disconnect()
   }, [])
 
+  const scrollToHeading = (id: string) => {
+    document.querySelector(`#${id}`)?.scrollIntoView({
+      behavior: 'smooth',
+    })
+    router.replace(`#${id}`, { scroll: false })
+  }
+
   return (
     <nav aria-label="Table of contents">
       <ul className="flex flex-col gap-y-4">
@@ -67,9 +76,7 @@ export const PostTableOfContents = () => {
               href={`#${heading.id}`}
               onClick={(e) => {
                 e.preventDefault()
-                document.querySelector(`#${heading.id}`)?.scrollIntoView({
-                  behavior: 'smooth',
-                })
+                scrollToHeading(heading.id)
               }}
               className={cn(
                 'w-fit decorate-underline text-sm leading-6',
@@ -86,9 +93,7 @@ export const PostTableOfContents = () => {
                       href={`#${child.id}`}
                       onClick={(e) => {
                         e.preventDefault()
-                        document.querySelector(`#${child.id}`)?.scrollIntoView({
-                          behavior: 'smooth',
-                        })
+                        scrollToHeading(child.id)
                       }}
                       className={cn(
                         'ml-4 w-fit decorate-underline text-sm leading-6',
