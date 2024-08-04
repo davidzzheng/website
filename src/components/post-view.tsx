@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { removeRefParam } from '@/lib/string'
 import { cn } from '@/lib/utils'
 import { CodeHighlighter } from './code-highlighter'
+import { CodeHighlighterOptions } from '@/lib/code'
 
 type PostViewProps = {
   content: string
@@ -49,7 +50,8 @@ export const PostView = async ({ content, className }: PostViewProps) => {
         } else if (domNode.name === 'pre') {
           const codeEl = domNode.children[0] as Element
           const codeText = (codeEl.children[0] as Text).data
-          return <CodeHighlighter code={codeText} />
+          const lang = codeEl.attribs.class?.split('language-')[1] as CodeHighlighterOptions['lang']
+          return <CodeHighlighter code={codeText} lang={lang} />
         }
 
         return domToReact(domNode.children as DOMNode[], options)
