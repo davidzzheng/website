@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { ScrollToTop } from './scroll-to-top'
 
 type Heading = {
   id: string
@@ -28,7 +29,7 @@ const getNestedHeadings = (
 
 export const PostTableOfContents = () => {
   const [headings, setHeadings] = useState<Heading[]>([])
-  const [activeId, setActiveId] = useState<string>('')
+  const [activeId, setActiveId] = useState<string>()
   const router = useRouter()
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export const PostTableOfContents = () => {
       { rootMargin: '0% 0% -80% 0%' },
     )
 
-    const headingElements = document.querySelectorAll('h2, h3, h4')
+    const headingElements = document.querySelectorAll('h2, h3, h4, h5, h6')
     headingElements.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
@@ -69,7 +70,7 @@ export const PostTableOfContents = () => {
 
   return (
     <nav aria-label="Table of contents">
-      <ul className="flex flex-col gap-y-4">
+      <ul className="flex flex-col gap-y-4 mb-4">
         {headings.map((heading) => (
           <li key={heading.id}>
             <a
@@ -109,6 +110,9 @@ export const PostTableOfContents = () => {
           </li>
         ))}
       </ul>
+      <div className={cn('transition origin-top scale-y-0', activeId ? 'scale-y-100' : '')}>
+        <ScrollToTop variant="ghost" className="w-full" size="sm" />
+      </div>
     </nav>
   )
 }
