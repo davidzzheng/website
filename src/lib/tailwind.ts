@@ -1,13 +1,13 @@
 import plugin from 'tailwindcss/plugin'
 
-export const decorateUnderline = plugin(({ addUtilities, theme, e }) => {
+export const underlined = plugin(({ addUtilities, theme, e }) => {
   const colors = theme('colors') as Record<string, string | Record<string, string>>
 
   const baseStyle = {
     display: 'inline-block',
     textDecoration: 'none',
     position: 'relative',
-    '--decorate-underline-color': colors.foreground,
+    '--underlined-color': colors.foreground,
     '&::after': {
       content: '""',
       position: 'absolute',
@@ -19,25 +19,25 @@ export const decorateUnderline = plugin(({ addUtilities, theme, e }) => {
       transformOrigin: 'bottom right',
       transition: 'transform 0.25s ease-out',
     },
-    '&:hover, &.decorate-underline-selected': {
+    '&:hover, &.underlined-active': {
       '&::after': {
         transform: 'scaleX(1)',
         transformOrigin: 'bottom left',
-        backgroundColor: 'var(--decorate-underline-color)',
+        backgroundColor: 'var(--underlined-color)',
       },
     },
   }
 
   const styles = {
-    '.decorate-underline': baseStyle,
+    '.underlined': baseStyle,
     ...Object.keys(colors).reduce((acc, key) => {
       const color = colors[key]
       if (typeof color === 'object') {
         return Object.keys(color).reduce(
           (acc, shade) => ({
             ...acc,
-            [`.${e(`decorate-underline-${key}-${shade}`)}`]: {
-              '--decorate-underline-color': color[shade],
+            [`.${e(`underlined-${key}-${shade}`)}`]: {
+              '--underlined-color': color[shade],
             },
           }),
           acc,
@@ -47,5 +47,5 @@ export const decorateUnderline = plugin(({ addUtilities, theme, e }) => {
     }, {}),
   }
 
-  addUtilities(styles, { respectPrefix: false })
+  addUtilities(styles)
 })

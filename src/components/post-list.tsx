@@ -19,7 +19,7 @@ export const PostList = ({ posts }: PostListProps) => {
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="decorate-underline ~text-lg/3xl mb-2 w-fit pb-1 font-semibold"
+              className="underlined ~text-lg/3xl mb-2 w-fit pb-1 font-semibold"
             >
               {post.title}
             </Link>

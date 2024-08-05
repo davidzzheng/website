@@ -26,18 +26,26 @@ export const PostView = async ({ content, className }: PostViewProps) => {
     replace: (domNode) => {
       if (domNode.type === 'tag') {
         switch (domNode.name) {
-          case 'a':
+          case 'a': {
+            const cleanedHref = removeRefParam(domNode.attribs.href!)
+            const internalLink = cleanedHref.split(process.env.GHOST_URL!)[1]
+
             return (
               <Link
                 {...domNode.attribs}
-                href={removeRefParam(domNode.attribs.href ?? '')}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(internalLink
+                  ? { href: `/blog${internalLink}` }
+                  : {
+                      href: cleanedHref,
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    })}
                 className="decorate-underline decorate-underline-blue-500 text-blue-500"
               >
                 {domToReact(domNode.children as DOMNode[], options)}
               </Link>
             )
+          }
           case 'img':
             return (
               <Image
@@ -46,7 +54,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
                 width={0}
                 height={0}
                 sizes="100%"
-                className="rounded-lg"
+                className="h-auto w-full rounded-lg"
               />
             )
           case 'pre': {
