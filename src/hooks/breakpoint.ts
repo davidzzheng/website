@@ -8,7 +8,8 @@ const breakpoints = fullConfig.theme.screens
 
 type BreakpointKey = keyof typeof breakpoints
 
-const getBreakpointValue = (breakpoint: string) => Number.parseInt(breakpoint.replace(/[^\d]/g, ''), 10)
+const getBreakpointValue = (breakpoint: string) =>
+  Number.parseInt(breakpoint.replace(/[^\d]/g, ''), 10)
 
 export const useBreakpoint = (breakpoint: BreakpointKey) => {
   const [isAboveBreakpoint, setIsAboveBreakpoint] = useState(false)
