@@ -1,8 +1,9 @@
 'use client'
 
-import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
+
+import { cn } from '@/lib/utils'
 
 type HeadingProps = {
   heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
