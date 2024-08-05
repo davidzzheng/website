@@ -1,7 +1,7 @@
 import GhostContentAPI from '@tryghost/content-api'
 
 export const ghost = GhostContentAPI({
-  url: process.env.GHOST_URL!,
+  url: `https://${process.env.GHOST_URL!}`,
   key: process.env.GHOST_KEY!,
   version: 'v5.0',
   makeRequest: async ({ url, method, params, headers }) => {

@@ -81,8 +81,8 @@ export const PostTableOfContents = () => {
                 scrollToHeading(heading.id)
               }}
               className={cn(
-                'decorate-underline w-fit text-sm leading-6',
-                heading.id === activeId ? 'selected decorate-underline-selected font-medium' : '',
+                'underlined w-fit text-sm leading-6',
+                heading.id === activeId ? 'underlined-active font-medium' : '',
               )}
             >
               {heading.title}
@@ -98,8 +98,8 @@ export const PostTableOfContents = () => {
                         scrollToHeading(child.id)
                       }}
                       className={cn(
-                        'decorate-underline ml-4 w-fit text-sm leading-6',
-                        child.id === activeId ? 'decorate-underline-selected font-medium' : '',
+                        'underlined ml-4 w-fit text-sm leading-6',
+                        child.id === activeId ? 'underlined-active font-medium' : '',
                       )}
                     >
                       {child.title}
