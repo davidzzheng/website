@@ -1,12 +1,13 @@
 import plugin from 'tailwindcss/plugin'
 
-export const decorateUnderline = plugin(function ({ addComponents, theme }) {
+export const decorateUnderline = plugin(({ addUtilities, theme, e }) => {
   const colors = theme('colors') as Record<string, string | Record<string, string>>
 
-  const baseStyle = (color: string) => ({
+  const baseStyle = {
     display: 'inline-block',
     textDecoration: 'none',
     position: 'relative',
+    '--decorate-underline-color': colors.foreground,
     '&::after': {
       content: '""',
       position: 'absolute',
@@ -22,28 +23,29 @@ export const decorateUnderline = plugin(function ({ addComponents, theme }) {
       '&::after': {
         transform: 'scaleX(1)',
         transformOrigin: 'bottom left',
-        backgroundColor: color,
+        backgroundColor: 'var(--decorate-underline-color)',
       },
     },
-  })
+  }
 
-  Object.keys(colors).forEach((colorName) => {
-    const color = colors[colorName]
+  const styles = {
+    '.decorate-underline': baseStyle,
+    ...Object.keys(colors).reduce((acc, key) => {
+      const color = colors[key]
+      if (typeof color === 'object') {
+        return Object.keys(color).reduce(
+          (acc, shade) => ({
+            ...acc,
+            [`.${e(`decorate-underline-${key}-${shade}`)}`]: {
+              '--decorate-underline-color': color[shade],
+            },
+          }),
+          acc,
+        )
+      }
+      return acc
+    }, {}),
+  }
 
-    if (typeof color === 'object') {
-      Object.keys(color).forEach((shade) => {
-        addComponents({
-          [`.decorate-underline-${colorName}-${shade}`]: baseStyle(color[shade]),
-        })
-      })
-    } else {
-      addComponents({
-        [`.decorate-underline-${colorName}`]: baseStyle(color),
-      })
-    }
-  })
-
-  addComponents({
-    '.decorate-underline': baseStyle(theme('colors.foreground')),
-  })
+  addUtilities(styles, { respectPrefix: false })
 })
