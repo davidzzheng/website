@@ -19,7 +19,7 @@ export const decorateUnderline = plugin(({ addUtilities, theme, e }) => {
       transformOrigin: 'bottom right',
       transition: 'transform 0.25s ease-out',
     },
-    '&:hover, &.selected': {
+    '&:hover, &.decorate-underline-selected': {
       '&::after': {
         transform: 'scaleX(1)',
         transformOrigin: 'bottom left',
