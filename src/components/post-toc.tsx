@@ -82,7 +82,7 @@ export const PostTableOfContents = () => {
               }}
               className={cn(
                 'decorate-underline w-fit text-sm leading-6',
-                heading.id === activeId ? 'selected font-medium' : '',
+                heading.id === activeId ? 'selected decorate-underline-selected font-medium' : '',
               )}
             >
               {heading.title}
@@ -99,7 +99,7 @@ export const PostTableOfContents = () => {
                       }}
                       className={cn(
                         'decorate-underline ml-4 w-fit text-sm leading-6',
-                        child.id === activeId ? 'selected font-medium' : '',
+                        child.id === activeId ? 'decorate-underline-selected font-medium' : '',
                       )}
                     >
                       {child.title}

@@ -53,7 +53,7 @@ export const DesktopNavBar = () => {
         <Link
           href="/"
           className={cx('decorate-underline ~text-lg/xl font-bold text-foreground', {
-            selected: path === '/',
+            'decorate-underline-selected': path === '/',
           })}
           aria-label="Home"
         >
