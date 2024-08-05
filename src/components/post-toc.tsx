@@ -111,12 +111,7 @@ export const PostTableOfContents = () => {
           </li>
         ))}
       </ul>
-      <div
-        className={cn(
-          'flex origin-top scale-y-0 items-center transition',
-          activeId ? 'scale-y-100' : '',
-        )}
-      >
+      <div className={cn('flex origin-top scale-y-0 transition', activeId ? 'scale-y-100' : null)}>
         <ScrollToTop variant="ghost" size="sm" />
       </div>
     </nav>
