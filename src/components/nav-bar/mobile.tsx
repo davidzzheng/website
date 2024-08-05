@@ -39,7 +39,7 @@ export const MobileNavBar = () => {
   }, [])
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed right-8 bottom-8 z-50">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -52,16 +52,16 @@ export const MobileNavBar = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mr-8">
-          <DropdownMenuItem asChild className="text-lg p-2">
+          <DropdownMenuItem asChild className="p-2 text-lg">
             <Link href="/">Home</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="text-lg p-2">
+          <DropdownMenuItem asChild className="p-2 text-lg">
             <Link href="/work">Work</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="text-lg p-2">
+          <DropdownMenuItem asChild className="p-2 text-lg">
             <Link href="/blog">Blog</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="text-lg p-2">
+          <DropdownMenuItem asChild className="p-2 text-lg">
             <Link href="/contact">Contact</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>

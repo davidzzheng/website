@@ -16,16 +16,16 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
 
   return (
     <Layout>
-      <Layout.Main className="rounded-lg bg-background/80 p-6 mb-16">
-        <h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">Work Experience</h1>
-        <section className="flex flex-col gap-y-2 mb-12">
+      <Layout.Main className="mb-16 rounded-lg bg-background/80 p-6">
+        <h1 className="~text-2xl/4xl mb-3 font-bold tracking-tighter">Work Experience</h1>
+        <section className="mb-12 flex flex-col gap-y-2">
           <div className="flex flex-col gap-y-6">
             {positions.map((position) => (
               <div key={position.id} className="flex flex-col gap-y-2">
                 <div className="flex items-center justify-between">
                   <a
                     href={position.link!}
-                    className="font-semibold ~text-lg/2xl decorate-underline"
+                    className="~text-lg/2xl decorate-underline font-semibold"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -36,16 +36,16 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                   </p>
                 </div>
                 <div
-                  className="prose max-w-full text-foreground dark:prose-invert"
+                  className="prose dark:prose-invert max-w-full text-foreground"
                   dangerouslySetInnerHTML={{
                     __html: position.descriptionHtml!,
                   }}
                 />
-                <ul className="flex gap-2 flex-wrap">
+                <ul className="flex flex-wrap gap-2">
                   {position.technologies?.map((tag) => (
                     <li
                       key={(tag as Technology).name}
-                      className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
+                      className="cursor-default rounded bg-muted px-1 text-muted-foreground text-sm transition hover:text-foreground"
                     >
                       {(tag as Technology).name}
                     </li>
@@ -56,7 +56,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
           </div>
         </section>
 
-        <h1 className="mb-3 font-bold tracking-tighter ~text-2xl/4xl">Projects</h1>
+        <h1 className="~text-2xl/4xl mb-3 font-bold tracking-tighter">Projects</h1>
         <section className="flex flex-col gap-y-2">
           <div className="flex flex-col gap-y-6">
             {projects.map((project) => (
@@ -64,7 +64,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                 <div className="flex items-center justify-between">
                   <a
                     href={project.link!}
-                    className="font-semibold ~text-lg/2xl decorate-underline"
+                    className="~text-lg/2xl decorate-underline font-semibold"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -78,16 +78,16 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                   </p>
                 </div>
                 <div
-                  className="prose max-w-full text-foreground dark:prose-invert"
+                  className="prose dark:prose-invert max-w-full text-foreground"
                   dangerouslySetInnerHTML={{
                     __html: project.descriptionHtml!,
                   }}
                 />
-                <ul className="flex gap-2 flex-wrap">
+                <ul className="flex flex-wrap gap-2">
                   {project.technologies?.map((tag) => (
                     <li
                       key={(tag as Technology).name}
-                      className="text-sm px-1 rounded bg-muted text-muted-foreground transition hover:text-foreground cursor-default"
+                      className="cursor-default rounded bg-muted px-1 text-muted-foreground text-sm transition hover:text-foreground"
                     >
                       {(tag as Technology).name}
                     </li>

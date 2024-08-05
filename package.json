@@ -8,7 +8,9 @@
     "build": "next build",
     "payload": "payload",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint --write ./src",
+    "format": "biome format --write ./src",
     "generate:types": "payload generate:types",
     "generate:schema": "payload-graphql generate:schema"
   },

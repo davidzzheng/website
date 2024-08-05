@@ -22,7 +22,7 @@ export const CodeHighlighter = async ({
     <div className="relative">
       <Clipboard
         value={stripCodeDirectives(code)}
-        className="absolute right-4 top-4 transition opacity-60 hover:opacity-100 z-10"
+        className="absolute top-4 right-4 z-10 opacity-60 transition hover:opacity-100"
       >
         <ClipboardIcon className="~size-4/5" aria-label="Copy code to clipboard" />
       </Clipboard>

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
+import React from 'react'
 
 import { NavBar } from '@/components/nav-bar'
 import { cn } from '@/lib/utils'
@@ -34,7 +34,7 @@ const fontSans = Inter({
   variable: '--font-sans',
 })
 
-const commitMono = localFont({
+const fontMono = localFont({
   src: [
     {
       path: '../../../public/fonts/CommitMono-400-Regular.otf',
@@ -68,13 +68,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
-          commitMono.variable,
+          fontMono.variable,
         )}
       >
         <Providers>
           <NavBar />
           {children}
-          <div className="fixed top-0 -z-50 h-screen w-screen">
+          <div className="-z-50 fixed top-0 h-screen w-screen">
             <Background />
           </div>
         </Providers>

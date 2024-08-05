@@ -12,19 +12,19 @@ export const TopicsView = ({ topics }: TopicsViewProps) => {
   return (
     <Layout>
       <Layout.Main className="rounded-lg bg-background/75 py-3">
-        <div className="px-6 my-3">
+        <div className="my-3 px-6">
           <Breadcrumbs />
         </div>
 
         <section className="flex flex-wrap gap-x-2 gap-y-4">
           {topics.map((topic) => (
             <div key={topic.id} className="m-2 rounded p-4 transition hover:bg-muted/50">
-              <div className="flex items-center justify-between w-fit">
+              <div className="flex w-fit items-center justify-between">
                 <Link
                   href={`/topics/${topic.slug}`}
-                  className="font-semibold ~text-lg/2xl decorate-underline"
+                  className="~text-lg/2xl decorate-underline font-semibold"
                 >
-                  <span className="~text-sm/lg text-muted-foreground mr-2">#</span>
+                  <span className="~text-sm/lg mr-2 text-muted-foreground">#</span>
                   {topic.name}
                 </Link>
               </div>

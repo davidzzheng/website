@@ -48,7 +48,7 @@ export const DesktopNavBar = () => {
 
   // const { toggleDarkMode } = useDarkMode()
   return (
-    <div className="flex h-16 w-full items-center justify-between ~px-6/8 bg-transparent">
+    <div className="~px-6/8 flex h-16 w-full items-center justify-between bg-transparent">
       <div className="flex items-center">
         <Link
           href="/"
@@ -69,7 +69,7 @@ export const DesktopNavBar = () => {
                 tabsRef.current[idx] = el
               }}
               href={`/${tab}`}
-              className="cursor-pointer px-4 py-3 font-semibold text-foreground transition ~text-lg/xl hover:text-muted-foreground"
+              className="~text-lg/xl cursor-pointer px-4 py-3 font-semibold text-foreground transition hover:text-muted-foreground"
               onClick={() => setActiveTabIndex(idx)}
               role="listitem"
             >

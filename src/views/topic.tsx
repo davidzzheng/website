@@ -12,7 +12,7 @@ export const TopicView = ({ posts }: TopicViewProps) => {
   return (
     <Layout>
       <Layout.Main className="rounded-lg bg-background/75 py-3">
-        <div className="px-6 my-3">
+        <div className="my-3 px-6">
           <Breadcrumbs />
         </div>
 

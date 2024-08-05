@@ -19,12 +19,12 @@ export const PostList = ({ posts }: PostListProps) => {
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="decorate-underline font-semibold ~text-lg/3xl w-fit"
+              className="decorate-underline ~text-lg/3xl w-fit font-semibold"
             >
               {post.title}
             </Link>
             <div className="flex justify-between">
-              <p className="~text-xs/sm sm:text-right text-nowrap">
+              <p className="~text-xs/sm text-nowrap sm:text-right">
                 Posted {formatRelativeDate(post.published_at!)}
               </p>
               <ul className="flex flex-wrap justify-end gap-2">
@@ -33,7 +33,7 @@ export const PostList = ({ posts }: PostListProps) => {
                     href={`/topics/${tag.slug}`}
                     key={tag.name}
                     className={cn(
-                      'rounded bg-muted px-1 py-0.5 text-xs h-fit transition',
+                      'h-fit rounded bg-muted px-1 py-0.5 text-xs transition',
                       'hover:bg-muted-foreground hover:text-background',
                     )}
                   >

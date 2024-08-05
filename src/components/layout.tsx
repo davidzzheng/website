@@ -18,19 +18,19 @@ export const Layout = ({ children, className }: LayoutNodeProps) => {
 }
 
 const LayoutTop = ({ children, className }: LayoutNodeProps) => (
-  <section className={cn('sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8', className)}>
+  <section className={cn('sm:col-span-9 sm:col-start-1 md:col-span-8 md:col-start-3', className)}>
     {children}
   </section>
 )
 
 const LayoutLeft = ({ children, className }: LayoutNodeProps) => (
-  <section className={cn('hidden sm:block sm:col-span-3 md:col-span-2', className)}>
+  <section className={cn('hidden sm:col-span-3 sm:block md:col-span-2', className)}>
     {children}
   </section>
 )
 
 const LayoutRight = ({ children, className }: LayoutNodeProps) => (
-  <section className={cn('sm:col-start-10 sm:col-span-3 md:col-start-11 md:col-span-2', className)}>
+  <section className={cn('sm:col-span-3 sm:col-start-10 md:col-span-2 md:col-start-11', className)}>
     {children}
   </section>
 )
@@ -38,7 +38,7 @@ const LayoutRight = ({ children, className }: LayoutNodeProps) => (
 const LayoutMain = ({ children, className }: LayoutNodeProps) => (
   <section
     className={cn(
-      'sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8',
+      'sm:col-span-9 sm:col-start-1 md:col-span-8 md:col-start-3',
       'row-start-2',
       className,
     )}
@@ -50,7 +50,7 @@ const LayoutMain = ({ children, className }: LayoutNodeProps) => (
 export const LayoutBottom = ({ children, className }: LayoutNodeProps) => (
   <section
     className={cn(
-      'sm:col-start-1 md:col-start-3 sm:col-span-9 md:col-span-8',
+      'sm:col-span-9 sm:col-start-1 md:col-span-8 md:col-start-3',
       'row-start-3',
       className,
     )}
