@@ -13,9 +13,7 @@ import {
   BreadcrumbSeparator,
 } from './ui/breadcrumb'
 
-type BreadcrumbsProps = {}
-
-export const Breadcrumbs = ({}: BreadcrumbsProps) => {
+export const Breadcrumbs = () => {
   const pathname = usePathname()
   const segments = pathname.split('/').filter(Boolean)
 

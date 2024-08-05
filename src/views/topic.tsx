@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Layout } from '@/components/layout'
 import { PostList } from '@/components/post-list'
-import { Post, Tag } from '@/lib/ghost'
+import type { Post, Tag } from '@/lib/ghost'
 
 type TopicViewProps = {
   topic: Tag

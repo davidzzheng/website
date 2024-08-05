@@ -21,7 +21,7 @@ export const Heading = ({ heading, id, children, className }: HeadingProps) => {
 
     const url = window.location.href.replace(/#.*$/, `#${id}`)
     await navigator.clipboard.writeText(url)
-  }, [id])
+  }, [id, router])
 
   return (
     <Comp

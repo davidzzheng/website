@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { formatRelativeDate } from '@/lib/date'
-import { Post } from '@/lib/ghost'
+import type { Post } from '@/lib/ghost'
 import { cn } from '@/lib/utils'
 
 type PostListProps = {
@@ -25,7 +25,7 @@ export const PostList = ({ posts }: PostListProps) => {
             </Link>
             <div className="flex justify-between">
               <p className="~text-xs/sm text-nowrap sm:text-right">
-                Posted {formatRelativeDate(post.published_at!)}
+                Posted {formatRelativeDate(post.published_at ?? new Date().toISOString())}
               </p>
               <ul className="flex flex-wrap justify-end gap-2">
                 {post.tags?.map((tag) => (

@@ -1,16 +1,16 @@
 'use server'
 
 import parse, {
-  DOMNode,
+  type DOMNode,
   domToReact,
-  HTMLReactParserOptions,
-  Text,
-  Element,
+  type HTMLReactParserOptions,
+  type Text,
+  type Element,
 } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CodeHighlighterOptions } from '@/lib/code'
+import type { CodeHighlighterOptions } from '@/lib/code'
 import { removeRefParam } from '@/lib/string'
 import { cn } from '@/lib/utils'
 import { CodeHighlighter } from '../code-highlighter'
@@ -49,13 +49,14 @@ export const PostView = async ({ content, className }: PostViewProps) => {
                 className="rounded-lg"
               />
             )
-          case 'pre':
+          case 'pre': {
             const codeEl = domNode.children[0] as Element
             const codeText = (codeEl.children[0] as Text).data
             const lang = codeEl.attribs.class?.split(
               'language-',
             )[1] as CodeHighlighterOptions['lang']
             return <CodeHighlighter code={codeText} lang={lang} />
+          }
           case 'h1':
           case 'h2':
           case 'h3':

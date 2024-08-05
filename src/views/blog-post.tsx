@@ -7,7 +7,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs'
 import { PostTableOfContents } from '@/components/post-toc'
 import { PostView } from '@/components/post-view'
 import { ScrollToTop } from '@/components/scroll-to-top'
-import { Post } from '@/lib/ghost'
+import type { Post } from '@/lib/ghost'
 
 const WPM = 150
 

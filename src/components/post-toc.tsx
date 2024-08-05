@@ -32,8 +32,10 @@ export const PostTableOfContents = () => {
   const [activeId, setActiveId] = useState<string>()
   const router = useRouter()
 
+  const queryForHeadings = () => document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('h2, h3, h4')).map((elem) => ({
+    const elements = Array.from(queryForHeadings()).map((elem) => ({
       id: elem.id,
       title: elem.textContent ?? '',
       level: Number(elem.nodeName.charAt(1)),
@@ -55,8 +57,7 @@ export const PostTableOfContents = () => {
       { rootMargin: '0% 0% -80% 0%' },
     )
 
-    const headingElements = document.querySelectorAll('h2, h3, h4, h5, h6')
-    headingElements.forEach((element) => observer.observe(element))
+    queryForHeadings().forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
   }, [])

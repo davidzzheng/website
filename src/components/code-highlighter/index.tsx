@@ -1,6 +1,6 @@
 import { ClipboardIcon } from 'lucide-react'
 
-import { CodeHighlighterOptions, codeToHtml, stripCodeDirectives } from '@/lib/code'
+import { type CodeHighlighterOptions, codeToHtml, stripCodeDirectives } from '@/lib/code'
 import { Clipboard } from '../ui/clipboard'
 
 import './index.scss'
