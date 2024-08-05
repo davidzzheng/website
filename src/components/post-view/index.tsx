@@ -28,19 +28,21 @@ export const PostView = async ({ content, className }: PostViewProps) => {
         switch (domNode.name) {
           case 'a': {
             const cleanedHref = removeRefParam(domNode.attribs.href!)
+            const isInternalLink =
+              cleanedHref.includes(process.env.GHOST_URL!) || cleanedHref === '#'
             const internalLink = cleanedHref.split(process.env.GHOST_URL!)[1]
 
             return (
               <Link
                 {...domNode.attribs}
-                {...(internalLink
-                  ? { href: `/blog${internalLink}` }
+                {...(isInternalLink
+                  ? { href: internalLink ? `/blog${internalLink}` : '#' }
                   : {
                       href: cleanedHref,
                       target: '_blank',
                       rel: 'noopener noreferrer',
                     })}
-                className="decorate-underline decorate-underline-blue-500 text-blue-500"
+                className="underlined underlined-blue-500 text-blue-500"
               >
                 {domToReact(domNode.children as DOMNode[], options)}
               </Link>
