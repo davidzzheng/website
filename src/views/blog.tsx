@@ -12,7 +12,7 @@ export const BlogView = ({ posts }: BlogViewProps) => {
       <Layout.Main className="rounded-lg bg-background/75 py-3">
         {posts.length > 0 ? (
           <>
-            <h1 className="my-3 px-6 font-bold tracking-tighter ~text-2xl/4xl">Blog</h1>
+            <h1 className="~text-2xl/4xl my-3 px-6 font-bold tracking-tighter">Blog</h1>
             <PostList posts={posts} />
           </>
         ) : (

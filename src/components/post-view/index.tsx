@@ -33,7 +33,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
                 href={removeRefParam(domNode.attribs.href ?? '')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 decorate-underline decorate-underline-blue-500"
+                className="decorate-underline decorate-underline-blue-500 text-blue-500"
               >
                 {domToReact(domNode.children as DOMNode[], options)}
               </Link>

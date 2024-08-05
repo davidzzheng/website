@@ -70,7 +70,7 @@ export const PostTableOfContents = () => {
 
   return (
     <nav aria-label="Table of contents">
-      <ul className="flex flex-col gap-y-4 mb-4">
+      <ul className="mb-4 flex flex-col gap-y-4">
         {headings.map((heading) => (
           <li key={heading.id}>
             <a
@@ -80,7 +80,7 @@ export const PostTableOfContents = () => {
                 scrollToHeading(heading.id)
               }}
               className={cn(
-                'w-fit decorate-underline text-sm leading-6',
+                'decorate-underline w-fit text-sm leading-6',
                 heading.id === activeId ? 'selected font-medium' : '',
               )}
             >
@@ -97,7 +97,7 @@ export const PostTableOfContents = () => {
                         scrollToHeading(child.id)
                       }}
                       className={cn(
-                        'ml-4 w-fit decorate-underline text-sm leading-6',
+                        'decorate-underline ml-4 w-fit text-sm leading-6',
                         child.id === activeId ? 'selected font-medium' : '',
                       )}
                     >
@@ -112,7 +112,7 @@ export const PostTableOfContents = () => {
       </ul>
       <div
         className={cn(
-          'flex items-center transition origin-top scale-y-0',
+          'flex origin-top scale-y-0 items-center transition',
           activeId ? 'scale-y-100' : '',
         )}
       >

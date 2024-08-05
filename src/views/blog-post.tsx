@@ -21,12 +21,12 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 
   return (
     <Layout className="mb-8">
-      <Layout.Left className="pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto row-start-2">
+      <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
         <PostTableOfContents />
       </Layout.Left>
-      <Layout.Top className="rounded-lg bg-background/75 pt-8 pb-4 ~px-4/8 space-y-2">
-        <h1 className="font-bold ~text-2xl/3xl">{post.title}</h1>
-        <div className="flex flex-wrap gap-y-1 items-center justify-between ~text-xs/sm">
+      <Layout.Top className="~px-4/8 space-y-2 rounded-lg bg-background/75 pt-8 pb-4">
+        <h1 className="~text-2xl/3xl font-bold">{post.title}</h1>
+        <div className="~text-xs/sm flex flex-wrap items-center justify-between gap-y-1">
           <span>
             {wordCount} words • {readingTime} min read
           </span>
@@ -38,20 +38,20 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
               role="listitem"
               key={tag.slug}
               href={`/topics/${tag.slug}`}
-              className="decorate-underline leading-5 flex cursor-pointer items-center gap-x-1 text-muted-foreground transition hover:text-foreground text-xs"
+              className="decorate-underline ~text-xs/sm flex cursor-pointer items-center gap-x-1 text-muted-foreground leading-5 tracking-wide transition hover:text-foreground"
             >
-              <span className="text-xs text-muted-foreground">#</span> {tag.name}
+              <span className="text-muted-foreground text-xs">#</span> {tag.name}
             </Link>
           ))}
         </ul>
       </Layout.Top>
 
-      <Layout.Main className="rounded-lg bg-background/75 py-6 ~px-4/8">
+      <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
         {/* <Breadcrumbs /> */}
 
         <PostView content={post.html!} />
       </Layout.Main>
-      <Layout.Bottom className="flex justify-center mb-8">
+      <Layout.Bottom className="mb-8 flex justify-center">
         <ScrollToTop />
       </Layout.Bottom>
     </Layout>

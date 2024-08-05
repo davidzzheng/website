@@ -9,7 +9,7 @@ export const ContactView = () => {
   return (
     <Layout>
       <Layout.Main className="space-y-4 bg-background/75 p-6">
-        <h1 className="font-bold tracking-tighter ~text-2xl/4xl">Contact</h1>
+        <h1 className="~text-2xl/4xl font-bold tracking-tighter">Contact</h1>
         <section className="flex items-center gap-x-6">
           <p className="text-base">External Links:</p>
           <a
