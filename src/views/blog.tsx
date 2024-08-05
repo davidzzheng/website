@@ -1,5 +1,5 @@
 import { Layout } from '@/components/layout'
-import { Post } from '@/lib/ghost'
+import type { Post } from '@/lib/ghost'
 import { PostList } from '@/components/post-list'
 
 type BlogViewProps = {

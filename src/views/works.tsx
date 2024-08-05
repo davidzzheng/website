@@ -1,7 +1,7 @@
 'use client'
 
 import { Layout } from '@/components/layout'
-import { Technology, Work } from 'payload-types'
+import type { Technology, Work } from 'payload-types'
 
 type WorkViewProps = {
   positions: Work[]

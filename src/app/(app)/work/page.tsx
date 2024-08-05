@@ -1,8 +1,8 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import { getPayload } from '@/lib/payload'
 import { WorkView } from '@/views/works'
-import { Work } from 'payload-types'
+import type { Work } from 'payload-types'
 
 const positions = [
   {

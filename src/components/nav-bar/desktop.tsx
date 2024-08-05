@@ -82,7 +82,7 @@ export const DesktopNavBar = () => {
           style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
         />
       </div>
-      <div></div>
+      <div />
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import {
   AnimatePresence,
   LazyMotion,
-  Variants,
+  type Variants,
   domAnimation,
   m as motion,
   useInView,

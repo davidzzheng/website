@@ -1,10 +1,10 @@
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import React from 'react'
+import type React from 'react'
 
 import { NavBar } from '@/components/nav-bar'
 import { cn } from '@/lib/utils'

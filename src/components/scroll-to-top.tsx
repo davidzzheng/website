@@ -2,7 +2,7 @@
 
 import { ArrowUp } from 'lucide-react'
 
-import { Button, ButtonProps } from './ui/button'
+import { Button, type ButtonProps } from './ui/button'
 
 export const ScrollToTop = (props: ButtonProps) => (
   <Button
