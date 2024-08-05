@@ -18,7 +18,7 @@ pre {
         &::before {
           @apply font-mono -ml-4 pl-2 content-["-"];
         }
-        @apply bg-red-950 opacity-70;
+        @apply bg-red-950 opacity-50;
       }
     }
 
