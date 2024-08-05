@@ -16,7 +16,6 @@
       "recommended": true,
       "nursery": {
         "useSortedClasses": {
-          "fix": "safe",
           "options": { "attributes": ["className"] },
           "level": "warn"
         }
