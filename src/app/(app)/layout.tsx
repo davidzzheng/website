@@ -66,7 +66,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider domain="davidzheng.me" trackOutboundLinks selfHosted />
+        <PlausibleProvider
+          domain="davidzheng.me"
+          customDomain="https://analytics.davidzheng.me"
+          trackOutboundLinks
+          selfHosted
+        />
       </head>
       <body
         className={cn(
