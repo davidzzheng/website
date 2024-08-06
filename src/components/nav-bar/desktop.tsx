@@ -52,8 +52,8 @@ export const DesktopNavBar = () => {
       <div className="flex items-center">
         <Link
           href="/"
-          className={cx('decorate-underline ~text-lg/xl font-bold text-foreground', {
-            'decorate-underline-selected': path === '/',
+          className={cx('underlined ~text-lg/xl font-bold text-foreground', {
+            'underlined-active': path === '/',
           })}
           aria-label="Home"
         >

@@ -62,7 +62,10 @@ export const PostView = async ({ content, className }: PostViewProps) => {
           case 'figure':
             return (
               <figure
-                className={cn('flex flex-col gap-y-2', '[&_span]:self-center [&_span]:text-sm')}
+                className={cn(
+                  'my-0 flex flex-col gap-y-2',
+                  '[&_span]:self-center [&_span]:text-sm',
+                )}
               >
                 {domToReact(domNode.children as DOMNode[], options)}
               </figure>
@@ -73,7 +76,7 @@ export const PostView = async ({ content, className }: PostViewProps) => {
             const lang = codeEl.attribs.class?.split(
               'language-',
             )[1] as CodeHighlighterOptions['lang']
-            return <CodeHighlighter code={codeText} lang={lang} className="[&_pre]:mb-0" />
+            return <CodeHighlighter code={codeText} lang={lang} className="[&_pre]:my-0" />
           }
           case 'h1':
           case 'h2':
