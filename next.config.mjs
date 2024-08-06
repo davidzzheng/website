@@ -11,4 +11,4 @@ const nextConfig = {
   },
 }
 
-export default withPlausibleProxy(nextConfig)
+export default withPlausibleProxy()(nextConfig)
