@@ -38,7 +38,9 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                         {position.company}
                       </a>
                       <p className="~text-xs/sm">
-                        {`${getDate(position.startDate!)} - ${getDate(position.endDate!)}`}
+                        {`${getDate(position.startDate!)} - ${
+                          position.endDate ? getDate(position.endDate) : 'Present'
+                        }`}
                       </p>
                     </div>
                     <div
