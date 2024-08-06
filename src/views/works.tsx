@@ -31,7 +31,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                     <div className="flex items-center justify-between">
                       <a
                         href={position.link!}
-                        className="~text-lg/2xl underlined font-semibold"
+                        className="~text-lg/2xl underlined underlined-blue-500 font-semibold text-blue-500"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
