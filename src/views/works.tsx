@@ -1,6 +1,7 @@
 'use client'
 
 import { Layout } from '@/components/layout'
+import { cn } from '@/lib/utils'
 import type { Technology, Work } from 'payload-types'
 
 type WorkViewProps = {
@@ -30,7 +31,7 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                     <div className="flex items-center justify-between">
                       <a
                         href={position.link!}
-                        className="~text-lg/2xl decorate-underline font-semibold"
+                        className="~text-lg/2xl underlined font-semibold"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -41,7 +42,10 @@ export const WorkView = ({ positions, projects }: WorkViewProps) => {
                       </p>
                     </div>
                     <div
-                      className="prose dark:prose-invert mb-2 max-w-full text-foreground"
+                      className={cn(
+                        'prose dark:prose-invert mb-2 max-w-full text-foreground',
+                        '[&_a]:underlined [&_a]:underlined-blue-500 [&_a]:text-blue-500',
+                      )}
                       dangerouslySetInnerHTML={{
                         __html: position.descriptionHtml!,
                       }}
