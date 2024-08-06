@@ -12,5 +12,5 @@ const nextConfig = {
 }
 
 export default withPlausibleProxy({
-  customDomain: 'https://analytics.davidzheng.me',
+  customDomain: 'http://analytics.davidzheng.me',
 })(nextConfig)
