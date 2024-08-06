@@ -1,11 +1,11 @@
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
+import PlausibleProvider from 'next-plausible'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import type React from 'react'
-import PlausibleProvider from 'next-plausible'
 
 import { NavBar } from '@/components/nav-bar'
 import { cn } from '@/lib/utils'
@@ -66,12 +66,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider
-          domain="davidzheng.me"
-          customDomain="https://analytics.davidzheng.me"
-          trackOutboundLinks
-          selfHosted
-        />
+        <PlausibleProvider domain="davidzheng.me" trackOutboundLinks selfHosted />
       </head>
       <body
         className={cn(
