@@ -28,7 +28,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
         <h1 className="~text-2xl/3xl font-bold">{post.title}</h1>
         <div className="~text-xs/sm flex flex-wrap items-center justify-between gap-y-1">
           <span>
-            {wordCount} words • {readingTime} min read
+            {wordCount} words · {readingTime} min read
           </span>
           <p>Posted on {formatDate(post.published_at!)}</p>
         </div>
