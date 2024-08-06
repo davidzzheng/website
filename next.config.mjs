@@ -13,6 +13,4 @@ const nextConfig = {
 
 export default withPlausibleProxy({
   customDomain: 'https://analytics.davidzheng.me',
-  subdirectory: './public/',
-  scriptName: 'analytics.js',
 })(nextConfig)
