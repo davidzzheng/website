@@ -59,13 +59,21 @@ export const PostView = async ({ content, className }: PostViewProps) => {
                 className="h-auto w-full rounded-lg"
               />
             )
+          case 'figure':
+            return (
+              <figure
+                className={cn('flex flex-col gap-y-2', '[&_span]:self-center [&_span]:text-sm')}
+              >
+                {domToReact(domNode.children as DOMNode[], options)}
+              </figure>
+            )
           case 'pre': {
             const codeEl = domNode.children[0] as Element
             const codeText = (codeEl.children[0] as Text).data
             const lang = codeEl.attribs.class?.split(
               'language-',
             )[1] as CodeHighlighterOptions['lang']
-            return <CodeHighlighter code={codeText} lang={lang} />
+            return <CodeHighlighter code={codeText} lang={lang} className="[&_pre]:mb-0" />
           }
           case 'h1':
           case 'h2':
