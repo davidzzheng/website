@@ -33,10 +33,10 @@ export const HomeView = () => {
                 professional experience
               </Link>
               , I've honed my skills in building scalable full-stack web applications for both
-              high-growth startups and enterprise-level companies. While my primary stack includes
-              React, Next.js, TypeScript, TailwindCSS, and Fastify, I'm always eager to explore and
-              adapt to new technologies and paradigms in the ever-evolving world of software
-              development.
+              high-growth startups and enterprise-level companies. These days I work primarily on
+              the frontend, but I am equally as capable working across the entire stack. I am always
+              eager to explore and learn new technologies and paradigms in the ever-evolving world
+              of software development.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
