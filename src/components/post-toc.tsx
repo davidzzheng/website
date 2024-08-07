@@ -27,11 +27,7 @@ const getNestedHeadings = (
   return nestedHeadings
 }
 
-type PostTableOfContentsProps = {
-  content: string
-}
-
-export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
+export const PostTableOfContents = () => {
   const [headings, setHeadings] = useState<Heading[]>([])
   const [activeId, setActiveId] = useState<string>()
   const router = useRouter()
@@ -39,7 +35,8 @@ export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
   const queryForHeadings = () => document.querySelectorAll('h1, h2, h3, h4, h5, h6')
 
   useEffect(() => {
-    const elements = Array.from(queryForHeadings()).map((elem) => ({
+    const headingQuery = queryForHeadings()
+    const elements = Array.from(headingQuery).map((elem) => ({
       id: elem.id,
       title: elem.textContent ?? '',
       level: Number(elem.nodeName.charAt(1)),
@@ -59,7 +56,7 @@ export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
       { rootMargin: '0% 0% -80% 0%' },
     )
 
-    queryForHeadings().forEach((element) => observer.observe(element))
+    headingQuery.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
   }, [])
