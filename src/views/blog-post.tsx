@@ -44,24 +44,15 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           ))}
         </ul>
       </Layout.Top>
-      <Suspense
-        fallback={
-          <Layout.Main className="~px-4/8 space-y-4 rounded-lg bg-background/75 py-6">
-            <Skeleton className="h-12 w-2/3" />
-            <Skeleton className="mb-8 h-32 w-full" />
-            <Skeleton className="h-32 w-full" />
-          </Layout.Main>
-        }
-      >
-        <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
-          <PostTableOfContents />
-        </Layout.Left>
-        <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
-          {/* <Breadcrumbs /> */}
 
-          <PostView content={post.html!} />
-        </Layout.Main>
-      </Suspense>
+      <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
+        <PostTableOfContents />
+      </Layout.Left>
+      <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
+        {/* <Breadcrumbs /> */}
+
+        <PostView content={post.html!} />
+      </Layout.Main>
 
       <Layout.Bottom className="mb-8 flex justify-center">
         <ScrollToTop />
