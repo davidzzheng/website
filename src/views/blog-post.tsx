@@ -24,7 +24,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
   return (
     <Layout className="mb-8">
       <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
-        <PostTableOfContents />
+        <PostTableOfContents content={post.html!} />
       </Layout.Left>
       <Layout.Top className="~px-4/8 space-y-2 rounded-lg bg-background/75 pt-8 pb-4">
         <h1 className="~text-2xl/3xl font-bold">{post.title}</h1>
