@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { Layout } from '@/components/layout'
 import { formatDate } from '@/lib/date'
@@ -8,6 +9,7 @@ import { PostTableOfContents } from '@/components/post-toc'
 import { PostView } from '@/components/post-view'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import type { Post } from '@/lib/ghost'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const WPM = 150
 
@@ -49,7 +51,17 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
       <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
         {/* <Breadcrumbs /> */}
 
-        <PostView content={post.html!} />
+        <Suspense
+          fallback={
+            <div className="space-y-4">
+              <Skeleton className="h-12 w-2/3" />
+              <Skeleton className="mb-16 h-32 w-full" />
+              <Skeleton className="h-32 w-full" />
+            </div>
+          }
+        >
+          <PostView content={post.html!} />
+        </Suspense>
       </Layout.Main>
       <Layout.Bottom className="mb-8 flex justify-center">
         <ScrollToTop />
