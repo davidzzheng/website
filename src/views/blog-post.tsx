@@ -46,9 +46,9 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
       </Layout.Top>
       <Suspense
         fallback={
-          <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
+          <Layout.Main className="~px-4/8 space-y-4 rounded-lg bg-background/75 py-6">
             <Skeleton className="h-12 w-2/3" />
-            <Skeleton className="mb-16 h-32 w-full" />
+            <Skeleton className="mb-8 h-32 w-full" />
             <Skeleton className="h-32 w-full" />
           </Layout.Main>
         }
@@ -58,6 +58,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
         </Layout.Left>
         <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
           {/* <Breadcrumbs /> */}
+
           <PostView content={post.html!} />
         </Layout.Main>
       </Suspense>
