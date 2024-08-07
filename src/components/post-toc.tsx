@@ -47,9 +47,7 @@ export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
 
     const nestedHeadings = getNestedHeadings(elements)
     setHeadings(nestedHeadings)
-  }, [])
 
-  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -64,7 +62,7 @@ export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
     queryForHeadings().forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
-  }, [content])
+  }, [])
 
   const scrollToHeading = (id: string) => {
     document.querySelector(`#${id}`)?.scrollIntoView({
