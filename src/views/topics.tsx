@@ -22,7 +22,7 @@ export const TopicsView = ({ topics }: TopicsViewProps) => {
               <div className="flex w-fit items-center justify-between">
                 <Link
                   href={`/topics/${topic.slug}`}
-                  className="~text-lg/2xl decorate-underline font-semibold"
+                  className="~text-lg/2xl underlined font-semibold"
                 >
                   <span className="~text-sm/lg mr-2 text-muted-foreground">#</span>
                   {topic.name}

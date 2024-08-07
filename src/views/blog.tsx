@@ -1,6 +1,6 @@
 import { Layout } from '@/components/layout'
-import type { Post } from '@/lib/ghost'
 import { PostList } from '@/components/post-list'
+import type { Post } from '@/lib/ghost'
 
 type BlogViewProps = {
   posts: Post[]
