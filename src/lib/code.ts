@@ -67,7 +67,9 @@ export const codeToHtml = async (code: string, options: CodeHighlighterOptions) 
     ],
   })
 
-  highlighter.dispose()
+  if (process.env.NODE_ENV === 'development') {
+    highlighter.dispose()
+  }
 
   return html
 }
