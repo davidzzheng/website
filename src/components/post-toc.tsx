@@ -27,7 +27,11 @@ const getNestedHeadings = (
   return nestedHeadings
 }
 
-export const PostTableOfContents = () => {
+type PostTableOfContentsProps = {
+  content: string
+}
+
+export const PostTableOfContents = ({ content }: PostTableOfContentsProps) => {
   const [headings, setHeadings] = useState<Heading[]>([])
   const [activeId, setActiveId] = useState<string>()
   const router = useRouter()
@@ -60,7 +64,7 @@ export const PostTableOfContents = () => {
     queryForHeadings().forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
-  }, [])
+  }, [content])
 
   const scrollToHeading = (id: string) => {
     document.querySelector(`#${id}`)?.scrollIntoView({
