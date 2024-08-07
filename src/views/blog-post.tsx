@@ -23,9 +23,6 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 
   return (
     <Layout className="mb-8">
-      <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
-        <PostTableOfContents content={post.html!} />
-      </Layout.Left>
       <Layout.Top className="~px-4/8 space-y-2 rounded-lg bg-background/75 pt-8 pb-4">
         <h1 className="~text-2xl/3xl font-bold">{post.title}</h1>
         <div className="~text-xs/sm flex flex-wrap items-center justify-between gap-y-1">
@@ -47,22 +44,35 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
           ))}
         </ul>
       </Layout.Top>
+      <Suspense
+        fallback={
+          <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
+            <Skeleton className="h-12 w-2/3" />
+            <Skeleton className="mb-16 h-32 w-full" />
+            <Skeleton className="h-32 w-full" />
+          </Layout.Main>
+        }
+      >
+        <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
+          <PostTableOfContents content={post.html!} />
+        </Layout.Left>
+        <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
+          {/* <Breadcrumbs /> */}
 
-      <Layout.Main className="~px-4/8 rounded-lg bg-background/75 py-6">
-        {/* <Breadcrumbs /> */}
+          <Suspense
+            fallback={
+              <div className="space-y-4">
+                <Skeleton className="h-12 w-2/3" />
+                <Skeleton className="mb-16 h-32 w-full" />
+                <Skeleton className="h-32 w-full" />
+              </div>
+            }
+          >
+            <PostView content={post.html!} />
+          </Suspense>
+        </Layout.Main>
+      </Suspense>
 
-        <Suspense
-          fallback={
-            <div className="space-y-4">
-              <Skeleton className="h-12 w-2/3" />
-              <Skeleton className="mb-16 h-32 w-full" />
-              <Skeleton className="h-32 w-full" />
-            </div>
-          }
-        >
-          <PostView content={post.html!} />
-        </Suspense>
-      </Layout.Main>
       <Layout.Bottom className="mb-8 flex justify-center">
         <ScrollToTop />
       </Layout.Bottom>
