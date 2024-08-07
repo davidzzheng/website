@@ -10,7 +10,7 @@ export default function Loading() {
       </Layout.Top>
       <Layout.Main className="space-y-4 rounded-lg bg-background/75 p-6">
         <Skeleton className="h-12 w-2/3" />
-        <Skeleton className="mb-16 h-32 w-full" />
+        <Skeleton className="mb-8 h-32 w-full" />
         <Skeleton className="h-32 w-full" />
       </Layout.Main>
     </Layout>
