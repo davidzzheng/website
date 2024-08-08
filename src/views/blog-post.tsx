@@ -67,11 +67,10 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
 
           <PostView content={post.html!} />
         </Layout.Main>
+        <Layout.Bottom className="mb-8 flex justify-center">
+          <ScrollToTop />
+        </Layout.Bottom>
       </Suspense>
-
-      <Layout.Bottom className="mb-8 flex justify-center">
-        <ScrollToTop />
-      </Layout.Bottom>
     </Layout>
   )
 }
