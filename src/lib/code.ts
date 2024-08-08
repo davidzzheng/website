@@ -4,7 +4,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
 } from '@shikijs/transformers'
-import { createHighlighterCore } from 'shiki/core'
+import { createHighlighterCore, makeSingletonHighlighter } from 'shiki/core'
 import loadWasm from 'shiki/wasm'
 
 export const createHighlighter = async () =>
@@ -24,28 +24,7 @@ export const createHighlighter = async () =>
     loadWasm,
   })
 
-type Highlighter = Awaited<ReturnType<typeof createHighlighterCore>>
-
-export class HighlighterSingleton {
-  private static instance: HighlighterSingleton
-  private highlighter: Highlighter | undefined
-
-  private constructor() {}
-
-  public static getInstance(): HighlighterSingleton {
-    if (!HighlighterSingleton.instance) {
-      HighlighterSingleton.instance = new HighlighterSingleton()
-    }
-    return HighlighterSingleton.instance
-  }
-
-  public async getHighlighter(): Promise<Highlighter> {
-    if (!this.highlighter) {
-      this.highlighter = await createHighlighter()
-    }
-    return this.highlighter
-  }
-}
+const getHighlighter = makeSingletonHighlighter(createHighlighter)
 
 export type CodeHighlighterOptions = {
   lang: 'ts' | 'js' | 'json' | 'html' | 'css'
@@ -54,7 +33,7 @@ export type CodeHighlighterOptions = {
 
 export const codeToHtml = async (code: string, options: CodeHighlighterOptions) => {
   const { theme, lang } = options
-  const highlighter = await createHighlighter()
+  const highlighter = await getHighlighter()
 
   const html = highlighter.codeToHtml(code, {
     lang,
@@ -66,10 +45,6 @@ export const codeToHtml = async (code: string, options: CodeHighlighterOptions) 
       transformerNotationErrorLevel(),
     ],
   })
-
-  if (process.env.NODE_ENV === 'development') {
-    highlighter.dispose()
-  }
 
   return html
 }

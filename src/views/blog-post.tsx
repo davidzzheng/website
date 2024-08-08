@@ -48,7 +48,7 @@ export const BlogPostView = ({ post }: BlogPostViewProps) => {
         fallback={
           <>
             <Layout.Left className="row-start-2 pt-8 sm:sticky sm:top-16 sm:max-h-[calc(100vh-4rem)] sm:overflow-y-auto">
-              <Skeleton className="h-72 w-full" />
+              <Skeleton className="h-72 w-full opacity-50" />
             </Layout.Left>
 
             <Layout.Main className="~px-4/8 space-y-4 rounded-lg bg-background/75 py-6">
