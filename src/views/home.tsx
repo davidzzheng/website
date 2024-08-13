@@ -21,22 +21,20 @@ export const HomeView = () => {
           </BlurFade>
           <BlurFade delay={0.25 * 1} inView>
             <span className="~text-sm/lg text-pretty">
-              I'm David Zheng, a Vancouver-based software developer with a passion for coding that
-              began at age 12. My self-taught journey has led me through diverse areas of
-              programming, from web development to robotics.{' '}
+              I'm David Zheng, a self-taught software developer based in Vancouver, Canada.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 2} inView>
             <span className="~text-sm/lg text-pretty">
-              With over 5 years of{' '}
+              I have over 5 years of{' '}
               <Link href="/work" className="underlined underlined-blue-500 text-blue-500">
                 professional experience
-              </Link>
-              , I've honed my skills in building scalable full-stack web applications for both
-              high-growth startups and enterprise-level companies. These days I work primarily on
-              the frontend, but I am equally as capable working across the entire stack. I am always
-              eager to explore and learn new technologies and paradigms in the ever-evolving world
-              of software development.
+              </Link>{' '}
+              building scalable full-stack web applications for both high-growth startups and
+              enterprise-level companies. These days I work primarily on the frontend, but I am
+              equally as capable working across the entire stack. I am always eager to explore and
+              learn new technologies and paradigms in the ever-evolving world of software
+              development.
             </span>
           </BlurFade>
           <BlurFade delay={0.25 * 3} inView>
