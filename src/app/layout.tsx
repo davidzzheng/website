@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { ThemeProvider } from 'next-themes'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
