@@ -7,8 +7,8 @@ import Link from 'next/link'
 import { AnimatedBackground, AnimatedBackgroundItem } from '@/components/ui/animated-background'
 import { TRANSITION_SECTION, VARIANTS_CONTAINER, VARIANTS_SECTION } from '@/lib/animation'
 import { EMAIL } from '@/lib/constants'
-import { formatMonthYear } from '@/lib/date'
 import { latestPosts, positions } from '@/lib/data'
+import { formatMonthYear } from '@/lib/date'
 
 export default function () {
   return (
@@ -40,8 +40,8 @@ export default function () {
                 <div className="flex items-center space-x-2">
                   <img src={position.logo} alt={position.company} className="size-10 rounded-full" />
                   <div className="flex flex-col">
-                    <a href={position.link} target="_blank" className="mb-px font-semibold">
-                      <p className="underlined">{position.company}</p>
+                    <a href={position.link} target="_blank" className="underlined mb-px w-fit font-semibold">
+                      {position.company}
                     </a>
                     <p className="flex flex-col gap-y-1 text-xs text-zinc-600 dark:text-zinc-400">
                       <span>{position.title}</span>
