@@ -1,1 +1,1 @@
-# Portfolio website v2 based on Ghost
+A portfolio website based on [Nim](https://github.com/ibelick/nim) template.

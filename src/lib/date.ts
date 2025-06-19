@@ -1,8 +1,5 @@
-import { format, formatDistance } from 'date-fns'
+import { format } from 'date-fns'
 
-export const formatRelativeDate = (date: string) =>
-  formatDistance(new Date(date), new Date(), {
-    addSuffix: true,
-  })
-
-export const formatDate = (date: string) => format(new Date(date), "EEEE, LLL dd, yyyy 'at' h:mm a")
+export const formatMonthYear = (date: string) => {
+  return format(date, 'LLLL, yyyy')
+}
