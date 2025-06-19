@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, type SpringOptions, useScroll, useSpring } from 'motion/react'
+import { type SpringOptions, useScroll, useSpring } from 'motion/react'
+import * as motion from 'motion/react-m'
 import type { RefObject } from 'react'
 
 import { cn } from '@/lib/utils'

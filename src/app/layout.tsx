@@ -8,6 +8,7 @@ import { Footer } from './footer'
 import { Header } from './header'
 
 import './globals.css'
+import { domAnimation, LazyMotion } from 'motion/react'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -48,13 +49,15 @@ export default function RootLayout({
         className={cn(geist.variable, geistMono.variable, 'bg-white tracking-tight antialiased dark:bg-neutral-950')}
       >
         <ThemeProvider enableSystem={true} attribute="class" storageKey="theme" defaultTheme="system">
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
-              <Header />
-              {children}
-              <Footer />
+          <LazyMotion features={domAnimation} strict>
+            <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
+              <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
+                <Header />
+                {children}
+                <Footer />
+              </div>
             </div>
-          </div>
+          </LazyMotion>
         </ThemeProvider>
       </body>
     </html>
