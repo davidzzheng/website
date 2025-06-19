@@ -29,7 +29,7 @@ Ok with all that aside, let's finally get into the implementation. First let's s
 
 This part isn't that important so I've generated this part using an [LLM](https://www.perplexity.ai/search/model-a-basic-database-using-s-GaCKbRJZQ6C4QtSSEkt7YA). In practice, you should be able to query from any Drizzle table in the same manner. Here's a very simple Drizzle table schema.
 
-```ts
+```ts title="src/db/schema.ts"
 export const pokemon = sqliteTable("pokemon", {
   id: integer("id").primaryKey(),
   name: text("name").notNull(),
@@ -44,7 +44,7 @@ export const pokemon = sqliteTable("pokemon", {
 
 Next, the server action:
 
-```ts
+```ts title="src/actions/pokemon.ts"
 "use server";
 
 export const fetchPokemonList = async (cursor: number, limit: number) => {
@@ -57,7 +57,7 @@ export const fetchPokemonList = async (cursor: number, limit: number) => {
 
 I found myself using the cursor pagination logic a lot throughout my app so I ended up abstracted it out so that it can be used for other queries.
 
-```ts
+```ts title="src/lib/db.ts"
 type DataTypeMap = {
   string: string;
   number: number;
@@ -105,7 +105,7 @@ There's quite a bit of TypeScript magic going on here. But the gist of it is tha
 
 Next, onto the fetching hook
 
-```ts
+```ts title="src/state/feed.ts"
 export const usePokemonFeed = (limit: number = 20) =>
   useInfiniteQuery({
     queryKey: ["pokemon-feed", limit],
@@ -119,7 +119,7 @@ export const usePokemonFeed = (limit: number = 20) =>
 
 Finally, a barebones example of the component:
 
-```tsx
+```tsx title="src/views/feed.tsx"
 export const Feed = () => {
   const { data, error, fetchNextPage, isLoading } = usePokemonFeed();
 
