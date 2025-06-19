@@ -1,16 +1,9 @@
-import { withPlausibleProxy } from 'next-plausible'
+import { withContentlayer } from 'next-contentlayer'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        hostname: process.env.GHOST_URL,
-      },
-    ],
-  },
+  reactStrictMode: true,
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 }
 
-export default withPlausibleProxy({
-  customDomain: 'http://analytics.davidzheng.me',
-})(nextConfig)
+export default withContentlayer(nextConfig)

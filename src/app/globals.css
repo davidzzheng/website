@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  code[data-theme],
+  code[data-theme] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+    white-space: pre-wrap;
+  }
+
+  figure[data-rehype-pretty-code-figure] pre {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+  }
+
+  .dark {
+    code[data-theme],
+    code[data-theme] span {
+      color: var(--shiki-dark);
+      background-color: var(--shiki-dark-bg);
+    }
+
+    figure[data-rehype-pretty-code-figure] pre {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+    }
+  }
+}
+
+@layer utilities {
+  .underlined {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    --underlined-color: currentColor;
+  }
+
+  .underlined::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 300ms ease-in-out;
+    width: 0;
+  }
+
+  .underlined:hover::after,
+  .underlined.underlined-active::after {
+    width: 100%;
+  }
+}

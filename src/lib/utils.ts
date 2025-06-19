@@ -1,4 +1,6 @@
-import { type CXOptions, cx } from 'cva'
+import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-export const cn = (...inputs: CXOptions) => twMerge(cx(inputs))
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
