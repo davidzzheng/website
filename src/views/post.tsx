@@ -3,8 +3,8 @@
 import type { Post } from 'contentlayer/generated'
 import { format } from 'date-fns'
 import { motion } from 'motion/react'
-import { useMDXComponent } from 'next-contentlayer/hooks'
 import Image from 'next/image'
+import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import ScrambleText from '@/components/ui/scramble-text'
 import { TRANSITION_SECTION, VARIANTS_CONTAINER, VARIANTS_SECTION } from '@/lib/animation'

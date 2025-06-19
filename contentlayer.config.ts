@@ -22,7 +22,7 @@ export const Post = defineDocumentType(() => ({
     isPublished: {
       type: 'boolean',
       description: 'Whether the post is published',
-      default: true,
+      default: false,
     },
   },
   computedFields: {
