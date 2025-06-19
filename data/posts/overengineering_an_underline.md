@@ -141,8 +141,8 @@ This plugin can then be plugged into `tailwind.config.ts`.
 
 ```js
 const config = {
-	...
-	plugins: [ ..., decorateUnderline], // [!code focus]
+  ...
+  plugins: [ ..., decorateUnderline], // [!code focus]
 } satisfies Config
 ```
 
@@ -241,6 +241,35 @@ This implementation finally produced the result I wanted. The changes reduced th
 
 Tailwind CSS is a highly effective CSS framework with a strong emphasis on productivity. Even when used as-is with its provided defaults and without any plugins, it offers a common atomic abstraction of CSS that not only enables individual developers to build quickly but also allows teams to experiment freely with styling without worrying about CSS bloat — a persistent issue that plagued previous CSS methodologies and frameworks.
 
-## 2025 Addendum
+## Tailwind v4 Addendum
 
 Since the introduction of Tailwind v4 and the move from a JavaScript-based configuration to a CSS-based one, this implementation _probably_ doesn't work anymore. And that's okay. A big part of engineering is weighing the time cost with the benefits. This was an exercise for myself to better understand how Tailwind works under the hood.
+
+I did manage to reimplement it for the new latest Tailwind version, but it no longer supports custom colours beyond the `currentColor` default, which is probably for the better anyway.
+
+```css title="app/globals.css"
+@layer utilities {
+  .underlined {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    --underlined-color: currentColor;
+  }
+
+  .underlined::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 300ms ease-in-out;
+    width: 0;
+  }
+
+  .underlined:hover::after,
+  .underlined.underlined-active::after {
+    width: 100%;
+  }
+}
+```
