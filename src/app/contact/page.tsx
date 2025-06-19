@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import * as motion from 'motion/react-m'
 
 import ScrambleText from '@/components/ui/scramble-text'
 import { TRANSITION_SECTION, VARIANTS_CONTAINER, VARIANTS_SECTION } from '@/lib/animation'
