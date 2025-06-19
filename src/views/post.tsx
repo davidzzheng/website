@@ -2,7 +2,7 @@
 
 import type { Post } from 'contentlayer/generated'
 import { format } from 'date-fns'
-import { motion } from 'motion/react'
+import * as motion from 'motion/react-m'
 import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { format } from 'date-fns'
-import { motion } from 'motion/react'
+import * as motion from 'motion/react-m'
 import Link from 'next/link'
 
 import { AnimatedBackground, AnimatedBackgroundItem } from '@/components/ui/animated-background'
