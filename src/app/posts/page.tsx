@@ -19,19 +19,19 @@ import { latestPosts } from "@/lib/data"
 export default function () {
   return (
     <motion.main
-      className="space-y-20"
-      variants={VARIANTS_CONTAINER}
-      initial="hidden"
       animate="visible"
+      className="space-y-20"
+      initial="hidden"
+      variants={VARIANTS_CONTAINER}
     >
       <ScrambleText as="h1" className="mb-8 font-bold text-2xl" text="Posts" />
       <motion.section
-        variants={VARIANTS_SECTION}
         transition={{ ...TRANSITION_SECTION, delay: 0.5 }}
+        variants={VARIANTS_SECTION}
       >
         <AnimatedBackground
-          enableHover
           className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+          enableHover
           transition={{
             type: "spring",
             bounce: 0,
@@ -41,17 +41,17 @@ export default function () {
           <div className="flex flex-col space-y-4">
             {latestPosts.map((post, idx) => (
               <AnimatedBackgroundItem id={post._id} key={idx}>
-                <Link href={post.url} className="underlined font-bold text-lg">
+                <Link className="underlined font-bold text-lg" href={post.url}>
                   {post.title}
                 </Link>
                 {post.description ? (
-                  <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+                  <p className="text-zinc-600 dark:text-zinc-400">
                     {post.description}
                   </p>
                 ) : null}
                 <time
-                  dateTime={post.date}
                   className="my-1 block text-gray-600 text-xs"
+                  dateTime={post.date}
                 >
                   {format(post.date, "LLLL d, yyyy")}
                 </time>
