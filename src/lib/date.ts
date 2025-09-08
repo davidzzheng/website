@@ -1,5 +1,5 @@
-import { format } from 'date-fns'
+import { format } from "date-fns"
 
 export const formatMonthYear = (date: string) => {
-  return format(date, 'LLLL, yyyy')
+  return format(date, "LLLL, yyyy")
 }

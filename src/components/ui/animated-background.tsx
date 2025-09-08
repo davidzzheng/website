@@ -1,10 +1,17 @@
-'use client'
+"use client"
 
-import { AnimatePresence, type Transition } from 'motion/react'
-import * as motion from 'motion/react-m'
-import { createContext, type ReactNode, useContext, useEffect, useId, useState } from 'react'
+import { AnimatePresence, type Transition } from "motion/react"
+import * as motion from "motion/react-m"
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useId,
+  useState,
+} from "react"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 type AnimatedBackgroundContextType = {
   activeId: string | null
@@ -15,12 +22,15 @@ type AnimatedBackgroundContextType = {
   enableHover: boolean
 }
 
-const AnimatedBackgroundContext = createContext<AnimatedBackgroundContextType | null>(null)
+const AnimatedBackgroundContext =
+  createContext<AnimatedBackgroundContextType | null>(null)
 
 export function useAnimatedBackground() {
   const context = useContext(AnimatedBackgroundContext)
   if (!context) {
-    throw new Error('useAnimatedBackground must be used within AnimatedBackground')
+    throw new Error(
+      "useAnimatedBackground must be used within AnimatedBackground"
+    )
   }
   return context
 }
@@ -81,8 +91,19 @@ export type AnimatedBackgroundItemProps = {
   className?: string
 }
 
-export function AnimatedBackgroundItem({ id, children, className }: AnimatedBackgroundItemProps) {
-  const { activeId, setActiveId, uniqueId, className: bgClassName, transition, enableHover } = useAnimatedBackground()
+export function AnimatedBackgroundItem({
+  id,
+  children,
+  className,
+}: AnimatedBackgroundItemProps) {
+  const {
+    activeId,
+    setActiveId,
+    uniqueId,
+    className: bgClassName,
+    transition,
+    enableHover,
+  } = useAnimatedBackground()
 
   const interactionProps = enableHover
     ? {
@@ -95,17 +116,17 @@ export function AnimatedBackgroundItem({ id, children, className }: AnimatedBack
 
   return (
     <div
-      className={cn('-mx-3 relative inline-flex rounded-xl p-3', className)}
-      data-checked={activeId === id ? 'true' : 'false'}
+      className={cn("-mx-3 relative inline-flex rounded-xl p-3", className)}
+      data-checked={activeId === id ? "true" : "false"}
       {...interactionProps}
     >
       <AnimatePresence mode="wait">
         {activeId === id && (
           <motion.div
             layoutId={`background-${uniqueId}`}
-            className={cn('absolute inset-0', bgClassName)}
+            className={cn("absolute inset-0", bgClassName)}
             transition={{
-              type: 'spring',
+              type: "spring",
               bounce: 0.2,
               duration: 0.3,
               ...transition,

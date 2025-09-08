@@ -1,25 +1,25 @@
-'use client'
+"use client"
 
-import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
-import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 const THEMES_OPTIONS = [
   {
-    label: 'Light',
-    id: 'light',
+    label: "Light",
+    id: "light",
     icon: <SunIcon className="size-4" />,
   },
   {
-    label: 'Dark',
-    id: 'dark',
+    label: "Dark",
+    id: "dark",
     icon: <MoonIcon className="size-4" />,
   },
   {
-    label: 'System',
-    id: 'system',
+    label: "System",
+    id: "system",
     icon: <MonitorIcon className="size-4" />,
   },
 ]
@@ -44,10 +44,10 @@ function ThemeSwitch() {
             name="theme"
             key={theme.id}
             className={cn(
-              'inline-flex size-7 cursor-pointer items-center justify-center rounded-sm transition-colors duration-100 focus-visible:outline-2 ',
+              "inline-flex size-7 cursor-pointer items-center justify-center rounded-sm transition-colors duration-100 focus-visible:outline-2 ",
               theme.id === _theme
-                ? 'bg-zinc-100 text-zinc-950 dark:bg-zinc-700 dark:text-zinc-50'
-                : 'text-zinc-500 dark:text-zinc-400',
+                ? "bg-zinc-100 text-zinc-950 dark:bg-zinc-700 dark:text-zinc-50"
+                : "text-zinc-500 dark:text-zinc-400"
             )}
             aria-label={`Switch to ${theme.label} theme`}
             onClick={() => setTheme(theme.id)}

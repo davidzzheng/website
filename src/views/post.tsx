@@ -1,13 +1,17 @@
-'use client'
+"use client"
 
-import type { Post } from 'contentlayer/generated'
-import { format } from 'date-fns'
-import * as motion from 'motion/react-m'
-import Image from 'next/image'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import type { Post } from "contentlayer/generated"
+import { format } from "date-fns"
+import * as motion from "motion/react-m"
+import Image from "next/image"
+import { useMDXComponent } from "next-contentlayer/hooks"
 
-import ScrambleText from '@/components/ui/scramble-text'
-import { TRANSITION_SECTION, VARIANTS_CONTAINER, VARIANTS_SECTION } from '@/lib/animation'
+import ScrambleText from "@/components/ui/scramble-text"
+import {
+  TRANSITION_SECTION,
+  VARIANTS_CONTAINER,
+  VARIANTS_SECTION,
+} from "@/lib/animation"
 
 export const PostView = ({ post }: { post: Post }) => {
   const MDXContent = useMDXComponent(post.body.code)
@@ -20,9 +24,22 @@ export const PostView = ({ post }: { post: Post }) => {
       animate="visible"
     >
       <div className="flex flex-col space-y-2 text-center">
-        <ScrambleText className="mb-1 text-gray-600 text-sm" text={format(post.date, 'LLLL d, yyyy')} />
-        <ScrambleText as="h1" className="font-bold text-3xl" text={post.title} />
-        {post.description ? <ScrambleText as="p" className="text-gray-600 text-sm" text={post.description} /> : null}
+        <ScrambleText
+          className="mb-1 text-gray-600 text-sm"
+          text={format(post.date, "LLLL d, yyyy")}
+        />
+        <ScrambleText
+          as="h1"
+          className="font-bold text-3xl"
+          text={post.title}
+        />
+        {post.description ? (
+          <ScrambleText
+            as="p"
+            className="text-gray-600 text-sm"
+            text={post.description}
+          />
+        ) : null}
         {post.image ? (
           <motion.div
             variants={VARIANTS_SECTION}

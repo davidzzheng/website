@@ -9,8 +9,8 @@ export const VARIANTS_CONTAINER = {
 }
 
 export const VARIANTS_SECTION = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 }
 
 export const TRANSITION_SECTION = {

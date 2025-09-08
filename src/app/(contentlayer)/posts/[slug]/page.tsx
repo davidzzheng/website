@@ -1,17 +1,22 @@
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation"
 
-import { posts } from '@/lib/data'
-import { PostView } from '@/views/post'
+import { posts } from "@/lib/data"
+import { PostView } from "@/views/post"
+import { Metadata } from "next"
 
 type Props = {
   params: Promise<{ slug: string }>
 }
 
-export const generateStaticParams = async () => posts.map((post) => ({ slug: post._raw.flattenedPath }))
+export const generateStaticParams = async () =>
+  posts.map((post) => ({ slug: post._raw.flattenedPath }))
 
-const findPost = (slug: string) => posts.find((post) => post._raw.flattenedPath === `posts/${slug}`)
+const findPost = (slug: string) =>
+  posts.find((post) => post._raw.flattenedPath === `posts/${slug}`)
 
-export const generateMetadata = async ({ params }: Props) => {
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
   const { slug } = await params
   const post = findPost(slug)
   if (!post) notFound()

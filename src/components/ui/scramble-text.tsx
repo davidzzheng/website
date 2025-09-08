@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { type ElementType, useEffect, useRef, useState } from 'react'
+import { type ElementType, useEffect, useRef, useState } from "react"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 type ScrambleTextProps = {
   text: string
@@ -15,17 +15,18 @@ type ScrambleTextProps = {
 
 export default function ScrambleText({
   text,
-  as = 'span',
+  as = "span",
   className,
   trigger = true,
   delay = 0,
   duration = 750,
 }: ScrambleTextProps) {
-  const [displayText, setDisplayText] = useState('')
+  const [displayText, setDisplayText] = useState("")
   const [isAnimating, setIsAnimating] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout>(null)
 
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?'
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"
 
   useEffect(() => {
     if (trigger && !isAnimating) {
@@ -44,7 +45,9 @@ export default function ScrambleText({
     const startTime = Date.now()
     const totalDuration = duration
 
-    const settleTimesMs = text.split('').map(() => Math.random() * totalDuration)
+    const settleTimesMs = text
+      .split("")
+      .map(() => Math.random() * totalDuration)
 
     const animate = () => {
       const elapsed = Date.now() - startTime
@@ -57,9 +60,9 @@ export default function ScrambleText({
 
       setDisplayText(
         text
-          .split('')
+          .split("")
           .map((char, index) => {
-            if (char === ' ') return ' '
+            if (char === " ") return " "
 
             if (elapsed >= settleTimesMs[index]) {
               return text[index]
@@ -67,7 +70,7 @@ export default function ScrambleText({
 
             return characters[Math.floor(Math.random() * characters.length)]
           })
-          .join(''),
+          .join("")
       )
 
       requestAnimationFrame(animate)
@@ -78,5 +81,9 @@ export default function ScrambleText({
 
   const Component = as
 
-  return <Component className={cn('inline-block', className)}>{displayText || (trigger ? '' : text)}</Component>
+  return (
+    <Component className={cn("inline-block", className)}>
+      {displayText || (trigger ? "" : text)}
+    </Component>
+  )
 }

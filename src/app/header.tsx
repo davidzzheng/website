@@ -1,33 +1,36 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
-import ScrambleText from '@/components/ui/scramble-text'
-import { cn } from '@/lib/utils'
+import ScrambleText from "@/components/ui/scramble-text"
+import { cn } from "@/lib/utils"
 
 export const Header = () => {
   const pathname = usePathname()
   const links = [
     {
-      label: 'Work',
-      href: '/work',
+      label: "Work",
+      href: "/work",
       regex: /work/,
     },
     {
-      label: 'Posts',
-      href: '/posts',
+      label: "Posts",
+      href: "/posts",
       regex: /posts/,
     },
     {
-      label: 'Contact',
-      href: '/contact',
+      label: "Contact",
+      href: "/contact",
       regex: /contact/,
     },
   ]
   return (
     <nav className="mb-4 flex items-center justify-between">
-      <Link href="/" className={cn('underlined py-2 font-bold text-black dark:text-white')}>
+      <Link
+        href="/"
+        className={cn("underlined py-2 font-bold text-black dark:text-white")}
+      >
         <ScrambleText text="David Zheng" />
       </Link>
 
@@ -38,7 +41,10 @@ export const Header = () => {
             <Link
               key={label}
               href={href}
-              className={cn('underlined py-2 text-black dark:text-white', isActive && 'underlined-active')}
+              className={cn(
+                "underlined py-2 text-black dark:text-white",
+                isActive && "underlined-active"
+              )}
             >
               <ScrambleText text={label} delay={250 * (arr.length - i)} />
             </Link>

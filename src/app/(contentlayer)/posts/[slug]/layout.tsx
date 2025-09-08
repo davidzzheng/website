@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react"
 
-import { ScrollProgress } from '@/components/ui/scroll-progress'
+import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 export default function PostLayout({ children }: { children: ReactNode }) {
   return (
