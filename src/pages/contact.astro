@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { EMAIL, GITHUB, LINKEDIN } from "@/lib/constants";
+import Terminal from "@/components/Terminal.astro";
+---
+
+<BaseLayout title="contact">
+  <section class="section" data-section="contact">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-label">contact</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="contact-content">
+      <a href={`mailto:${EMAIL}`} class="contact-email group">
+        <span class="contact-label">let's talk</span>
+        <span class="contact-address">{EMAIL}</span>
+      </a>
+
+      <div class="contact-links">
+        <a href={GITHUB} target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">github</span>
+          <span class="contact-link-handle">@davidzzheng ↗</span>
+        </a>
+        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">linkedin</span>
+          <span class="contact-link-handle">/in/davidzzheng ↗</span>
+        </a>
+      </div>
+
+      <div style="margin-top: 48px; max-width: 560px;">
+        <Terminal />
+      </div>
+
+      <div class="contact-footer">
+        david zheng · vancouver · {new Date().getFullYear()}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

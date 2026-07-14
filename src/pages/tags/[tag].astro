@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPostsByTag, getAllTags } from "@/lib/posts";
+import { format } from "date-fns";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const tags = await getAllTags();
+  return tags.map(({ tag }) => ({
+    params: { tag },
+    props: { tag },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.props;
+const posts = await getPostsByTag(tag);
+---
+
+<BaseLayout title={`#${tag}`}>
+  <section class="section" data-section="writing">
+    <div class="section-header">
+      <a href="/tags" class="post-back" style="margin-bottom: 16px; display: inline-block;">← all tags</a>
+      <h1 class="tag-heading">#{tag}</h1>
+      <span class="tag-subtitle">{posts.length} {posts.length === 1 ? "post" : "posts"}</span>
+      <span class="section-line" style="margin-top: 32px;"></span>
+    </div>
+
+    <div class="write-list">
+      {posts.map((post, i) => {
+        const num = String(posts.length - i).padStart(2, "0");
+        const words = post.body?.trim().split(/\s+/).length ?? 0;
+        const readTime = Math.max(1, Math.round(words / 200));
+        return (
+          <a href={`/posts/${post.id.replace(/\/index$/, "")}`} class="write-entry entry">
+            <span class="write-num">{num}</span>
+            <div class="write-body">
+              <h3 class="write-title">{post.data.title}</h3>
+              <p class="write-desc">{post.data.description}</p>
+            </div>
+            <span class="write-date">
+              {format(post.data.date, "MMM yy")}<br />{readTime}m
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tag-heading {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  }
+  .tag-subtitle {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--color-text-faint); margin-top: 8px; display: block;
+  }
+  .post-back {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--color-text-faint); text-decoration: none;
+  }
+</style>

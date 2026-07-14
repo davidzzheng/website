@@ -1,0 +1,158 @@
+---
+title: Testing the Blog System
+description: "A comprehensive test of every MDX component and feature"
+date: 2026-07-14
+draft: false
+tags: ["meta", "testing"]
+---
+
+## Overview
+
+This post exercises every feature of the blog system: callouts, code groups, steps, live code execution, and component previews. If everything renders correctly here, the blog is working.
+
+## Callouts
+
+<Callout type="info" title="Did you know?">
+Astro 7 content collections support MDX components natively. No extra configuration needed — just pass them to the Content renderer.
+</Callout>
+
+<Callout type="tip">
+Use the `draft: true` frontmatter field to keep posts unpublished in production while still previewing them locally.
+</Callout>
+
+<Callout type="warning" title="Watch out">
+The `postSlug()` helper strips `/index` from folder-based post IDs. Don't use `post.id` directly in URLs.
+</Callout>
+
+<Callout type="danger">
+Never use `as any` in Preact components. Import types from `preact`, not `preact/hooks`.
+</Callout>
+
+## Code Groups
+
+When you want to show the same concept in multiple languages:
+
+<CodeGroup>
+
+```ts
+const greet = (name: string): string => `Hello, ${name}!`
+```
+
+```js
+const greet = (name) => `Hello, ${name}!`
+```
+
+</CodeGroup>
+
+## Steps
+
+<Steps>
+
+### Create the file
+
+Run the scaffold script to create a new post:
+
+```bash
+bun run scripts/new-post.ts "My Post" --tag react
+```
+
+### Write your content
+
+Open the generated `.mdx` file and start writing. Use MDX components like `<Callout>` and `<Steps>` to enrich your posts.
+
+### Publish
+
+Flip `draft: false` in the frontmatter and your post goes live on the next build.
+
+</Steps>
+
+## Live Code
+
+Click "Run" to execute the code in a sandboxed iframe:
+
+<LiveCode code={`console.log("Hello from the sandbox!")
+const numbers = [1, 2, 3, 4, 5]
+const sum = numbers.reduce((a, b) => a + b, 0)
+console.log("Sum:", sum)
+console.log("Doubled:", numbers.map(n => n * 2))`} language="js" />
+
+And with TypeScript (types are stripped at runtime):
+
+<LiveCode code={`interface User {
+  name: string
+  age: number
+}
+
+const users: User[] = [
+  { name: "Alice", age: 30 },
+  { name: "Bob", age: 25 },
+]
+
+const names = users.map(u => u.name)
+console.log("Users:", names)`} language="ts" />
+
+## Component Previews
+
+Stateful and interactive — these render live with full Preact hooks:
+
+### Counter
+
+<Preview code={`const [count, setCount] = useState(0)
+return html\`<button onClick=\${() => setCount(c => c + 1)} style=\${{ padding: '8px 20px', fontSize: '14px', fontFamily: 'var(--font-mono)', color: 'var(--color-accent)', background: 'rgba(232,165,64,0.08)', border: '1px solid rgba(232,165,64,0.3)', borderRadius: '4px', cursor: 'pointer' }}>clicked \${count} times</button>\``} />
+
+### Toggle
+
+<Preview code={`const [on, setOn] = useState(false)
+return html\`<div style=\${{ display: 'flex', alignItems: 'center', gap: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+  <span style=\${{ color: on ? 'var(--color-accent)' : 'var(--color-text-faint)' }}>\${on ? 'on' : 'off'}</span>
+  <button onClick=\${() => setOn(!on)} style=\${{ width: '44px', height: '24px', borderRadius: '12px', border: '1px solid var(--color-border)', background: on ? 'var(--color-accent)' : 'transparent', cursor: 'pointer', position: 'relative', transition: 'background 200ms' }}>
+    <span style=\${{ position: 'absolute', top: '2px', left: on ? '22px' : '2px', width: '18px', height: '18px', borderRadius: '50%', background: on ? '#000' : 'var(--color-text-faint)', transition: 'left 200ms' }} />
+  </button>
+</div>\``} />
+
+### Color palette
+
+<Preview code={`const colors = [
+  { name: 'accent', value: 'var(--color-accent)' },
+  { name: 'text', value: 'var(--color-text)' },
+  { name: 'dim', value: 'var(--color-text-dim)' },
+  { name: 'faint', value: 'var(--color-text-faint)' },
+]
+return html\`<div style=\${{ display: 'flex', gap: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>\${colors.map(c => html\`<span style=\${{ color: c.value }}>\${c.name}</span>\`)}</div>\``} />
+
+## Inline Elements
+
+Here's a paragraph with **bold text**, *italic text*, `inline code`, and a [link to the homepage](/). You can also use ~~strikethrough~~ if GFM is enabled.
+
+> This is a blockquote. It should have an accent-colored left border and italic text.
+
+## Lists
+
+Unordered list:
+
+- First item
+- Second item with `inline code`
+- Third item with **bold text**
+
+Ordered list:
+
+1. First step
+2. Second step
+3. Third step
+
+## Table
+
+| Feature | Status |
+|---------|--------|
+| Callouts | ✅ Working |
+| Code Groups | ✅ Working |
+| Steps | ✅ Working |
+| Live Code | ✅ Working |
+| Preview | ✅ Working |
+| TOC | ✅ Working |
+| Tags | ✅ Working |
+| Related Posts | ✅ Working |
+
+## Conclusion
+
+If you can see all the components above rendering correctly, the blog system is fully operational. Time to write something real.

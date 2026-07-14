@@ -1,0 +1,5 @@
+---
+import LiveCode from "./LiveCode.tsx";
+const { code, language } = Astro.props;
+---
+<LiveCode client:visible code={code} language={language} />

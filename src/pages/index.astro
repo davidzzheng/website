@@ -1,0 +1,206 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getLatestPosts, getPositions } from "@/lib/content";
+import { format } from "date-fns";
+import { EMAIL, GITHUB, LINKEDIN } from "@/lib/constants";
+
+const latestPosts = await getLatestPosts(3);
+const positions = await getPositions();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "David Zheng",
+  url: "https://davidzheng.me",
+  jobTitle: "Fullstack Developer",
+  email: `mailto:${EMAIL}`,
+  sameAs: [GITHUB, LINKEDIN],
+};
+---
+
+<BaseLayout jsonLd={jsonLd}>
+
+  {/* ═══════════════════════════════════════════
+      HERO — bold, asymmetric, massive type
+      ═══════════════════════════════════════════ */}
+  <section class="section" data-section="home" id="hero">
+    <div class="hero-content">
+      <h1 id="hero-name" class="hero-name" data-text="DAVID ZHENG">
+        DAVID ZHENG
+      </h1>
+      <div class="hero-rule"></div>
+      <div class="hero-meta">
+        <div class="hero-meta-left">
+          <span class="hero-tag">software engineer</span>
+          <span class="hero-tag">vancouver, bc</span>
+        </div>
+        <p class="hero-bio">
+          I build web apps and get way too deep into the details.
+          Sometimes I write about it.
+        </p>
+      </div>
+      <div class="hero-links hero-stagger">
+        <a href={GITHUB} target="_blank" rel="noopener noreferrer">github ↗</a>
+        <a href={`mailto:${EMAIL}`}>email ↗</a>
+        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ═══════════════════════════════════════════
+      WORK — large company names, editorial rows
+      ═══════════════════════════════════════════ */}
+  <section class="section" data-section="work">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <span class="section-label">experience</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="work-list reveal-stagger">
+      {positions.map((pos) => {
+        const startYear = new Date(pos.data.start).getFullYear();
+        const endYear = pos.data.end ? new Date(pos.data.end).getFullYear() : null;
+        const isExternal = pos.data.link && pos.data.link !== "#";
+        const Tag = isExternal ? "a" : "div";
+        return (
+          <Tag
+            {...(isExternal ? { href: pos.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
+            class="work-row entry"
+          >
+            <span class="work-year">{startYear}{endYear && endYear !== startYear ? `—${endYear}` : ""}</span>
+            <div class="work-info">
+              <h3 class="work-company">{pos.data.company}</h3>
+              <span class="work-role">{pos.data.title}</span>
+              {pos.data.description && (
+                <p class="work-desc">{pos.data.description}</p>
+              )}
+            </div>
+            {isExternal && <span class="work-arrow">↗</span>}
+          </Tag>
+        );
+      })}
+    </div>
+
+    <a href="/work" class="work-more link-hover">full history →</a>
+  </section>
+
+  {/* ═══════════════════════════════════════════
+      WRITING — editorial post entries
+      ═══════════════════════════════════════════ */}
+  {latestPosts.length > 0 && (
+    <section class="section" data-section="writing">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <span class="section-label">writing</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="write-list reveal-stagger">
+        {latestPosts.map((post, i) => {
+          const num = String(latestPosts.length - i).padStart(2, "0");
+          const words = post.body?.trim().split(/\s+/).length ?? 0;
+          const readTime = Math.max(1, Math.round(words / 200));
+          return (
+            <a href={`/posts/${post.id.replace(/\/index$/, "")}`} class="write-entry entry">
+              <span class="write-num">{num}</span>
+              <div class="write-body">
+                <h3 class="write-title">{post.data.title}</h3>
+                <p class="write-desc">{post.data.description}</p>
+              </div>
+              <span class="write-date">
+                {format(post.data.date, "MMM yy")}<br />{readTime}m
+              </span>
+            </a>
+          );
+        })}
+      </div>
+
+      <a href="/posts" class="work-more link-hover">all posts →</a>
+    </section>
+  )}
+
+  {/* ═══════════════════════════════════════════
+      CONTACT — bold, direct
+      ═══════════════════════════════════════════ */}
+  <section class="section" data-section="contact">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <span class="section-label">contact</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="contact-content reveal">
+      <a href={`mailto:${EMAIL}`} class="contact-email group">
+        <span class="contact-label">let's talk</span>
+        <span class="contact-address">{EMAIL}</span>
+      </a>
+
+      <div class="contact-links">
+        <a href={GITHUB} target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">github</span>
+          <span class="contact-link-handle">@davidzzheng ↗</span>
+        </a>
+        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">linkedin</span>
+          <span class="contact-link-handle">/in/davidzzheng ↗</span>
+        </a>
+      </div>
+
+      <div class="contact-footer">
+        david zheng · vancouver · {new Date().getFullYear()}
+      </div>
+    </div>
+  </section>
+
+<script>
+  let cleanup: (() => void) | undefined;
+  let phosphorLoaded = false;
+
+  function startPhosphor() {
+    // Only run on homepage
+    if (window.location.pathname !== "/") {
+      cleanup?.();
+      cleanup = undefined;
+      phosphorLoaded = false;
+      return;
+    }
+
+    cleanup?.();
+    cleanup = undefined;
+    phosphorLoaded = false;
+
+    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+
+    // Hover over work rows → morph particles into company name
+    document.querySelectorAll<HTMLElement>("[data-section='work'] .work-row").forEach((item) => {
+      const company = item.querySelector(".work-company")?.textContent || "";
+      item.addEventListener("mouseenter", () => {
+        window.dispatchEvent(new CustomEvent("particle-hover", { detail: company }));
+      });
+      item.addEventListener("mouseleave", () => {
+        window.dispatchEvent(new CustomEvent("particle-hover", { detail: null }));
+      });
+    });
+
+    // Lazy-load Three.js particle system after idle
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !canvas) return;
+
+    const load = () => {
+      if (phosphorLoaded || !canvas) return;
+      phosphorLoaded = true;
+      import("@/lib/phosphor").then(({ initFlowField }) => {
+        cleanup = initFlowField(canvas) || undefined;
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(load);
+    } else {
+      setTimeout(load, 200);
+    }
+  }
+  document.addEventListener("astro:page-load", startPhosphor);
+</script>
+</BaseLayout>

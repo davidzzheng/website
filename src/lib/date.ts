@@ -1,5 +1,3 @@
 import { format } from "date-fns"
 
-export const formatMonthYear = (date: string) => {
-  return format(date, "LLLL, yyyy")
-}
+export const formatMonthYear = (date: string) => format(date, "LLLL, yyyy")

@@ -1,0 +1,180 @@
+---
+import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description = "Software engineer in Vancouver. I build web apps and get way too deep into the details.",
+  ogImage = "/og/default.png",
+  jsonLd,
+} = Astro.props;
+const siteTitle = title ? `${title} · david zheng` : "david zheng — software engineer";
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site).toString();
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
+const ogType = path.startsWith("/posts/") ? "article" : "website";
+const ogTitle = title || "david zheng";
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="david zheng" href={new URL("/rss.xml", Astro.site).toString()} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="david zheng" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <ClientRouter />
+  </head>
+  <body>
+    {/* Particle canvas — hero accent only */}
+    <canvas id="hero-canvas" style="position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;"></canvas>
+
+    {/* Nav — clean floating text, no background */}
+    <nav class="nav" id="nav" transition:persist>
+      <a href="/" class="nav-name">david zheng</a>
+      <div class="nav-links" id="nav-links"></div>
+    </nav>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <main transition:animate="fade">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <script>
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { ScrollSmoother } from "gsap/ScrollSmoother";
+      import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+      import { initAnimations } from "@/lib/animations";
+
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
+
+      let smoother: ScrollSmoother | undefined;
+
+      function initScroll() {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+        smoother?.kill();
+        smoother = undefined;
+
+        const sections = document.querySelectorAll("section[data-section]");
+
+        // Only use ScrollSmoother on multi-section pages (homepage)
+        // Single-section pages (posts) need native scroll for sticky TOC support
+        if (sections.length > 1) {
+          smoother = ScrollSmoother.create({
+            smooth: 0.8,
+            effects: true,
+          });
+        }
+
+
+        const container = document.getElementById("nav-links");
+
+        // Build nav text links (skip "home")
+        if (container) {
+          container.innerHTML = "";
+          sections.forEach((sec, i) => {
+            if (i === 0) return;
+            const label = sec.getAttribute("data-section") || `sec-${i}`;
+            const link = document.createElement("a");
+            link.href = "#";
+            link.className = "nav-link";
+            link.textContent = label;
+            link.dataset.idx = String(i);
+            link.addEventListener("click", (e) => {
+              e.preventDefault();
+              gsap.to(window, { scrollTo: { y: sec, autoKill: false }, duration: 1, ease: "power3.inOut" });
+            });
+            container.appendChild(link);
+          });
+        }
+
+        const links = container?.querySelectorAll(".nav-link");
+
+        // Track active section + crossfade transitions (multi-section pages only)
+        if (sections.length > 1) {
+          sections.forEach((sec, i) => {
+            ScrollTrigger.create({
+              trigger: sec,
+              start: "top 50%",
+              end: "bottom 50%",
+              onToggle: (self) => {
+                if (self.isActive) {
+                  links?.forEach((l) => l.classList.remove("active"));
+                  const activeLink = container?.querySelector(`[data-idx="${i}"]`);
+                  if (activeLink) activeLink.classList.add("active");
+                }
+              },
+            });
+            // Crossfade: section dims + scales slightly as it enters/leaves viewport
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: sec,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
+              },
+            })
+            .fromTo(sec,
+              { autoAlpha: 0.4, scale: 0.97 },
+              { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power1.inOut" }
+            )
+            .to(sec,
+              { autoAlpha: 0.4, scale: 0.97, duration: 0.5, ease: "power1.inOut" }
+            );
+          });
+        }
+
+
+        // ── Scroll reveal for homepage sections ──
+        document.querySelectorAll(".reveal, .reveal-stagger, .section-header").forEach((el) => {
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                  obs.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -10% 0px" }
+          );
+          obs.observe(el);
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      document.addEventListener("astro:page-load", () => {
+        initScroll();
+        initAnimations();
+      });
+    </script>
+  </body>
+</html>

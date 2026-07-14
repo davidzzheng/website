@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPublishedPosts } from "@/lib/content";
+import { format } from "date-fns";
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="writing">
+  <section class="section" data-section="writing">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-label">writing</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="write-list">
+      {posts.map((post, i) => {
+        const num = String(posts.length - i).padStart(2, "0");
+        const words = post.body?.trim().split(/\s+/).length ?? 0;
+        const readTime = Math.max(1, Math.round(words / 200));
+        return (
+          <a href={`/posts/${post.id.replace(/\/index$/, "")}`} class="write-entry entry">
+            <span class="write-num">{num}</span>
+            <div class="write-body">
+              <h3 class="write-title">{post.data.title}</h3>
+              <p class="write-desc">{post.data.description}</p>
+            </div>
+            <span class="write-date">
+              {format(post.data.date, "MMM yy")}<br />{readTime}m
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

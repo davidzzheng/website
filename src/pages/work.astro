@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPositions } from "@/lib/content";
+
+const positions = await getPositions();
+---
+
+<BaseLayout title="work">
+  <section class="section" data-section="work">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-label">experience</span>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="work-list">
+      {positions.map((pos) => {
+        const startYear = new Date(pos.data.start).getFullYear();
+        const endYear = pos.data.end ? new Date(pos.data.end).getFullYear() : null;
+        const isExternal = pos.data.link && pos.data.link !== "#";
+        const Tag = isExternal ? "a" : "div";
+        return (
+          <Tag
+            {...(isExternal ? { href: pos.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
+            class="work-row entry"
+          >
+            <span class="work-year">{startYear}{endYear && endYear !== startYear ? `—${endYear}` : ""}</span>
+            <div class="work-info">
+              <h3 class="work-company">{pos.data.company}</h3>
+              <span class="work-role">{pos.data.title}</span>
+            </div>
+            {isExternal && <span class="work-arrow">↗</span>}
+          </Tag>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

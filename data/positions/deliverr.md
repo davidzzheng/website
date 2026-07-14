@@ -1,10 +1,8 @@
 ---
-company: Shopify Logistics (FKA Deliverr)
-logo: /logos/shopify.jpeg
+company: Shopify Logistics
 title: Software Engineer
-start: 2021-04-21
-end: 2022-10-01
-link: https://deliverr.com
-
+start: 2021-04-01
+end: 2022-10-31
+link: https://shopify.com
 type: Position
 ---
