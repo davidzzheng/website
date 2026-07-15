@@ -1,6 +1,7 @@
 import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
 import preact from "@astrojs/preact"
+import react from "@astrojs/react"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import rehypePrettyCode from "rehype-pretty-code"
@@ -12,10 +13,9 @@ const prettyCodeOptions = {
   keepBackground: false,
 }
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://davidzheng.me",
-  integrations: [preact(), mdx(), sitemap()],
+  integrations: [preact(), react(), mdx(), sitemap()],
   markdown: {
     processor: unified({
       rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],

@@ -1,8 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 
-gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -13,6 +12,7 @@ export function initAnimations() {
   initHero();
   initMagneticLinks();
   initEntryAnimations();
+  initTimeline();
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -30,19 +30,27 @@ function initHero() {
     return;
   }
 
-  // Scramble the name
-  if (heroName) {
-    const target = heroName.dataset.text || heroName.textContent || "";
-    const textSpan = document.createElement("span");
-    textSpan.textContent = target;
-    heroName.innerHTML = "";
-    heroName.appendChild(textSpan);
-
-    gsap.to(textSpan, {
-      duration: 1.2,
-      scrambleText: { text: target, chars: "#@%&*+?<>01", speed: 0.6 },
-      ease: "none",
-      delay: 0.2,
+  // Scramble the name — dynamically load plugin only when needed
+  if (heroName && window.location.pathname === "/") {
+    import("gsap/ScrambleTextPlugin").then(({ ScrambleTextPlugin }) => {
+      gsap.registerPlugin(ScrambleTextPlugin);
+      const target = heroName.dataset.text || heroName.textContent || "";
+      const textSpan = document.createElement("span");
+      textSpan.textContent = target;
+      heroName.innerHTML = "";
+      heroName.appendChild(textSpan);
+      gsap.to(textSpan, {
+        duration: 1.2,
+        scrambleText: { text: target, chars: "#@%&*+?<>01", speed: 0.6 },
+        ease: "none",
+        delay: 0.2,
+        onComplete: () => {
+          // Split into per-character spans for continuous floating animation
+          heroName.innerHTML = target.split("").map((c, i) =>
+            `<span style="animation-delay:${i * 0.08}s">${c === " " ? "&nbsp;" : c}</span>`
+          ).join("");
+        },
+      });
     });
   }
 
@@ -132,15 +140,34 @@ function initEntryAnimations() {
     entry.addEventListener("mouseleave", () => xTo(0));
   });
 }
-
 /* ═══════════════════════════════════════════════════════════════
-   TIMELINE — force visible (channel-flip model, no scroll reveals)
+   TIMELINE — GSAP scroll-triggered line draw + card reveals
    ═══════════════════════════════════════════════════════════════ */
 function initTimeline() {
-  const timeline = document.getElementById("timeline");
-  if (!timeline) return;
-  timeline.querySelectorAll("[data-timeline-item]").forEach((item) => {
-    item.classList.add("visible");
-    gsap.set(item.querySelectorAll(".timeline-content"), { opacity: 1, x: 0 });
+  const line = document.getElementById("timeline-line");
+  const items = document.querySelectorAll<HTMLElement>(".timeline-item");
+  if (items.length === 0) return;
+
+  if (reduceMotion) {
+    if (line) line.style.transform = "scaleY(1)";
+    return;
+  }
+
+  // Line draws downward tied to scroll progress
+  if (line) {
+    gsap.fromTo(line,
+      { scaleY: 0 },
+      { scaleY: 1, ease: "none",
+        scrollTrigger: { trigger: "#timeline", start: "top 75%", end: "bottom 70%", scrub: 0.5 }
+      }
+    );
+  }
+
+  // Cards slide in as they enter viewport
+  items.forEach((item) => {
+    gsap.from(item, {
+      x: -20, opacity: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: item, start: "top 85%" },
+    });
   });
 }

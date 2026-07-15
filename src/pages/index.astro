@@ -5,8 +5,50 @@ import { format } from "date-fns";
 import { EMAIL, GITHUB, LINKEDIN } from "@/lib/constants";
 
 const latestPosts = await getLatestPosts(3);
-const positions = await getPositions();
+const workPositions = await getPositions("work");
+const communityPositions = await getPositions("community");
 
+type TimelineItem = {
+  name: string;
+  role: string;
+  sortYear: number;
+  dateLabel: string;
+  isCurrent: boolean;
+  isExternal: boolean;
+  link?: string;
+  kind: "work" | "community";
+};
+
+const timeline: TimelineItem[] = [
+  ...workPositions.map((p) => {
+    const start = new Date(p.data.start).getFullYear();
+    const end = p.data.end ? new Date(p.data.end).getFullYear() : null;
+    return {
+      name: p.data.company,
+      role: p.data.title,
+      sortYear: start,
+      dateLabel: `${start}${end ? `—${end}` : "—present"}`,
+      isCurrent: !p.data.end,
+      isExternal: p.data.link && p.data.link !== "#",
+      link: p.data.link !== "#" ? p.data.link : undefined,
+      kind: "work" as const,
+    };
+  }),
+  ...communityPositions.map((p) => {
+    const start = new Date(p.data.start).getFullYear();
+    const end = p.data.end ? new Date(p.data.end).getFullYear() : null;
+    return {
+      name: p.data.company,
+      role: p.data.title,
+      sortYear: start,
+      dateLabel: `${start}${end ? `—${end}` : "—present"}`,
+      isCurrent: !p.data.end,
+      isExternal: p.data.link && p.data.link !== "#",
+      link: p.data.link !== "#" ? p.data.link : undefined,
+      kind: "community" as const,
+    };
+  }),
+].sort((a, b) => b.sortYear - a.sortYear);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -28,58 +70,43 @@ const jsonLd = {
       <h1 id="hero-name" class="hero-name" data-text="DAVID ZHENG">
         DAVID ZHENG
       </h1>
-      <div class="hero-rule"></div>
-      <div class="hero-meta">
-        <div class="hero-meta-left">
-          <span class="hero-tag">software engineer</span>
-          <span class="hero-tag">vancouver, bc</span>
+      <div class="hero-sub">
+        <span class="hero-tag">software engineer · vancouver</span>
+        <div class="hero-links">
+          <a href={GITHUB} target="_blank" rel="noopener noreferrer">github ↗</a>
+          <a href={`mailto:${EMAIL}`}>email ↗</a>
+          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">linkedin ↗</a>
         </div>
-        <p class="hero-bio">
-          I build web apps and get way too deep into the details.
-          Sometimes I write about it.
-        </p>
-      </div>
-      <div class="hero-links hero-stagger">
-        <a href={GITHUB} target="_blank" rel="noopener noreferrer">github ↗</a>
-        <a href={`mailto:${EMAIL}`}>email ↗</a>
-        <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">linkedin ↗</a>
       </div>
     </div>
   </section>
 
   {/* ═══════════════════════════════════════════
-      WORK — large company names, editorial rows
+      WORK — unified timeline
       ═══════════════════════════════════════════ */}
   <section class="section" data-section="work">
-    <div class="section-header reveal">
+    <div class="section-header">
       <span class="section-num">01</span>
-      <span class="section-label">experience</span>
+      <span class="section-label">work</span>
       <span class="section-line"></span>
     </div>
 
-    <div class="work-list reveal-stagger">
-      {positions.map((pos) => {
-        const startYear = new Date(pos.data.start).getFullYear();
-        const endYear = pos.data.end ? new Date(pos.data.end).getFullYear() : null;
-        const isExternal = pos.data.link && pos.data.link !== "#";
-        const Tag = isExternal ? "a" : "div";
-        return (
-          <Tag
-            {...(isExternal ? { href: pos.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
-            class="work-row entry"
-          >
-            <span class="work-year">{startYear}{endYear && endYear !== startYear ? `—${endYear}` : ""}</span>
-            <div class="work-info">
-              <h3 class="work-company">{pos.data.company}</h3>
-              <span class="work-role">{pos.data.title}</span>
-              {pos.data.description && (
-                <p class="work-desc">{pos.data.description}</p>
-              )}
-            </div>
-            {isExternal && <span class="work-arrow">↗</span>}
-          </Tag>
-        );
-      })}
+    <div class="tl">
+      {timeline.map((item) => (
+        <a
+          {...(item.isExternal && item.link ? { href: item.link, target: "_blank", rel: "noopener noreferrer" } : {})}
+          class={`tl-row entry ${item.isCurrent ? "tl-current" : ""} tl-${item.kind}`}
+          data-company={item.name}
+        >
+          <span class={`tl-dot ${item.isCurrent ? "tl-dot-on" : ""} tl-dot-${item.kind}`}></span>
+          <div class="tl-body">
+            <span class="tl-company">{item.name}</span>
+            <span class="tl-role">{item.role}</span>
+          </div>
+          <span class="tl-date">{item.dateLabel}</span>
+          {item.isExternal && <span class="tl-arrow">↗</span>}
+        </a>
+      ))}
     </div>
 
     <a href="/work" class="work-more link-hover">full history →</a>
@@ -107,9 +134,16 @@ const jsonLd = {
               <div class="write-body">
                 <h3 class="write-title">{post.data.title}</h3>
                 <p class="write-desc">{post.data.description}</p>
+                {post.data.tags.length > 0 && (
+                  <div class="write-tags">
+                    {post.data.tags.map((tag) => (
+                      <span class="write-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
               </div>
               <span class="write-date">
-                {format(post.data.date, "MMM yy")}<br />{readTime}m
+                {format(post.data.date, "MMM yyyy")} · {readTime}m
               </span>
             </a>
           );
@@ -155,41 +189,51 @@ const jsonLd = {
 
 <script>
   let cleanup: (() => void) | undefined;
-  let phosphorLoaded = false;
+  let loaded = false;
 
-  function startPhosphor() {
-    // Only run on homepage
+  function startBackground() {
     if (window.location.pathname !== "/") {
       cleanup?.();
       cleanup = undefined;
-      phosphorLoaded = false;
+      loaded = false;
       return;
     }
 
     cleanup?.();
     cleanup = undefined;
-    phosphorLoaded = false;
+    loaded = false;
 
-    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+    // Mouse parallax — hero drifts opposite to particles (depth)
+    const heroContent = document.getElementById("hero-content");
+    if (heroContent) {
+      document.addEventListener("mousemove", (e) => {
+        const nx = e.clientX / window.innerWidth - 0.5;
+        const ny = e.clientY / window.innerHeight - 0.5;
+        heroContent.style.left = `${nx * -16}px`;
+        heroContent.style.top = `${ny * -10}px`;
+      }, { passive: true });
+    }
 
-    // Hover over work rows → morph particles into company name
-    document.querySelectorAll<HTMLElement>("[data-section='work'] .work-row").forEach((item) => {
-      const company = item.querySelector(".work-company")?.textContent || "";
-      item.addEventListener("mouseenter", () => {
+    // Hover experience entries → morph particles into company name
+    document.querySelectorAll<HTMLElement>("[data-section='work'] [data-company]").forEach((el) => {
+      const company = el.dataset.company || "";
+      el.addEventListener("mouseenter", () => {
         window.dispatchEvent(new CustomEvent("particle-hover", { detail: company }));
       });
-      item.addEventListener("mouseleave", () => {
+      el.addEventListener("mouseleave", () => {
         window.dispatchEvent(new CustomEvent("particle-hover", { detail: null }));
       });
     });
 
-    // Lazy-load Three.js particle system after idle
+    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+    if (!canvas) return;
+
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion || !canvas) return;
+    if (reduceMotion) return;
 
     const load = () => {
-      if (phosphorLoaded || !canvas) return;
-      phosphorLoaded = true;
+      if (loaded || !canvas) return;
+      loaded = true;
       import("@/lib/phosphor").then(({ initFlowField }) => {
         cleanup = initFlowField(canvas) || undefined;
       });
@@ -201,6 +245,6 @@ const jsonLd = {
       setTimeout(load, 200);
     }
   }
-  document.addEventListener("astro:page-load", startPhosphor);
+  document.addEventListener("astro:page-load", startBackground);
 </script>
 </BaseLayout>

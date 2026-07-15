@@ -269,7 +269,7 @@ const articleLd = {
     .post-article { max-width: 100%; }
   }
 
-  /* ── Article entrance — staggered fade-up on load ── */
+  /* ── Article entrance — staggered fade-up ── */
   @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   .post-back { animation: fade-up 500ms cubic-bezier(0.16,1,0.3,1) 0ms backwards; }
   .post-meta { animation: fade-up 500ms cubic-bezier(0.16,1,0.3,1) 60ms backwards; }
@@ -300,127 +300,140 @@ const articleLd = {
 </style>
 
 <script>
-  // ── Reading progress bar ──
-  const bar = document.getElementById("progress-bar");
-  const article = document.querySelector(".post-article");
-  function updateProgress() {
-    if (!bar || !article) return;
-    const rect = article.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const total = rect.height - window.innerHeight;
-    bar.style.width = `${Math.max(0, Math.min(1, scrolled / total)) * 100}%`;
-  }
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
+  // Re-init everything on each navigation (view transitions don't re-run module scripts)
+  let cleanup: (() => void) | undefined;
 
-  // ── TOC active heading tracking ──
-  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
-  const headings = tocLinks.length > 0
-    ? Array.from(tocLinks).map((link) => document.getElementById(link.dataset.target ?? ""))
-    : [];
-  if (headings.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            tocLinks.forEach((link) => link.classList.remove("active"));
-            document.querySelector(`.toc-link[data-target="${entry.target.id}"]`)?.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-80px 0px -70% 0px" }
-    );
-    headings.forEach((h) => h && observer.observe(h));
-  }
+  function initPostPage() {
+    cleanup?.();
 
-  // ── Code blocks — window chrome with dots + language + copy ──
-  document.querySelectorAll(".post-content pre").forEach((pre) => {
-    if (pre.parentElement?.classList.contains("code-block")) return;
-    if (pre.closest("astro-island")) return;
-
-    const code = pre.querySelector("code");
-    const lang = code?.className?.match(/language-(\w+)/)?.[1] || "text";
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "code-block";
-
-    const barEl = document.createElement("div");
-    barEl.className = "code-block-bar";
-    barEl.innerHTML = `<div class="code-block-dots"><span></span><span></span><span></span></div><span class="code-block-lang">${lang}</span><button class="code-block-copy">copy</button>`;
-
-    pre.parentNode!.insertBefore(wrapper, pre);
-    wrapper.appendChild(barEl);
-    wrapper.appendChild(pre);
-
-    const copyBtn = barEl.querySelector(".code-block-copy")!;
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(code?.textContent ?? "");
-      copyBtn.textContent = "✓";
-      setTimeout(() => (copyBtn.textContent = "copy"), 2000);
+    // ── Force-replay entrance animations ──
+    document.querySelectorAll<HTMLElement>(".post-back, .post-meta, .post-title, .post-desc, .post-tags").forEach((el) => {
+      el.style.animation = "none";
+      void el.offsetHeight;
+      el.style.animation = "";
     });
-  });
 
-  // ── Heading anchors — click to copy link ──
-  document.querySelectorAll(".post-content h2[id], .post-content h3[id]").forEach((heading) => {
-    const h = heading as HTMLElement;
-    const id = h.id;
-    if (!id) return;
-
-    const anchor = document.createElement("a");
-    anchor.className = "heading-anchor";
-    anchor.href = `#${id}`;
-    anchor.textContent = "#";
-    h.appendChild(anchor);
-
-    h.addEventListener("click", (e) => {
-      if (window.getSelection()?.toString()) return;
-      e.preventDefault();
-      navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${id}`);
-      anchor.textContent = "copied!";
-      anchor.style.fontSize = "0.65em";
-      setTimeout(() => { anchor.textContent = "#"; anchor.style.fontSize = ""; }, 1500);
-      history.replaceState(null, "", `#${id}`);
-    });
-  });
-  // ── Scroll-triggered entrance animations ──
-  const animObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          animObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: "0px 0px -8% 0px" }
-  );
-  document.querySelectorAll(".post-content > *").forEach((el) => animObserver.observe(el));
-
-  // ── Image zoom ──
-  const zoomOverlay = document.getElementById("image-zoom-overlay");
-  document.querySelectorAll(".post-content img").forEach((img) => {
-    img.addEventListener("click", () => {
-      if (!zoomOverlay) return;
-      zoomOverlay.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
-      zoomOverlay.classList.add("show");
-    });
-  });
-  zoomOverlay?.addEventListener("click", () => zoomOverlay.classList.remove("show"));
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") zoomOverlay?.classList.remove("show");
-  });
-
-  // ── Back to top ──
-  const backBtn = document.getElementById("back-to-top");
-  window.addEventListener("scroll", () => {
-    if (!backBtn) return;
-    if (window.scrollY > window.innerHeight * 0.8) {
-      backBtn.classList.add("show");
-    } else {
-      backBtn.classList.remove("show");
+    // ── Reading progress bar ──
+    const bar = document.getElementById("progress-bar");
+    const article = document.querySelector(".post-article");
+    function updateProgress() {
+      if (!bar || !article) return;
+      const rect = article.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const total = rect.height - window.innerHeight;
+      bar.style.width = `${Math.max(0, Math.min(1, scrolled / total)) * 100}%`;
     }
-  }, { passive: true });
-  backBtn?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    // ── TOC active heading tracking ──
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+    const headings = tocLinks.length > 0
+      ? Array.from(tocLinks).map((link) => document.getElementById(link.dataset.target ?? ""))
+      : [];
+    if (headings.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach((link) => link.classList.remove("active"));
+              document.querySelector(`.toc-link[data-target="${entry.target.id}"]`)?.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-80px 0px -70% 0px" }
+      );
+      headings.forEach((h) => h && observer.observe(h));
+    }
+
+    // ── Code blocks — window chrome with dots + language + copy ──
+    document.querySelectorAll(".post-content pre").forEach((pre) => {
+      if (pre.parentElement?.classList.contains("code-block")) return;
+      if (pre.closest("astro-island")) return;
+
+      const code = pre.querySelector("code");
+      const lang = code?.className?.match(/language-(\w+)/)?.[1] || "text";
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+
+      const barEl = document.createElement("div");
+      barEl.className = "code-block-bar";
+      barEl.innerHTML = `<div class="code-block-dots"><span></span><span></span><span></span></div><span class="code-block-lang">${lang}</span><button class="code-block-copy">copy</button>`;
+
+      pre.parentNode!.insertBefore(wrapper, pre);
+      wrapper.appendChild(barEl);
+      wrapper.appendChild(pre);
+
+      const copyBtn = barEl.querySelector(".code-block-copy")!;
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(code?.textContent ?? "");
+        copyBtn.textContent = "✓";
+        setTimeout(() => (copyBtn.textContent = "copy"), 2000);
+      });
+    });
+
+    // ── Heading anchors — click to copy link ──
+    document.querySelectorAll(".post-content h2[id], .post-content h3[id]").forEach((heading) => {
+      const h = heading as HTMLElement;
+      const id = h.id;
+      if (!id) return;
+
+      const anchor = document.createElement("a");
+      anchor.className = "heading-anchor";
+      anchor.href = `#${id}`;
+      anchor.textContent = "#";
+      h.appendChild(anchor);
+
+      h.addEventListener("click", (e) => {
+        if (window.getSelection()?.toString()) return;
+        e.preventDefault();
+        navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${id}`);
+        anchor.textContent = "copied!";
+        anchor.style.fontSize = "0.65em";
+        setTimeout(() => { anchor.textContent = "#"; anchor.style.fontSize = ""; }, 1500);
+        history.replaceState(null, "", `#${id}`);
+      });
+    });
+
+    // ── Image zoom ──
+    const zoomOverlay = document.getElementById("image-zoom-overlay");
+    document.querySelectorAll(".post-content img").forEach((img) => {
+      img.addEventListener("click", () => {
+        if (!zoomOverlay) return;
+        zoomOverlay.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
+        zoomOverlay.classList.add("show");
+      });
+    });
+    zoomOverlay?.addEventListener("click", () => zoomOverlay.classList.remove("show"));
+
+    // ── Back to top ──
+    const backBtn = document.getElementById("back-to-top");
+    function handleScroll() {
+      if (!backBtn) return;
+      if (window.scrollY > window.innerHeight * 0.8) {
+        backBtn.classList.add("show");
+      } else {
+        backBtn.classList.remove("show");
+      }
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    backBtn?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    cleanup = () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }
+
+  document.addEventListener("astro:page-load", initPostPage);
+  document.addEventListener("astro:before-swap", () => cleanup?.());
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.getElementById("image-zoom-overlay")?.classList.remove("show");
+    }
   });
 </script>

@@ -17,6 +17,7 @@ export default Alchemy.Stack(
       compatibility: {
         flags: ["nodejs_compat"],
       },
+      domain: "davidzheng.me",
       outdir: "dist",
     })
 

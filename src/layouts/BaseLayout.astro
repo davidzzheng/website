@@ -49,33 +49,29 @@ const ogTitle = title || "david zheng";
     <ClientRouter />
   </head>
   <body>
-    {/* Particle canvas — hero accent only */}
-    <canvas id="hero-canvas" style="position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;"></canvas>
+    <canvas id="hero-canvas" class="hero-canvas"></canvas>
 
-    {/* Nav — clean floating text, no background */}
     <nav class="nav" id="nav" transition:persist>
-      <a href="/" class="nav-name">david zheng</a>
+      <a href="/" class="nav-name">david zheng<span class="accent">.</span></a>
       <div class="nav-links" id="nav-links"></div>
     </nav>
 
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <main transition:animate="fade">
-          <slot />
-        </main>
-      </div>
-    </div>
+    <main>
+      <slot />
+    </main>
+
+    <div class="crt-scanlines"></div>
+    <div class="crt-vignette"></div>
 
     <script>
       import gsap from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
-      import { ScrollSmoother } from "gsap/ScrollSmoother";
-      import { ScrollToPlugin } from "gsap/ScrollToPlugin";
       import { initAnimations } from "@/lib/animations";
 
-      gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
+      gsap.registerPlugin(ScrollTrigger);
 
-      let smoother: ScrollSmoother | undefined;
+      let smoother: any;
+
 
       function initScroll() {
         ScrollTrigger.getAll().forEach((t) => t.kill());
@@ -84,14 +80,8 @@ const ogTitle = title || "david zheng";
 
         const sections = document.querySelectorAll("section[data-section]");
 
-        // Only use ScrollSmoother on multi-section pages (homepage)
-        // Single-section pages (posts) need native scroll for sticky TOC support
-        if (sections.length > 1) {
-          smoother = ScrollSmoother.create({
-            smooth: 0.8,
-            effects: true,
-          });
-        }
+        // Single-section pages (posts) use native scroll for sticky TOC
+
 
 
         const container = document.getElementById("nav-links");
@@ -109,7 +99,7 @@ const ogTitle = title || "david zheng";
             link.dataset.idx = String(i);
             link.addEventListener("click", (e) => {
               e.preventDefault();
-              gsap.to(window, { scrollTo: { y: sec, autoKill: false }, duration: 1, ease: "power3.inOut" });
+              sec.scrollIntoView({ behavior: "smooth" });
             });
             container.appendChild(link);
           });
@@ -132,22 +122,7 @@ const ogTitle = title || "david zheng";
                 }
               },
             });
-            // Crossfade: section dims + scales slightly as it enters/leaves viewport
-            gsap.timeline({
-              scrollTrigger: {
-                trigger: sec,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.5,
-              },
-            })
-            .fromTo(sec,
-              { autoAlpha: 0.4, scale: 0.97 },
-              { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power1.inOut" }
-            )
-            .to(sec,
-              { autoAlpha: 0.4, scale: 0.97, duration: 0.5, ease: "power1.inOut" }
-            );
+            // (crossfade removed — scroll-reveal handles transitions)
           });
         }
 
@@ -168,13 +143,23 @@ const ogTitle = title || "david zheng";
           obs.observe(el);
         });
 
-        ScrollTrigger.refresh();
+
+      // ── Logo hover → morph particles into "DAVID ZHENG" text ──
+      document.querySelector(".nav-name")?.addEventListener("mouseenter", () => {
+        window.dispatchEvent(new CustomEvent("particle-hover", { detail: "__text__:DAVID ZHENG" }));
+      });
+      document.querySelector(".nav-name")?.addEventListener("mouseleave", () => {
+        window.dispatchEvent(new CustomEvent("particle-hover", { detail: null }));
+      });
       }
 
       document.addEventListener("astro:page-load", () => {
-        initScroll();
         initAnimations();
+        initScroll();
       });
+
+
     </script>
+
   </body>
 </html>

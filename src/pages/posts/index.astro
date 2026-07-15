@@ -14,6 +14,8 @@ const posts = await getPublishedPosts();
       <span class="section-line"></span>
     </div>
 
+    <h1 class="page-title">things i wrote</h1>
+    <p class="page-intro">deep dives, rabbit holes, and the occasional rant. {posts.length} posts and counting.</p>
     <div class="write-list">
       {posts.map((post, i) => {
         const num = String(posts.length - i).padStart(2, "0");

@@ -1,8 +1,9 @@
 ---
+import { getPositions, getProjects } from "@/lib/content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getPositions } from "@/lib/content";
 
 const positions = await getPositions();
+const projects = await getProjects();
 ---
 
 <BaseLayout title="work">
@@ -13,6 +14,8 @@ const positions = await getPositions();
       <span class="section-line"></span>
     </div>
 
+    <h1 class="page-title">where i've worked</h1>
+    <p class="page-intro">{positions.length} roles across startups and enterprise. mostly building things that ship.</p>
     <div class="work-list">
       {positions.map((pos) => {
         const startYear = new Date(pos.data.start).getFullYear();
@@ -33,6 +36,29 @@ const positions = await getPositions();
           </Tag>
         );
       })}
+    </div>
+
+    <div class="proj-section">
+      <div class="sub-label">projects</div>
+      <div class="work-list">
+        {projects.map((proj) => {
+          const isExternal = proj.data.link && proj.data.link !== "#";
+          const Tag = isExternal ? "a" : "div";
+          return (
+            <Tag
+              {...(isExternal ? { href: proj.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
+              class="work-row entry"
+            >
+              <span class="work-year">{proj.data.year}</span>
+              <div class="work-info">
+                <h3 class="work-company">{proj.data.title}</h3>
+                <span class="work-role">{proj.data.description}</span>
+              </div>
+              {isExternal && <span class="work-arrow">↗</span>}
+            </Tag>
+          );
+        })}
+      </div>
     </div>
   </section>
 </BaseLayout>
