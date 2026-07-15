@@ -44,6 +44,3 @@ data/
   posts/       — blog posts (mdx)
 ```
 
-## license
-
-mit
