@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const items = (await getCollection("board")).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout title="board">
+  <section class="section" data-section="board">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-label">board</span>
+      <span class="section-line"></span>
+    </div>
+
+    <h1 class="page-title">inspiration board</h1>
+    <p class="page-intro">things i've found and loved across the web. design, motion, type, whatever sticks.</p>
+
+    <div class="board-grid">
+      {items.map(async (item) => {
+        const { Content } = await render(item);
+        const hasBody = item.body?.trim().length > 0;
+        return (
+          <div class="board-card" data-type={item.data.type}>
+            {item.data.type === "video" && item.data.embed && (
+              <div class="board-media board-embed">
+                <iframe src={item.data.embed} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+              </div>
+            )}
+            {item.data.type === "gif" && item.data.media && (
+              <a href={item.data.url || "#"} target="_blank" rel="noopener noreferrer" class="board-media">
+                <img src={item.data.media} alt={item.data.title} loading="lazy" />
+              </a>
+            )}
+            {item.data.type === "image" && item.data.media && (
+              <a href={item.data.url || item.data.media} target="_blank" rel="noopener noreferrer" class="board-media">
+                <img src={item.data.media} alt={item.data.title} loading="lazy" />
+              </a>
+            )}
+            {item.data.type === "website" && (
+              <a href={item.data.url || "#"} target="_blank" rel="noopener noreferrer" class="board-media board-website">
+                <span class="board-site-icon">↗</span>
+                <span class="board-site-url">{item.data.source || item.data.url}</span>
+              </a>
+            )}
+            <div class="board-info">
+              <div class="board-title-row">
+                <span class="board-title">{item.data.title}</span>
+                <span class="board-type">{item.data.type}</span>
+              </div>
+              {hasBody && <div class="board-desc"><Content /></div>}
+              {item.data.tags.length > 0 && (
+                <div class="board-tags">
+                  {item.data.tags.map((t) => <span class="proj-tag">{t}</span>)}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

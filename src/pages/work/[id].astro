@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const positions = await getCollection("positions");
+  return positions.map((pos) => ({
+    params: { id: pos.id },
+    props: { pos },
+  }));
+}
+
+const { pos } = Astro.props;
+const { Content } = await render(pos);
+const startYear = new Date(pos.data.start).getFullYear();
+const endYear = pos.data.end ? new Date(pos.data.end).getFullYear() : null;
+const dateLabel = `${startYear}${endYear && endYear !== startYear ? `—${endYear}` : "—present"}`;
+---
+
+<BaseLayout title={`${pos.data.company} — work`}>
+  <section class="section" data-section="work">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-label">work</span>
+      <span class="section-line"></span>
+    </div>
+
+    <a href="/work" class="post-back entry">← back</a>
+
+    <div class="detail-header">
+      <h1 class="page-title">{pos.data.company}</h1>
+      <div class="detail-meta">
+        <span class="detail-role">{pos.data.title}</span>
+        <span class="detail-date">{dateLabel}</span>
+      </div>
+    </div>
+
+    {pos.data.links.length > 0 && (
+      <div class="detail-links">
+        {pos.data.links.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="detail-link entry">
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
+    )}
+
+    <div class="post-content detail-body">
+      <Content />
+    </div>
+
+    {pos.data.images.length > 0 && (
+      <div class="gallery">
+        {pos.data.images.map((src) => (
+          <figure class="gallery-item">
+            <img src={src} alt={`${pos.data.company} screenshot`} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

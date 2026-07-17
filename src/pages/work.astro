@@ -20,20 +20,15 @@ const projects = await getProjects();
       {positions.map((pos) => {
         const startYear = new Date(pos.data.start).getFullYear();
         const endYear = pos.data.end ? new Date(pos.data.end).getFullYear() : null;
-        const isExternal = pos.data.link && pos.data.link !== "#";
-        const Tag = isExternal ? "a" : "div";
         return (
-          <Tag
-            {...(isExternal ? { href: pos.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
-            class="work-row entry"
-          >
+          <a href={`/work/${pos.id}`} class="work-row entry">
             <span class="work-year">{startYear}{endYear && endYear !== startYear ? `—${endYear}` : ""}</span>
             <div class="work-info">
               <h3 class="work-company">{pos.data.company}</h3>
               <span class="work-role">{pos.data.title}</span>
             </div>
-            {isExternal && <span class="work-arrow">↗</span>}
-          </Tag>
+            <span class="work-arrow">→</span>
+          </a>
         );
       })}
     </div>
@@ -42,20 +37,15 @@ const projects = await getProjects();
       <div class="sub-label">projects</div>
       <div class="work-list">
         {projects.map((proj) => {
-          const isExternal = proj.data.link && proj.data.link !== "#";
-          const Tag = isExternal ? "a" : "div";
           return (
-            <Tag
-              {...(isExternal ? { href: proj.data.link, target: "_blank", rel: "noopener noreferrer" } : {})}
-              class="work-row entry"
-            >
+            <a href={`/projects/${proj.id}`} class="work-row entry">
               <span class="work-year">{proj.data.year}</span>
               <div class="work-info">
                 <h3 class="work-company">{proj.data.title}</h3>
                 <span class="work-role">{proj.data.description}</span>
               </div>
-              {isExternal && <span class="work-arrow">↗</span>}
-            </Tag>
+              <span class="work-arrow">→</span>
+            </a>
           );
         })}
       </div>

@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((proj) => ({
+    params: { id: proj.id },
+    props: { proj },
+  }));
+}
+
+const { proj } = Astro.props;
+const { Content } = await render(proj);
+---
+
+<BaseLayout title={`${proj.data.title} — project`}>
+  <section class="section" data-section="work">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-label">work</span>
+      <span class="section-line"></span>
+    </div>
+
+    <a href="/work" class="post-back entry">← back</a>
+
+    <div class="detail-header">
+      <h1 class="page-title">{proj.data.title}</h1>
+      <div class="detail-meta">
+        <span class="detail-role">{proj.data.description}</span>
+        {proj.data.year && <span class="detail-date">{proj.data.year}</span>}
+      </div>
+    </div>
+
+    {proj.data.prize && <p class="proj-prize">★ {proj.data.prize}</p>}
+
+    {proj.data.tech.length > 0 && (
+      <div class="proj-tech">
+        {proj.data.tech.map((t) => <span class="proj-tag">{t}</span>)}
+      </div>
+    )}
+
+    {proj.data.links.length > 0 && (
+      <div class="detail-links">
+        {proj.data.links.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="detail-link entry">
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
+    )}
+
+    <div class="post-content detail-body">
+      <Content />
+    </div>
+
+    {proj.data.images.length > 0 && (
+      <div class="gallery">
+        {proj.data.images.map((src) => (
+          <figure class="gallery-item">
+            <img src={src} alt={`${proj.data.title} screenshot`} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

@@ -28,7 +28,9 @@ const ogTitle = title || "david zheng";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/favicon-32x32.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <title>{siteTitle}</title>
@@ -53,7 +55,7 @@ const ogTitle = title || "david zheng";
 
     <nav class="nav" id="nav" transition:persist>
       <a href="/" class="nav-name">david zheng<span class="accent">.</span></a>
-      <div class="nav-links" id="nav-links"></div>
+      <div class="nav-links" id="nav-links"><a href="/board" class="nav-link-static">board</a></div>
     </nav>
 
     <main>
