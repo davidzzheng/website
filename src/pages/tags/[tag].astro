@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getPostsByTag, getAllTags } from "@/lib/posts";
+import { getPostsByTag, getBoardByTag, getAllTags } from "@/lib/posts";
 import { format } from "date-fns";
 import type { GetStaticPaths } from "astro";
 
@@ -13,7 +13,11 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { tag } = Astro.props;
-const posts = await getPostsByTag(tag);
+const [posts, boardItems] = await Promise.all([
+  getPostsByTag(tag),
+  getBoardByTag(tag),
+]);
+const total = posts.length + boardItems.length;
 ---
 
 <BaseLayout title={`#${tag}`}>
@@ -21,29 +25,46 @@ const posts = await getPostsByTag(tag);
     <div class="section-header">
       <a href="/tags" class="post-back" style="margin-bottom: 16px; display: inline-block;">← all tags</a>
       <h1 class="tag-heading">#{tag}</h1>
-      <span class="tag-subtitle">{posts.length} {posts.length === 1 ? "post" : "posts"}</span>
+      <span class="tag-subtitle">{total} {total === 1 ? "item" : "items"}</span>
       <span class="section-line" style="margin-top: 32px;"></span>
     </div>
 
-    <div class="write-list">
-      {posts.map((post, i) => {
-        const num = String(posts.length - i).padStart(2, "0");
-        const words = post.body?.trim().split(/\s+/).length ?? 0;
-        const readTime = Math.max(1, Math.round(words / 200));
-        return (
-          <a href={`/posts/${post.id.replace(/\/index$/, "")}`} class="write-entry entry">
-            <span class="write-num">{num}</span>
-            <div class="write-body">
-              <h3 class="write-title">{post.data.title}</h3>
-              <p class="write-desc">{post.data.description}</p>
-            </div>
-            <span class="write-date">
-              {format(post.data.date, "MMM yy")}<br />{readTime}m
-            </span>
-          </a>
-        );
-      })}
-    </div>
+    {posts.length > 0 && (
+      <div class="write-list">
+        {posts.map((post, i) => {
+          const num = String(posts.length - i).padStart(2, "0");
+          const words = post.body?.trim().split(/\s+/).length ?? 0;
+          const readTime = Math.max(1, Math.round(words / 200));
+          return (
+            <a href={`/posts/${post.id.replace(/\/index$/, "")}`} class="write-entry entry">
+              <span class="write-num">{num}</span>
+              <div class="write-body">
+                <h3 class="write-title">{post.data.title}</h3>
+                <p class="write-desc">{post.data.description}</p>
+              </div>
+              <span class="write-date">
+                {format(post.data.date, "MMM yy")}<br />{readTime}m
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    )}
+
+    {boardItems.length > 0 && (
+      <div class="proj-section">
+        <div class="sub-label">from the board</div>
+        <div class="board-grid">
+          {boardItems.map((item) => (
+            <a href={`/board#${item.id}`} class="board-card" data-type={item.data.type}>
+              <div class="board-info">
+                <span class="board-title">{item.data.title}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </section>
 </BaseLayout>
 

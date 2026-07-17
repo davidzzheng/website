@@ -27,12 +27,20 @@ export async function getLatestPosts(n: number): Promise<Post[]> {
   return (await getPublishedPosts()).slice(0, n)
 }
 
-/** All unique tags across published posts, with counts */
+/** All unique tags across published posts + board items, with counts */
 export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
-  const posts = await getPublishedPosts()
+  const [posts, boardItems] = await Promise.all([
+    getPublishedPosts(),
+    getCollection("board"),
+  ])
   const map = new Map<string, number>()
   for (const post of posts) {
     for (const tag of post.data.tags) {
+      map.set(tag, (map.get(tag) ?? 0) + 1)
+    }
+  }
+  for (const item of boardItems) {
+    for (const tag of item.data.tags) {
       map.set(tag, (map.get(tag) ?? 0) + 1)
     }
   }
@@ -46,6 +54,12 @@ export async function getPostsByTag(tag: string): Promise<Post[]> {
   return (await getPublishedPosts()).filter((p) =>
     p.data.tags.includes(tag)
   )
+}
+
+/** Board items matching a given tag */
+export async function getBoardByTag(tag: string) {
+  const items = await getCollection("board")
+  return items.filter((item) => item.data.tags.includes(tag))
 }
 
 /** Adjacent posts for prev/next navigation */
